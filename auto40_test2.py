@@ -1042,12 +1042,10 @@ def autoBet(driver, driver2):
                                         time.sleep(0.5)
                                         driver2.find_element(By.CSS_SELECTOR, '.result3 .tc2').click()
                                         check_type = "X"
-                                    elif (
-                                            recent_percent2 == recent_percent3 or recent_percent2 == recent_percent3_2) and recent_percent2 > recent_percent2_2:
+                                    elif (recent_percent2 == recent_percent3 or recent_percent2 == recent_percent3_2) and recent_percent2 > recent_percent2_2:
                                         driver2.find_element(By.CSS_SELECTOR, '.result2').click()
                                         check_type = "O"
-                                    elif (
-                                            recent_percent2_2 == recent_percent3_2 or recent_percent2_2 == recent_percent3) and recent_percent2_2 > recent_percent2:
+                                    elif (recent_percent2_2 == recent_percent3_2 or recent_percent2_2 == recent_percent3) and recent_percent2_2 > recent_percent2:
                                         driver2.find_element(By.CSS_SELECTOR, '.result2').click()
                                         time.sleep(0.5)
                                         driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
@@ -1069,12 +1067,10 @@ def autoBet(driver, driver2):
                                         time.sleep(0.5)
                                         driver2.find_element(By.CSS_SELECTOR, '.result3 .tc2').click()
                                         check_type = "X"
-                                    elif (
-                                            recent_percent1 == recent_percent3 or recent_percent1 == recent_percent3_2) and recent_percent1 > recent_percent1_2:
+                                    elif (recent_percent1 == recent_percent3 or recent_percent1 == recent_percent3_2) and recent_percent1 > recent_percent1_2:
                                         driver2.find_element(By.CSS_SELECTOR, '.result1').click()
                                         check_type = "O"
-                                    elif (
-                                            recent_percent1_2 == recent_percent3_2 or recent_percent1_2 == recent_percent3) and recent_percent1_2 > recent_percent1:
+                                    elif (recent_percent1_2 == recent_percent3_2 or recent_percent1_2 == recent_percent3) and recent_percent1_2 > recent_percent1:
                                         driver2.find_element(By.CSS_SELECTOR, '.result1').click()
                                         time.sleep(0.5)
                                         driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
@@ -1096,12 +1092,10 @@ def autoBet(driver, driver2):
                                         time.sleep(0.5)
                                         driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
                                         check_type = "X"
-                                    elif (
-                                            recent_percent1 == recent_percent2 or recent_percent1 == recent_percent2_2) and recent_percent2 > recent_percent2_2:
+                                    elif (recent_percent1 == recent_percent2 or recent_percent1 == recent_percent2_2) and recent_percent2 > recent_percent2_2:
                                         driver2.find_element(By.CSS_SELECTOR, '.result2').click()
                                         check_type = "O"
-                                    elif (
-                                            recent_percent1_2 == recent_percent2_2 or recent_percent1_2 == recent_percent2) and recent_percent2_2 > recent_percent2:
+                                    elif (recent_percent1_2 == recent_percent2_2 or recent_percent1_2 == recent_percent2) and recent_percent2_2 > recent_percent2:
                                         driver2.find_element(By.CSS_SELECTOR, '.result2').click()
                                         time.sleep(0.5)
                                         driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
@@ -1288,6 +1282,10 @@ def autoBet(driver, driver2):
                                         entry_25.insert(tk.END,
                                                         ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
                                         entry_25.see(tk.END)
+                                    if martin_kind == "일반+크루즈_2" and step > 4:
+                                        entry_25.insert(tk.END,
+                                                        ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
+                                        entry_25.see(tk.END)
 
                             else:
                                 if start or re_start:
@@ -1330,6 +1328,11 @@ def autoBet(driver, driver2):
                                         entry_25.see(tk.END)
                                     if martin_kind == "일반+크루즈" or martin_kind == "슈퍼+크루즈":
                                         if step > 3:
+                                            entry_25.insert(tk.END,
+                                                            ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
+                                            entry_25.see(tk.END)
+                                    if martin_kind == "일반+크루즈_2":
+                                        if step > 4:
                                             entry_25.insert(tk.END,
                                                             ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
                                             entry_25.see(tk.END)
@@ -1604,6 +1607,71 @@ def autoBet(driver, driver2):
                                                     playsound.playsound(sound_path, block=False)
                                                 except:
                                                     print("사운드오류")
+                                    elif martin_kind == "일반+크루즈_2":
+                                        if stop_check:
+                                            if stop_check3 and step > 4:
+                                                if step == 1:
+                                                    step = 0
+                                                elif step < 1:
+                                                    step = 0
+                                                else:
+                                                    if step > 4:
+                                                        step = 3
+                                                    elif step < 5:
+                                                        step = 0
+                                                if step < 0:
+                                                    step = 0
+                                            else:
+                                                step += 1
+                                            stop_check = False
+                                            stop_check3 = False
+                                        elif stop_check2:
+                                            if stop_check3 and step > 4:
+                                                if step == 1:
+                                                    step = 0
+                                                elif step == 0:
+                                                    step = 0
+                                                else:
+                                                    if step > 4:
+                                                        step = 3
+                                                    elif step < 5:
+                                                        step = 0
+                                                if step < 0:
+                                                    step = 0
+                                                stop_check3 = False
+                                            else:
+                                                step += 1
+
+                                            stop_check2 = False
+                                            stop_check3 = False
+                                        else:
+                                            if step == 0:
+                                                step = 0
+                                            else:
+                                                if step == 1:
+                                                    step = 0
+                                                elif step == 0:
+                                                    step = 0
+                                                else:
+                                                    if step > 4:
+                                                        step = 3
+                                                    elif step < 5:
+                                                        step = 0
+                                                if step < 0:
+                                                    step = 0
+                                            if step < 0:
+                                                step = 0
+
+                                        if step > 4:
+                                            if win_stack > 1:
+                                                step = 0
+                                            if win_stack == 2:
+                                                try:
+                                                    sound_path = resource_path(os.path.join("assets", "start.mp3"))
+                                                    playsound.playsound(sound_path, block=False)
+                                                except:
+                                                    print("사운드오류")
+
                                     else:
                                         if martin_kind == "크루즈1" or martin_kind == "크루즈2":
                                             if win_stack > 1:
@@ -1994,6 +2062,10 @@ def autoBet(driver, driver2):
                                         entry_25.insert(tk.END,
                                                         ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
                                         entry_25.see(tk.END)
+                                    if martin_kind == "일반+크루즈_2" and step > 4:
+                                        entry_25.insert(tk.END,
+                                                        ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
+                                        entry_25.see(tk.END)
 
                             else:
                                 if start or re_start:
@@ -2036,6 +2108,11 @@ def autoBet(driver, driver2):
                                         entry_25.see(tk.END)
                                     if martin_kind == "일반+크루즈" or martin_kind == "슈퍼+크루즈":
                                         if step > 3:
+                                            entry_25.insert(tk.END,
+                                                            ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
+                                            entry_25.see(tk.END)
+                                    if martin_kind == "일반+크루즈_2":
+                                        if step > 4:
                                             entry_25.insert(tk.END,
                                                             ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
                                             entry_25.see(tk.END)
@@ -2302,6 +2379,70 @@ def autoBet(driver, driver2):
                                                 step = 0
 
                                         if step > 3:
+                                            if win_stack > 1:
+                                                step = 0
+                                            if win_stack == 2:
+                                                try:
+                                                    sound_path = resource_path(os.path.join("assets", "start.mp3"))
+                                                    playsound.playsound(sound_path, block=False)
+                                                except:
+                                                    print("사운드오류")
+                                    elif martin_kind == "일반+크루즈_2":
+                                        if stop_check:
+                                            if stop_check3 and step > 4:
+                                                if step == 1:
+                                                    step = 0
+                                                elif step < 1:
+                                                    step = 0
+                                                else:
+                                                    if step > 4:
+                                                        step = 3
+                                                    elif step < 5:
+                                                        step = 0
+                                                if step < 0:
+                                                    step = 0
+                                            else:
+                                                step += 1
+                                            stop_check = False
+                                            stop_check3 = False
+                                        elif stop_check2:
+                                            if stop_check3 and step > 4:
+                                                if step == 1:
+                                                    step = 0
+                                                elif step == 0:
+                                                    step = 0
+                                                else:
+                                                    if step > 4:
+                                                        step = 3
+                                                    elif step < 5:
+                                                        step = 0
+                                                if step < 0:
+                                                    step = 0
+                                                stop_check3 = False
+                                            else:
+                                                step += 1
+
+                                            stop_check2 = False
+                                            stop_check3 = False
+                                        else:
+                                            if step == 0:
+                                                step = 0
+                                            else:
+                                                if step == 1:
+                                                    step = 0
+                                                elif step == 0:
+                                                    step = 0
+                                                else:
+                                                    if step > 4:
+                                                        step = 3
+                                                    elif step < 5:
+                                                        step = 0
+                                                if step < 0:
+                                                    step = 0
+                                            if step < 0:
+                                                step = 0
+
+                                        if step > 4:
                                             if win_stack > 1:
                                                 step = 0
                                             if win_stack == 2:
@@ -2950,6 +3091,10 @@ def set1_click(value):
         base_bet = [1, 2, 4, 8, 8, 16, 24, 40, 64, 104, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765, 1, 1, 1, 1, 1,
                     1,
                     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    elif martin_kind == "일반+크루즈_2":
+        base_bet = [1, 2, 4, 8, 16, 16, 32, 48, 80, 128, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765, 1, 1, 1, 1, 1,
+                    1,
+                    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
     elif martin_kind == "슈퍼+크루즈":
         base_bet = [1, 3, 7, 15, 12, 24, 39, 63, 102, 165, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765, 1, 1, 1, 1, 1,
                     1,
@@ -3493,7 +3638,7 @@ if __name__ == "__main__":
         font=("Inter Black", 12 * -1)
     )
 
-    martin_kind = ["크루즈1", "크루즈2", "크루즈3","크루즈3_2","크루즈3_3","크루즈3_4","크루즈4", "크루즈5", "일반마틴", "슈퍼마틴", "다니엘시스템", "일반+크루즈", "슈퍼+크루즈"]
+    martin_kind = ["크루즈1", "크루즈2", "크루즈3","크루즈3_2","크루즈3_3","크루즈3_4","크루즈4", "크루즈5", "일반마틴", "슈퍼마틴", "다니엘시스템", "일반+크루즈", "일반+크루즈_2", "슈퍼+크루즈"]
     martin_kind.insert(0, "마틴방식설정")
     entry_77 = ttk.Combobox(
         win,
