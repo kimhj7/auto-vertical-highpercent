@@ -45,7 +45,7 @@ user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTM
 options.add_argument('user-agent=' + user_agent)
 options.add_argument("lang=ko_KR")
 options.add_argument('--window-size=1920,1020')
-a = 'a'
+
 monitors = get_monitors()
 
 options.add_argument("force-device-scale-factor=0.6")
