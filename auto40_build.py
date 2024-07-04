@@ -1685,8 +1685,8 @@ def autoBet(driver, driver2):
                                                 if step == 0:
                                                     step = 0
                                                 else:
-                                                    if step > 9:
-                                                        step -= 4
+                                                    if step > 12:
+                                                        step -= 2
                                                     else:
                                                         step -= 1
                                                 if step < 0:
@@ -2464,8 +2464,8 @@ def autoBet(driver, driver2):
                                                 if step == 0:
                                                     step = 0
                                                 else:
-                                                    if step > 9:
-                                                        step -= 4
+                                                    if step > 12:
+                                                        step -= 2
                                                     else:
                                                         step -= 1
                                                 if step < 0:
