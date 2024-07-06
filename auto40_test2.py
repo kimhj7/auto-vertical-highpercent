@@ -1197,6 +1197,22 @@ def autoBet(driver, driver2):
                     else:
                         long_go_o = False
                         if ox == "X":
+                            if martin_kind == "다니엘시스템":
+                                if check_kind == "A":
+                                    driver2.find_element(By.CSS_SELECTOR, '.result1').click()
+                                    time.sleep(0.5)
+                                    driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
+                                elif check_kind == "B":
+                                    driver2.find_element(By.CSS_SELECTOR, '.result2').click()
+                                    time.sleep(0.5)
+                                    driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
+                                elif check_kind == "C":
+                                    driver2.find_element(By.CSS_SELECTOR, '.result3').click()
+                                    time.sleep(0.5)
+                                    driver2.find_element(By.CSS_SELECTOR, '.result3 .tc2').click()
+                                current_res = driver2.find_element(By.CSS_SELECTOR,'.result.active .x-pattern .to-result')
+                                c_res = current_res.get_attribute('innerHTML').strip()
+
                             win_stack = 0
                             if t_check == "TIE":
                                 print(lose_stack)
@@ -1967,6 +1983,16 @@ def autoBet(driver, driver2):
                     else:
 
                         if ox == "O":
+                            if martin_kind == "다니엘시스템":
+                                if check_kind == "A":
+                                    driver2.find_element(By.CSS_SELECTOR, '.result1').click()
+                                elif check_kind == "B":
+                                    driver2.find_element(By.CSS_SELECTOR, '.result2').click()
+                                elif check_kind == "C":
+                                    driver2.find_element(By.CSS_SELECTOR, '.result3').click()
+                                current_res = driver2.find_element(By.CSS_SELECTOR,
+                                                                   '.result.active .o-pattern .to-result')
+                                c_res = current_res.get_attribute('innerHTML').strip()
                             win_stack = 0
                             if t_check == "TIE":
                                 print(lose_stack)
@@ -3612,7 +3638,7 @@ if __name__ == "__main__":
 
     martin_level = [str(i) + "마틴" for i in range(1, 41)]
     martin_level.insert(0, "마틴단계설정")
-    text_font = ('Inter Black', '10')
+    text_font = ('Inter Black', '6')
 
     win.option_add('*TCombobox*Listbox.font', text_font)
     entry_7 = ttk.Combobox(
