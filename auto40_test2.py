@@ -2643,6 +2643,9 @@ def crawlresult(driver, driver2, nowin):
                     try:
                         if not stop_check and not stop_check3:
                             if element_length > 6:
+                                check_type = driver2.find_element(By.CSS_SELECTOR,
+                                                                  '.result.active .tc.active').get_attribute(
+                                    'data-type')
                                 check_ox = driver2.find_element(By.CSS_SELECTOR,
                                                                 '.result.active .pattern2 > ul:last-child > li:last-child p').get_attribute(
                                     'innerHTML').strip()
@@ -3027,6 +3030,9 @@ def martin_kind_select(event):
     global martin_kind
 
     martin_kind = entry_77.get()
+    if martin_kind == "다니엘시스템":
+        c3.deselect()
+
 
 
 def on_select2(event):
