@@ -1196,6 +1196,23 @@ def autoBet(driver, driver2):
                     else:
                         long_go_o = False
                         if ox == "X":
+                            if martin_kind == "다니엘시스템":
+                                if check_kind == "A":
+                                    driver2.find_element(By.CSS_SELECTOR, '.result1').click()
+                                    time.sleep(0.5)
+                                    driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
+                                elif check_kind == "B":
+                                    driver2.find_element(By.CSS_SELECTOR, '.result2').click()
+                                    time.sleep(0.5)
+                                    driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
+                                elif check_kind == "C":
+                                    driver2.find_element(By.CSS_SELECTOR, '.result3').click()
+                                    time.sleep(0.5)
+                                    driver2.find_element(By.CSS_SELECTOR, '.result3 .tc2').click()
+                                current_res = driver2.find_element(By.CSS_SELECTOR,'.result.active .x-pattern .to-result')
+                                c_res = current_res.get_attribute('innerHTML').strip()
+                                check_type = "X"
+
                             win_stack = 0
                             if t_check == "TIE":
                                 print(lose_stack)
@@ -1966,6 +1983,17 @@ def autoBet(driver, driver2):
                     else:
 
                         if ox == "O":
+                            if martin_kind == "다니엘시스템":
+                                if check_kind == "A":
+                                    driver2.find_element(By.CSS_SELECTOR, '.result1').click()
+                                elif check_kind == "B":
+                                    driver2.find_element(By.CSS_SELECTOR, '.result2').click()
+                                elif check_kind == "C":
+                                    driver2.find_element(By.CSS_SELECTOR, '.result3').click()
+                                current_res = driver2.find_element(By.CSS_SELECTOR,
+                                                                   '.result.active .o-pattern .to-result')
+                                c_res = current_res.get_attribute('innerHTML').strip()
+                                check_type = "O"
                             win_stack = 0
                             if t_check == "TIE":
                                 print(lose_stack)
@@ -2616,6 +2644,9 @@ def crawlresult(driver, driver2, nowin):
                     try:
                         if not stop_check and not stop_check3:
                             if element_length > 6:
+                                check_type = driver2.find_element(By.CSS_SELECTOR,
+                                                                  '.result.active .tc.active').get_attribute(
+                                    'data-type')
                                 check_ox = driver2.find_element(By.CSS_SELECTOR,
                                                                 '.result.active .pattern2 > ul:last-child > li:last-child p').get_attribute(
                                     'innerHTML').strip()
@@ -2680,8 +2711,6 @@ def crawlresult(driver, driver2, nowin):
                                             entry_25.see(tk.END)
                                             recode_log('WIN', start_price, current_price, 0, d_title, r_title, "", "",
                                                        round)
-
-
 
                     except NoSuchElementException:
                         # 요소가 발견되지 않으면 계속 반복
