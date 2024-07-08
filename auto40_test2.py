@@ -1325,7 +1325,6 @@ def autoBet(driver, driver2):
                                     else:
                                         lose_stack = 0
                                         win_stack += 1
-                                        stop_check = False
 
                                     if martin_kind == "크루즈1" or martin_kind == "크루즈2":
                                         if step < 7:
@@ -1804,6 +1803,8 @@ def autoBet(driver, driver2):
                         recode_log('LONG_STOP', start_price, current_price, 0, d_title, r_title, "", "", round)
 
                         if (stop_check1 and stop_check1 == "O") and (lose_stack >= long_stop_value) and long_stop_w:
+                            stop_check = True
+                            stop_check2 = True
                             stop_check3 = True
                             stop_step2 = step
 
@@ -1892,6 +1893,8 @@ def autoBet(driver, driver2):
                     elif (stop_check1 and stop_check1 == "O") and (lose_stack >= long_stop_value) and long_stop_w:
                         entry_25.insert(tk.END, ("연패방지 정지 후 패턴이동..\n"))
                         entry_25.see(tk.END)
+                        stop_check = True
+                        stop_check2 = True
                         stop_check3 = True
                         stop_step2 = step
                         recode_log('CHANGE_STOP', start_price, current_price, 0, d_title, r_title, "", "", round)
@@ -2116,7 +2119,6 @@ def autoBet(driver, driver2):
                                     else:
                                         lose_stack = 0
                                         win_stack += 1
-                                        stop_check = False
 
                                     if martin_kind == "크루즈1" or martin_kind == "크루즈2":
                                         if step < 7:
@@ -3029,10 +3031,11 @@ def on_martin_select(event):
 
 
 def martin_kind_select(event):
-    global martin_kind
+    global martin_kind, long_stop_w2
 
     martin_kind = entry_77.get()
     if martin_kind == "다니엘시스템":
+        long_stop_w2 = False
         c3.deselect()
 
 
