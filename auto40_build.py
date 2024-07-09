@@ -862,8 +862,6 @@ def autoBet(driver, driver2):
         entry_1.config(state='readonly')
         entry_2.config(state='readonly')
 
-
-
         try:
             check_ox = driver2.find_element(By.CSS_SELECTOR,
                                             '.result.active .pattern2 > ul:last-child > li:last-child p')
@@ -878,23 +876,39 @@ def autoBet(driver, driver2):
             tie_check = driver2.find_element(By.CSS_SELECTOR, '.result.active .current_res .ball')
             t_check = tie_check.get_attribute('innerHTML').strip()
             try:
-                stop_check1 = driver2.find_element(By.CSS_SELECTOR,'.result.active .pattern2 > ul:last-child > li:last-child p').get_attribute('innerHTML').strip()
-                double_up_check = len(driver2.find_elements(By.CSS_SELECTOR, '.result.active .pattern2 > ul:last-child > li'))
+                stop_check1 = driver2.find_element(By.CSS_SELECTOR,
+                                                   '.result.active .pattern2 > ul:last-child > li:last-child p').get_attribute(
+                    'innerHTML').strip()
+                double_up_check = len(
+                    driver2.find_elements(By.CSS_SELECTOR, '.result.active .pattern2 > ul:last-child > li'))
 
-                recent_percent1 = int(driver2.find_element(By.CSS_SELECTOR, '.result1 .recent_percent1').get_attribute('data-value').strip())
-                max_percent1 = int(driver2.find_element(By.CSS_SELECTOR, '.result1 .max_lost.max_lost1').get_attribute('data-value').strip())
-                recent_percent1_2 = int(driver2.find_element(By.CSS_SELECTOR, '.result1 .recent_percent2').get_attribute('data-value').strip())
-                max_percent1_2 = int(driver2.find_element(By.CSS_SELECTOR, '.result1 .max_lost.max_lost2').get_attribute('data-value').strip())
-                recent_percent2 = int(driver2.find_element(By.CSS_SELECTOR, '.result2 .recent_percent1').get_attribute('data-value').strip())
-                max_percent2 = int(driver2.find_element(By.CSS_SELECTOR, '.result2 .max_lost.max_lost1').get_attribute('data-value').strip())
-                recent_percent2_2 = int(driver2.find_element(By.CSS_SELECTOR, '.result2 .recent_percent2').get_attribute('data-value').strip())
+                recent_percent1 = int(driver2.find_element(By.CSS_SELECTOR, '.result1 .recent_percent1').get_attribute(
+                    'data-value').strip())
+                max_percent1 = int(driver2.find_element(By.CSS_SELECTOR, '.result1 .max_lost.max_lost1').get_attribute(
+                    'data-value').strip())
+                recent_percent1_2 = int(
+                    driver2.find_element(By.CSS_SELECTOR, '.result1 .recent_percent2').get_attribute(
+                        'data-value').strip())
+                max_percent1_2 = int(
+                    driver2.find_element(By.CSS_SELECTOR, '.result1 .max_lost.max_lost2').get_attribute(
+                        'data-value').strip())
+                recent_percent2 = int(driver2.find_element(By.CSS_SELECTOR, '.result2 .recent_percent1').get_attribute(
+                    'data-value').strip())
+                max_percent2 = int(driver2.find_element(By.CSS_SELECTOR, '.result2 .max_lost.max_lost1').get_attribute(
+                    'data-value').strip())
+                recent_percent2_2 = int(
+                    driver2.find_element(By.CSS_SELECTOR, '.result2 .recent_percent2').get_attribute(
+                        'data-value').strip())
                 max_percent2_2 = int(
                     driver2.find_element(By.CSS_SELECTOR, '.result2 .max_lost.max_lost2').get_attribute(
                         'data-value').strip())
-                recent_percent3 = int(driver2.find_element(By.CSS_SELECTOR, '.result3 .recent_percent1').get_attribute('data-value').strip())
+                recent_percent3 = int(driver2.find_element(By.CSS_SELECTOR, '.result3 .recent_percent1').get_attribute(
+                    'data-value').strip())
                 max_percent3 = int(driver2.find_element(By.CSS_SELECTOR, '.result2 .max_lost.max_lost1').get_attribute(
                     'data-value').strip())
-                recent_percent3_2 = int(driver2.find_element(By.CSS_SELECTOR, '.result3 .recent_percent2').get_attribute('data-value').strip())
+                recent_percent3_2 = int(
+                    driver2.find_element(By.CSS_SELECTOR, '.result3 .recent_percent2').get_attribute(
+                        'data-value').strip())
                 max_percent3_2 = int(
                     driver2.find_element(By.CSS_SELECTOR, '.result3 .max_lost.max_lost2').get_attribute(
                         'data-value').strip())
@@ -922,1635 +936,1640 @@ def autoBet(driver, driver2):
 
             print(f"현재 회차: {element_length}")
             print(f"현재 그룹: {check_kind}")
-            if element_length < 7:
-                entry_25.insert(tk.END, ("패턴 수집중..7회 진행 후 배팅 시작\n"))
-                entry_25.see(tk.END)
-            else:
-                if element_length == 7:
-                    main_loop(driver2)
-                    if highest_variable == "a":
-                        driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                        check_type = "O"
-                    elif highest_variable == "b":
-                        driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                        driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
-                        check_type = "X"
-                    elif highest_variable == "c":
-                        driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                        check_type = "O"
-                    elif highest_variable == "d":
-                        driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                        driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
-                        check_type = "X"
-                    elif highest_variable == "e":
-                        driver2.find_element(By.CSS_SELECTOR, '.result3').click()
-                        check_type = "O"
-                    elif highest_variable == "f":
-                        driver2.find_element(By.CSS_SELECTOR, '.result3').click()
-                        driver2.find_element(By.CSS_SELECTOR, '.result3 .tc2').click()
-                        check_type = "X"
-                    check_ox = driver2.find_element(By.CSS_SELECTOR,
-                                                    '.result.active .pattern2 > ul:last-child > li:last-child p')
-                    ox = check_ox.get_attribute('innerHTML').strip()
-                    check_type = driver2.find_element(By.CSS_SELECTOR, '.result.active .tc.active').get_attribute(
-                        'data-type')
-                    if check_type == "O":
-                        current_res = driver2.find_element(By.CSS_SELECTOR, '.result.active .o-pattern .to-result')
-                    elif check_type == "X":
-                        current_res = driver2.find_element(By.CSS_SELECTOR, '.result.active .x-pattern .to-result')
-                    c_res = current_res.get_attribute('innerHTML').strip()
-
-                if check_type == "O":
-                    if ox == "X":
-                        if t_check == "TIE":
-                            pass
-                        else:
-                            if not start:
-                                if lose_stack <= long_stop_value:
-                                    lose_stack += 1
-
-                    if (cal > 0) and (profit_stop2 != 0 and profit_stop2 < cal):
-                        profit_stop_func()
-                        pass
-                    elif (cal < 0) and (loss_stop2 != 0 and loss_stop2 < positive_cal):
-                        loss_stop_func()
-                        pass
-                    elif (stop_check1 and stop_check1 == "X") and lose:
-                        if t_check == "TIE":
-                            step = last_tie_step
-                            last_tie_step = 0
-                            lose = True
-                            group_level = 1
-                            entry_25.insert(tk.END, (str(step + 1) + "마틴 진행\n"))
-                            entry_25.see(tk.END)
-                            chip_selection(martin_list[step], c_res, step, round)
-                            compare_mybet = c_res
-                            tie_on = False
-                            tie_stack += 1
-                        else:
-                            entry_25.insert(tk.END, ("처음으로 단계로 돌아감\n"))
-                            entry_25.see(tk.END)
-                            group_level = 1
-                            step = 0
-                            lose_stack = 0
-                            start = True
-                            tie_on = False
-                            lose = False
-                            pass
-                    elif (stop_check1 and stop_check1 == "X") and (
-                            double_up_check >= long_stop_value2) and long_stop_w2:
-                        if double_up_check > long_stop_value2:
-                            if t_check == "TIE":
-                                lose_stack = lose_stack
-                            else:
-                                lose_stack -= 1
-                        entry_25.insert(tk.END,
-                                        ("연속 패 : " + str(lose_stack) + "패 - " + str(
-                                            long_stop_value) + "연패시 정지후 패턴 변경\n\n"))
-                        entry_25.see(tk.END)
-                        entry_25.insert(tk.END, ("X장줄 예상 정지중..\n"))
-                        entry_25.see(tk.END)
-                        recode_log('LONG_STOP', start_price, current_price, 0, d_title, r_title, "", "", round)
-                        stop_check = True
-                        stop_check2 = True
-
-                        if (stop_check1 and stop_check1 == "X") and (lose_stack >= long_stop_value) and long_stop_w:
-                            stop_check = True
-                            stop_check2 = True
-                            stop_check3 = True
-                            stop_step2 = step
-
-                            if not long_go_o:
-                                entry_25.insert(tk.END, ("연패방지 정지 후 패턴이동..\n"))
-                                entry_25.see(tk.END)
-                                recode_log('CHANGE_STOP', start_price, current_price, 0, d_title, r_title, "", "", round)
-                                if check_kind == "A":
-                                    if recent_percent2 > recent_percent2_2 and recent_percent2 > recent_percent3 and recent_percent2 > recent_percent3_2:
-                                        driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                        check_type = "O"
-                                    elif recent_percent2_2 > recent_percent2 and recent_percent2_2 > recent_percent3 and recent_percent2_2 > recent_percent3_2:
-                                        driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                        time.sleep(0.5)
-                                        driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
-                                        check_type = "X"
-                                    elif recent_percent3 > recent_percent2 and recent_percent3 > recent_percent2_2 and recent_percent3 > recent_percent3_2:
-                                        driver2.find_element(By.CSS_SELECTOR, '.result3').click()
-                                        check_type = "O"
-                                    elif recent_percent3_2 > recent_percent2 and recent_percent3_2 > recent_percent3 and recent_percent3_2 > recent_percent2_2:
-                                        driver2.find_element(By.CSS_SELECTOR, '.result3').click()
-                                        time.sleep(0.5)
-                                        driver2.find_element(By.CSS_SELECTOR, '.result3 .tc2').click()
-                                        check_type = "X"
-                                    elif (recent_percent2 == recent_percent3 or recent_percent2 == recent_percent3_2) and recent_percent2 > recent_percent2_2:
-                                        driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                        check_type = "O"
-                                    elif (recent_percent2_2 == recent_percent3_2 or recent_percent2_2 == recent_percent3) and recent_percent2_2 > recent_percent2:
-                                        driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                        time.sleep(0.5)
-                                        driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
-                                        check_type = "X"
-                                elif check_kind == "B":
-                                    if recent_percent1 > recent_percent1_2 and recent_percent1 > recent_percent3 and recent_percent1 > recent_percent3_2:
-                                        driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                        check_type = "O"
-                                    elif recent_percent1_2 > recent_percent1 and recent_percent1_2 > recent_percent3 and recent_percent1_2 > recent_percent3_2:
-                                        driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                        time.sleep(0.5)
-                                        driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
-                                        check_type = "X"
-                                    elif recent_percent3 > recent_percent1 and recent_percent3 > recent_percent1_2 and recent_percent3 > recent_percent3_2:
-                                        driver2.find_element(By.CSS_SELECTOR, '.result3').click()
-                                        check_type = "O"
-                                    elif recent_percent3_2 > recent_percent1 and recent_percent3_2 > recent_percent3 and recent_percent3_2 > recent_percent1_2:
-                                        driver2.find_element(By.CSS_SELECTOR, '.result3').click()
-                                        time.sleep(0.5)
-                                        driver2.find_element(By.CSS_SELECTOR, '.result3 .tc2').click()
-                                        check_type = "X"
-                                    elif (recent_percent1 == recent_percent3 or recent_percent1 == recent_percent3_2) and recent_percent1 > recent_percent1_2:
-                                        driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                        check_type = "O"
-                                    elif (recent_percent1_2 == recent_percent3_2 or recent_percent1_2 == recent_percent3) and recent_percent1_2 > recent_percent1:
-                                        driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                        time.sleep(0.5)
-                                        driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
-                                        check_type = "X"
-                                elif check_kind == "C":
-                                    if recent_percent1 > recent_percent1_2 and recent_percent1 > recent_percent2 and recent_percent1 > recent_percent2_2:
-                                        driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                        check_type = "O"
-                                    elif recent_percent1_2 > recent_percent1 and recent_percent1_2 > recent_percent2 and recent_percent1_2 > recent_percent2_2:
-                                        driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                        time.sleep(0.5)
-                                        driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
-                                        check_type = "X"
-                                    elif recent_percent2 > recent_percent1 and recent_percent2 > recent_percent1_2 and recent_percent2 > recent_percent2_2:
-                                        driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                        check_type = "O"
-                                    elif recent_percent2_2 > recent_percent1 and recent_percent2_2 > recent_percent2 and recent_percent2_2 > recent_percent1_2:
-                                        driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                        time.sleep(0.5)
-                                        driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
-                                        check_type = "X"
-                                    elif (recent_percent1 == recent_percent2 or recent_percent1 == recent_percent2_2) and recent_percent2 > recent_percent2_2:
-                                        driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                        check_type = "O"
-                                    elif (recent_percent1_2 == recent_percent2_2 or recent_percent1_2 == recent_percent2) and recent_percent2_2 > recent_percent2:
-                                        driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                        time.sleep(0.5)
-                                        driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
-                                        check_type = "X"
-                                lose_stack = 0
-                        pass
-                    elif (stop_check1 and stop_check1 == "X") and (lose_stack >= long_stop_value) and long_stop_w:
-                        entry_25.insert(tk.END, ("연패방지 정지 후 패턴이동..\n"))
-                        entry_25.see(tk.END)
-                        recode_log('CHANGE_STOP', start_price, current_price, 0, d_title, r_title, "", "", round)
-                        stop_check = True
-                        stop_check2 = True
-                        stop_check3 = True
-                        stop_step2 = step
-                        if not long_go_o:
-                            if check_kind == "A":
-                                if recent_percent2 > recent_percent2_2 and recent_percent2 > recent_percent3 and recent_percent2 > recent_percent3_2:
-                                    driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                    check_type = "O"
-                                elif recent_percent2_2 > recent_percent2 and recent_percent2_2 > recent_percent3 and recent_percent2_2 > recent_percent3_2:
-                                    driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                    time.sleep(0.5)
-                                    driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
-                                    check_type = "X"
-                                elif recent_percent3 > recent_percent2 and recent_percent3 > recent_percent2_2 and recent_percent3 > recent_percent3_2:
-                                    driver2.find_element(By.CSS_SELECTOR, '.result3').click()
-                                    check_type = "O"
-                                elif recent_percent3_2 > recent_percent2 and recent_percent3_2 > recent_percent3 and recent_percent3_2 > recent_percent2_2:
-                                    driver2.find_element(By.CSS_SELECTOR, '.result3').click()
-                                    time.sleep(0.5)
-                                    driver2.find_element(By.CSS_SELECTOR, '.result3 .tc2').click()
-                                    check_type = "X"
-                                elif (
-                                        recent_percent2 == recent_percent3 or recent_percent2 == recent_percent3_2) and recent_percent2 > recent_percent2_2:
-                                    driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                    check_type = "O"
-                                elif (
-                                        recent_percent2_2 == recent_percent3_2 or recent_percent2_2 == recent_percent3) and recent_percent2_2 > recent_percent2:
-                                    driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                    time.sleep(0.5)
-                                    driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
-                                    check_type = "X"
-                            elif check_kind == "B":
-                                if recent_percent1 > recent_percent1_2 and recent_percent1 > recent_percent3 and recent_percent1 > recent_percent3_2:
-                                    driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                    check_type = "O"
-                                elif recent_percent1_2 > recent_percent1 and recent_percent1_2 > recent_percent3 and recent_percent1_2 > recent_percent3_2:
-                                    driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                    time.sleep(0.5)
-                                    driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
-                                    check_type = "X"
-                                elif recent_percent3 > recent_percent1 and recent_percent3 > recent_percent1_2 and recent_percent3 > recent_percent3_2:
-                                    driver2.find_element(By.CSS_SELECTOR, '.result3').click()
-                                    check_type = "O"
-                                elif recent_percent3_2 > recent_percent1 and recent_percent3_2 > recent_percent3 and recent_percent3_2 > recent_percent1_2:
-                                    driver2.find_element(By.CSS_SELECTOR, '.result3').click()
-                                    time.sleep(0.5)
-                                    driver2.find_element(By.CSS_SELECTOR, '.result3 .tc2').click()
-                                    check_type = "X"
-                                elif (
-                                        recent_percent1 == recent_percent3 or recent_percent1 == recent_percent3_2) and recent_percent1 > recent_percent1_2:
-                                    driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                    check_type = "O"
-                                elif (
-                                        recent_percent1_2 == recent_percent3_2 or recent_percent1_2 == recent_percent3) and recent_percent1_2 > recent_percent1:
-                                    driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                    time.sleep(0.5)
-                                    driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
-                                    check_type = "X"
-                            elif check_kind == "C":
-                                if recent_percent1 > recent_percent1_2 and recent_percent1 > recent_percent2 and recent_percent1 > recent_percent2_2:
-                                    driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                    check_type = "O"
-                                elif recent_percent1_2 > recent_percent1 and recent_percent1_2 > recent_percent2 and recent_percent1_2 > recent_percent2_2:
-                                    driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                    time.sleep(0.5)
-                                    driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
-                                    check_type = "X"
-                                elif recent_percent2 > recent_percent1 and recent_percent2 > recent_percent1_2 and recent_percent2 > recent_percent2_2:
-                                    driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                    check_type = "O"
-                                elif recent_percent2_2 > recent_percent1 and recent_percent2_2 > recent_percent2 and recent_percent2_2 > recent_percent1_2:
-                                    driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                    time.sleep(0.5)
-                                    driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
-                                    check_type = "X"
-                                elif (
-                                        recent_percent1 == recent_percent2 or recent_percent1 == recent_percent2_2) and recent_percent2 > recent_percent2_2:
-                                    driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                    check_type = "O"
-                                elif (
-                                        recent_percent1_2 == recent_percent2_2 or recent_percent1_2 == recent_percent2) and recent_percent2_2 > recent_percent2:
-                                    driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                    time.sleep(0.5)
-                                    driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
-                                    check_type = "X"
-                            lose_stack = 0
+            if check_type == "O":
+                if ox == "X":
+                    if t_check == "TIE":
                         pass
                     else:
-                        long_go_o = False
-                        if ox == "X":
-                            if martin_kind == "다니엘시스템":
-                                if check_kind == "A":
-                                    driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                    time.sleep(0.5)
-                                    driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
-                                elif check_kind == "B":
-                                    driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                    time.sleep(0.5)
-                                    driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
-                                elif check_kind == "C":
-                                    driver2.find_element(By.CSS_SELECTOR, '.result3').click()
-                                    time.sleep(0.5)
-                                    driver2.find_element(By.CSS_SELECTOR, '.result3 .tc2').click()
-                                current_res = driver2.find_element(By.CSS_SELECTOR,'.result.active .x-pattern .to-result')
-                                c_res = current_res.get_attribute('innerHTML').strip()
-                                check_type = "X"
+                        if not start:
+                            if lose_stack <= long_stop_value:
+                                lose_stack += 1
 
-                            win_stack = 0
-                            if t_check == "TIE":
-                                print(lose_stack)
-                                if lose:
-                                    step = step
-                                    last_tie_step = 0
-                                    lose = False
-                                    group_level = 1
-                                else:
-                                    step = step
-                                    tie_on = True
-                                    print("step유지")
-                                if long_stop_w:
-                                    entry_25.insert(tk.END, ("연속 패 : " + str(lose_stack) + "패 - " + str(
-                                        long_stop_value) + "연패시 정지후 패턴 변경\n\n"))
-                                    entry_25.see(tk.END)
-                            else:
-                                if lose:
-                                    step = 0
-                                else:
-                                    if win_stack > 1:
-                                        step = 0
-                                    else:
-                                        step += 1
-                                        stop_check2 = False
-                                        stop_check3 = False
-                                if start:
-                                    step = 0
-                                    lose_stack = 0
-                                if long_stop_w:
-                                    entry_25.insert(tk.END, ("연속 패 : " + str(lose_stack) + "패 - " + str(
-                                        long_stop_value) + "연패시 정지후 패턴 변경\n\n"))
-                                    entry_25.see(tk.END)
-                            if re_start:
-                                if pause_step != 0:
-                                    step = pause_step - 1
-                                else:
-                                    step = stop_step - 1
-                                    group_level = 1
-                                re_start = False
-
-                            entry_25.insert(tk.END, (str(step + 1) + "마틴 진행\n"))
-                            entry_25.see(tk.END)
-
-                            for i in range(40):
-                                if step == i:
-                                    if selected_index == i + 1:
-                                        lose = True
-                                        last_tie_step = step
-                                        tie_on = True
-                                    chip_selection(martin_list[i], c_res, step, round)
-                                    compare_mybet = c_res
-                                    break  # 일치하는 조건을 찾으면 반복문을 종료
-
-                            start = False
-
-                        if ox == "O":
-
-                            if group_level == 2:
-                                if group2_get == 0:
-                                    group2_get = martin9
-                                if start:
-                                    entry_25.insert(tk.END, ("2단계 진행 시작\n"))
-                                    entry_25.see(tk.END)
-                                    driver2.find_element(By.CSS_SELECTOR, '.go-level2').click()
-
-                            if t_check == "TIE":
-                                tie_stack += 1
-                                if lose:
-                                    step = last_tie_step
-                                    last_tie_step = 0
-                                    lose = False
-                                    group_level = 1
-
-                                else:
-                                    step = step
-                                    print("step유지")
-                                    if martin_kind == "크루즈1" or martin_kind == "크루즈2" or martin_kind == "크루즈3" or martin_kind == "크루즈4" or martin_kind == "크루즈5" or martin_kind == "크루즈3_2" or martin_kind == "크루즈3_3" or martin_kind == "크루즈3_4":
-                                        entry_25.insert(tk.END,
-                                                        ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
-                                        entry_25.see(tk.END)
-                                    if (martin_kind == "일반+크루즈" and step > 3) or (martin_kind == "슈퍼+크루즈" and step > 3):
-                                        entry_25.insert(tk.END,
-                                                        ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
-                                        entry_25.see(tk.END)
-                                    if martin_kind == "일반+크루즈_2" and step > 4:
-                                        entry_25.insert(tk.END,
-                                                        ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
-                                        entry_25.see(tk.END)
-
-                            else:
-                                if start or re_start:
-                                    win_stack = 0
-                                else:
-                                    if stop_check2:
-                                        if stop_check3:
-
-                                            lose_stack = 0
-                                        else:
-                                            win_stack = 0
-                                        stop_check2 = False
-                                        stop_check3 = False
-
-                                    elif stop_check3:
-
-                                        stop_check3 = False
-                                        lose_stack = 0
-
-                                    else:
-                                        lose_stack = 0
-                                        win_stack += 1
-
-                                    if martin_kind == "크루즈1" or martin_kind == "크루즈2":
-                                        if step < 7:
-                                            entry_25.insert(tk.END,
-                                                            ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
-                                            entry_25.see(tk.END)
-                                    if martin_kind == "크루즈3" or martin_kind == "크루즈4" or martin_kind == "크루즈5":
-                                        if win_stack > 0 and step > selected_index - 4:
-                                            step = 0
-                                        else:
-                                            entry_25.insert(tk.END,
-                                                            ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
-                                            entry_25.see(tk.END)
-                                    if martin_kind == "크루즈3_2" or martin_kind == "크루즈3_3" or martin_kind == "크루즈3_4":
-                                        entry_25.insert(tk.END,
-                                                        ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
-                                        entry_25.see(tk.END)
-                                    if martin_kind == "일반+크루즈" or martin_kind == "슈퍼+크루즈":
-                                        if step > 3:
-                                            entry_25.insert(tk.END,
-                                                            ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
-                                            entry_25.see(tk.END)
-                                    if martin_kind == "일반+크루즈_2":
-                                        if step > 4:
-                                            entry_25.insert(tk.END,
-                                                            ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
-                                            entry_25.see(tk.END)
-                                if lose:
-                                    if t_check == "TIE":
-                                        step = last_tie_step
-                                    else:
-                                        step = 0
-                                    lose = False
-                                else:
-                                    if martin_kind == "크루즈1" or martin_kind == "크루즈2":
-                                        if martin_kind == "크루즈1":
-                                            step += 1
-                                        if martin_kind == "크루즈2" and win_stack == 0:
-                                            step += 1
-                                        if win_stack > 1 and step < 7:
-                                            step = 0
-                                        if win_stack == 2:
-                                            try:
-                                                sound_path = resource_path(os.path.join("assets", "start.mp3"))
-                                                playsound.playsound(sound_path, block=False)
-                                            except:
-                                                print("사운드오류")
-                                    elif martin_kind == "크루즈3" or martin_kind == "크루즈4" or martin_kind == "크루즈5":
-                                        if stop_check:
-                                            if stop_check3:
-                                                step -= 1
-                                            else:
-                                                step += 1
-                                            stop_check = False
-                                            stop_check3 = False
-                                        elif stop_check2:
-                                            if stop_check3:
-                                                step -= 1
-                                                stop_check3 = False
-                                            else:
-                                                step += 1
-
-                                            stop_check2 = False
-                                            stop_check3 = False
-                                        else:
-                                            if step == 0:
-                                                step = 0
-                                            else:
-                                                step -= 1
-
-                                        if win_stack > 1:
-                                            step = 0
-                                        if win_stack == 2:
-                                            try:
-                                                sound_path = resource_path(os.path.join("assets", "start.mp3"))
-                                                playsound.playsound(sound_path, block=False)
-                                            except:
-                                                print("사운드오류")
-                                        if win_stack > 0 and step > selected_index - 4:
-                                            step = 0
-                                    elif martin_kind == "크루즈3_2":
-                                        if stop_check:
-                                            if stop_check3:
-                                                if step == 1:
-                                                    step = 0
-                                                elif step == 0:
-                                                    step = 0
-                                                else:
-                                                    step -= 2
-                                            else:
-                                                step += 1
-                                            stop_check = False
-                                            stop_check3 = False
-                                        elif stop_check2:
-                                            if stop_check3:
-                                                if step == 1:
-                                                    step = 0
-                                                elif step == 0:
-                                                    step = 0
-                                                else:
-                                                    step -= 2
-                                                stop_check3 = False
-                                            else:
-                                                step += 1
-
-                                            stop_check2 = False
-                                            stop_check3 = False
-                                        else:
-                                            if step == 0:
-                                                step = 0
-                                            else:
-                                                if step == 1:
-                                                    step = 0
-                                                elif step == 0:
-                                                    step = 0
-                                                else:
-                                                    step -= 2
-
-                                        if win_stack > 1:
-                                            step = 0
-                                        if win_stack == 2:
-                                            try:
-                                                sound_path = resource_path(os.path.join("assets", "start.mp3"))
-                                                playsound.playsound(sound_path, block=False)
-                                            except:
-                                                print("사운드오류")
-                                    elif martin_kind == "크루즈3_3":
-                                        if stop_check:
-                                            if stop_check3:
-                                                if step == 1:
-                                                    step = 0
-                                                elif step == 0:
-                                                    step = 0
-                                                else:
-                                                    step -= 3
-                                                if step < 0:
-                                                    step = 0
-                                            else:
-                                                step += 1
-                                            stop_check = False
-                                            stop_check3 = False
-                                        elif stop_check2:
-                                            if stop_check3:
-                                                if step == 1:
-                                                    step = 0
-                                                elif step == 0:
-                                                    step = 0
-                                                else:
-                                                    step -= 3
-                                                if step < 0:
-                                                    step = 0
-                                                stop_check3 = False
-                                            else:
-                                                step += 1
-
-                                            stop_check2 = False
-                                            stop_check3 = False
-                                        else:
-                                            if step == 0:
-                                                step = 0
-                                            else:
-                                                if step == 1:
-                                                    step = 0
-                                                elif step == 0:
-                                                    step = 0
-                                                else:
-                                                    step -= 3
-                                                if step < 0:
-                                                    step = 0
-                                            if step < 0:
-                                                step = 0
-
-                                        if win_stack > 1:
-                                            step = 0
-                                        if win_stack == 2:
-                                            try:
-                                                sound_path = resource_path(os.path.join("assets", "start.mp3"))
-                                                playsound.playsound(sound_path, block=False)
-                                            except:
-                                                print("사운드오류")
-                                    elif martin_kind == "크루즈3_4":
-                                        if stop_check:
-                                            if stop_check3:
-                                                if step == 1:
-                                                    step = 0
-                                                elif step < 1:
-                                                    step = 0
-                                                else:
-                                                    step -= 4
-                                                if step < 0:
-                                                    step = 0
-                                            else:
-                                                step += 1
-                                            stop_check = False
-                                            stop_check3 = False
-                                        elif stop_check2:
-                                            if stop_check3:
-                                                if step == 1:
-                                                    step = 0
-                                                elif step == 0:
-                                                    step = 0
-                                                else:
-                                                    step -= 4
-                                                if step < 0:
-                                                    step = 0
-                                                stop_check3 = False
-                                            else:
-                                                step += 1
-
-                                            stop_check2 = False
-                                            stop_check3 = False
-                                        else:
-                                            if step == 0:
-                                                step = 0
-                                            else:
-                                                if step == 1:
-                                                    step = 0
-                                                elif step == 0:
-                                                    step = 0
-                                                else:
-                                                    step -= 4
-                                                if step < 0:
-                                                    step = 0
-                                            if step < 0:
-                                                step = 0
-
-                                        if win_stack > 1:
-                                            step = 0
-                                        if win_stack == 2:
-                                            try:
-                                                sound_path = resource_path(os.path.join("assets", "start.mp3"))
-                                                playsound.playsound(sound_path, block=False)
-                                            except:
-                                                print("사운드오류")
-                                    elif martin_kind == "일반+크루즈" or martin_kind == "슈퍼+크루즈":
-                                        if stop_check:
-                                            if stop_check3 and step > 3:
-                                                if step == 1:
-                                                    step = 0
-                                                elif step < 1:
-                                                    step = 0
-                                                else:
-                                                    if step > 3:
-                                                        step = 3
-                                                    elif step < 4:
-                                                        step = 0
-                                                if step < 0:
-                                                    step = 0
-                                            else:
-                                                step += 1
-                                            stop_check = False
-                                            stop_check3 = False
-                                        elif stop_check2:
-                                            if stop_check3 and step > 3:
-                                                if step == 1:
-                                                    step = 0
-                                                elif step == 0:
-                                                    step = 0
-                                                else:
-                                                    if step > 3:
-                                                        step = 3
-                                                    elif step < 4:
-                                                        step = 0
-                                                if step < 0:
-                                                    step = 0
-                                                stop_check3 = False
-                                            else:
-                                                step += 1
-
-                                            stop_check2 = False
-                                            stop_check3 = False
-                                        else:
-                                            if step == 0:
-                                                step = 0
-                                            else:
-                                                if step == 1:
-                                                    step = 0
-                                                elif step == 0:
-                                                    step = 0
-                                                else:
-                                                    if step > 3:
-                                                        step = 3
-                                                    elif step < 4:
-                                                        step = 0
-                                                if step < 0:
-                                                    step = 0
-                                            if step < 0:
-                                                step = 0
-
-                                        if step > 3:
-                                            if win_stack > 1:
-                                                step = 0
-                                            if win_stack == 2:
-                                                try:
-                                                    sound_path = resource_path(os.path.join("assets", "start.mp3"))
-                                                    playsound.playsound(sound_path, block=False)
-                                                except:
-                                                    print("사운드오류")
-                                    elif martin_kind == "일반+크루즈_2":
-                                        if stop_check:
-                                            if stop_check3 and step > 4:
-                                                if step == 1:
-                                                    step = 0
-                                                elif step < 1:
-                                                    step = 0
-                                                else:
-                                                    if step > 4:
-                                                        step = 3
-                                                    elif step < 5:
-                                                        step = 0
-                                                if step < 0:
-                                                    step = 0
-                                            else:
-                                                step += 1
-                                            stop_check = False
-                                            stop_check3 = False
-                                        elif stop_check2:
-                                            if stop_check3 and step > 4:
-                                                if step == 1:
-                                                    step = 0
-                                                elif step == 0:
-                                                    step = 0
-                                                else:
-                                                    if step > 4:
-                                                        step = 3
-                                                    elif step < 5:
-                                                        step = 0
-                                                if step < 0:
-                                                    step = 0
-                                                stop_check3 = False
-                                            else:
-                                                step += 1
-
-                                            stop_check2 = False
-                                            stop_check3 = False
-                                        else:
-                                            if step == 0:
-                                                step = 0
-                                            else:
-                                                if step == 1:
-                                                    step = 0
-                                                elif step == 0:
-                                                    step = 0
-                                                else:
-                                                    if step > 4:
-                                                        step = 3
-                                                    elif step < 5:
-                                                        step = 0
-                                                if step < 0:
-                                                    step = 0
-                                            if step < 0:
-                                                step = 0
-
-                                        if step > 4:
-                                            if win_stack > 1:
-                                                step = 0
-                                            if win_stack == 2:
-                                                try:
-                                                    sound_path = resource_path(os.path.join("assets", "start.mp3"))
-                                                    playsound.playsound(sound_path, block=False)
-                                                except:
-                                                    print("사운드오류")
-
-                                    else:
-                                        if martin_kind == "크루즈1" or martin_kind == "크루즈2":
-                                            if win_stack > 1:
-                                                step = 0
-                                            else:
-                                                step += 1
-                                        elif martin_kind == "다니엘시스템":
-                                            if stop_check:
-                                                step += 1
-                                                stop_check = False
-                                            else:
-                                                if step == 0:
-                                                    step = 0
-                                                else:
-                                                    if step > 12:
-                                                        step -= 2
-                                                    else:
-                                                        step -= 1
-                                                if step < 0:
-                                                    step = 0
-                                        else:
-                                            if stop_check:
-                                                step += 1
-                                                stop_check = False
-                                            else:
-                                                step = 0
-                                if start:
-                                    step = 0
-                                    lose_stack = 0
-                                if stop_check3:
-                                    step = step
-                                    stop_check3 = False
-                                    lose_stack = 0
-                            if re_start:
-                                if pause_step != 0:
-                                    step = pause_step - 1
-                                else:
-                                    step = stop_step - 1
-                                    group_level = 1
-                                re_start = False
-
-                            if stop_check3 and t_check == "TIE":
-                                stop_check3 = False
-                                pass
-                            else:
-                                entry_25.insert(tk.END, (str(step + 1) + "마틴 진행\n"))
-                                entry_25.see(tk.END)
-
-                                for i in range(40):
-                                    if step == i:
-                                        if selected_index == i + 1:
-                                            lose = True
-                                            last_tie_step = step
-                                            tie_on = True
-                                        chip_selection(martin_list[i], c_res, step, round)
-                                        compare_mybet = c_res
-                                        break  # 일치하는 조건을 찾으면 반복문을 종료
-
-                            start = False
-
-                            group2_get = 0
-                elif check_type == "X":
-                    if ox == "O":
-                        if t_check == "TIE":
-                            pass
-                        else:
-                            if not start:
-                                if lose_stack <= long_stop_value:
-                                    lose_stack += 1
-                    if (cal > 0) and (profit_stop2 != 0 and profit_stop2 < cal):
-                        profit_stop_func()
-                        pass
-                    elif (cal < 0) and (loss_stop2 != 0 and loss_stop2 < positive_cal):
-                        loss_stop_func()
-                        pass
-                    elif (stop_check1 and stop_check1 == "O") and lose:
-                        if t_check == "TIE":
-                            step = last_tie_step
-                            last_tie_step = 0
-                            lose = True
-                            group_level = 1
-                            entry_25.insert(tk.END, (str(step + 1) + "마틴 진행\n"))
-                            entry_25.see(tk.END)
-                            chip_selection(martin_list[step], c_res, step, round)
-                            compare_mybet = c_res
-                            tie_on = False
-                            tie_stack += 1
-                        else:
-                            entry_25.insert(tk.END, ("처음으로 단계로 돌아감\n"))
-                            entry_25.see(tk.END)
-                            group_level = 1
-                            step = 0
-                            lose_stack = 0
-                            start = True
-                            tie_on = False
-                            lose = False
-                            pass
-                    elif (stop_check1 and stop_check1 == "O") and (
-                            double_up_check >= long_stop_value2) and long_stop_w2 and not start:
-                        if double_up_check > long_stop_value2:
-                            if t_check == "TIE":
-                                lose_stack = lose_stack
-                            else:
-                                lose_stack -= 1
-                        entry_25.insert(tk.END,
-                                        ("연속 패 : " + str(lose_stack) + "패 - " + str(
-                                            long_stop_value) + "연패시 정지후 패턴 변경\n\n"))
+                if (cal > 0) and (profit_stop2 != 0 and profit_stop2 < cal):
+                    profit_stop_func()
+                    pass
+                elif (cal < 0) and (loss_stop2 != 0 and loss_stop2 < positive_cal):
+                    loss_stop_func()
+                    pass
+                elif (stop_check1 and stop_check1 == "X") and lose:
+                    if t_check == "TIE":
+                        step = last_tie_step
+                        last_tie_step = 0
+                        lose = True
+                        group_level = 1
+                        entry_25.insert(tk.END, (str(step + 1) + "마틴 진행\n"))
                         entry_25.see(tk.END)
-                        entry_25.insert(tk.END, ("O장줄 예상 정지중..\n"))
-                        entry_25.see(tk.END)
-                        stop_check = True
-                        stop_check2 = True
-                        recode_log('LONG_STOP', start_price, current_price, 0, d_title, r_title, "", "", round)
-
-                        if (stop_check1 and stop_check1 == "O") and (lose_stack >= long_stop_value) and long_stop_w:
-                            stop_check = True
-                            stop_check2 = True
-                            stop_check3 = True
-                            stop_step2 = step
-
-                            if not long_go_x:
-                                entry_25.insert(tk.END, ("연패방지 정지 후 패턴이동..\n"))
-                                entry_25.see(tk.END)
-                                recode_log('CHANGE_STOP', start_price, current_price, 0, d_title, r_title, "", "", round)
-                                if check_kind == "A":
-                                    if recent_percent2 > recent_percent2_2 and recent_percent2 > recent_percent3 and recent_percent2 > recent_percent3_2:
-                                        driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                        check_type = "O"
-                                    elif recent_percent2_2 > recent_percent2 and recent_percent2_2 > recent_percent3 and recent_percent2_2 > recent_percent3_2:
-                                        driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                        time.sleep(0.5)
-                                        driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
-                                        check_type = "X"
-                                    elif recent_percent3 > recent_percent2 and recent_percent3 > recent_percent2_2 and recent_percent3 > recent_percent3_2:
-                                        driver2.find_element(By.CSS_SELECTOR, '.result3').click()
-                                        check_type = "O"
-                                    elif recent_percent3_2 > recent_percent2 and recent_percent3_2 > recent_percent3 and recent_percent3_2 > recent_percent2_2:
-                                        driver2.find_element(By.CSS_SELECTOR, '.result3').click()
-                                        time.sleep(0.5)
-                                        driver2.find_element(By.CSS_SELECTOR, '.result3 .tc2').click()
-                                        check_type = "X"
-                                    elif (recent_percent2 == recent_percent3 or recent_percent2 == recent_percent3_2) and recent_percent2 > recent_percent2_2:
-                                        driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                        check_type = "O"
-                                    elif (recent_percent2_2 == recent_percent3_2 or recent_percent2_2 == recent_percent3) and recent_percent2_2 > recent_percent2:
-                                        driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                        time.sleep(0.5)
-                                        driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
-                                        check_type = "X"
-                                elif check_kind == "B":
-                                    if recent_percent1 > recent_percent1_2 and recent_percent1 > recent_percent3 and recent_percent1 > recent_percent3_2:
-                                        driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                        check_type = "O"
-                                    elif recent_percent1_2 > recent_percent1 and recent_percent1_2 > recent_percent3 and recent_percent1_2 > recent_percent3_2:
-                                        driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                        time.sleep(0.5)
-                                        driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
-                                        check_type = "X"
-                                    elif recent_percent3 > recent_percent1 and recent_percent3 > recent_percent1_2 and recent_percent3 > recent_percent3_2:
-                                        driver2.find_element(By.CSS_SELECTOR, '.result3').click()
-                                        check_type = "O"
-                                    elif recent_percent3_2 > recent_percent1 and recent_percent3_2 > recent_percent3 and recent_percent3_2 > recent_percent1_2:
-                                        driver2.find_element(By.CSS_SELECTOR, '.result3').click()
-                                        time.sleep(0.5)
-                                        driver2.find_element(By.CSS_SELECTOR, '.result3 .tc2').click()
-                                        check_type = "X"
-                                    elif (recent_percent1 == recent_percent3 or recent_percent1 == recent_percent3_2) and recent_percent1 > recent_percent1_2:
-                                        driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                        check_type = "O"
-                                    elif (recent_percent1_2 == recent_percent3_2 or recent_percent1_2 == recent_percent3) and recent_percent1_2 > recent_percent1:
-                                        driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                        time.sleep(0.5)
-                                        driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
-                                        check_type = "X"
-                                elif check_kind == "C":
-                                    if recent_percent1 > recent_percent1_2 and recent_percent1 > recent_percent2 and recent_percent1 > recent_percent2_2:
-                                        driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                        check_type = "O"
-                                    elif recent_percent1_2 > recent_percent1 and recent_percent1_2 > recent_percent2 and recent_percent1_2 > recent_percent2_2:
-                                        driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                        time.sleep(0.5)
-                                        driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
-                                        check_type = "X"
-                                    elif recent_percent2 > recent_percent1 and recent_percent2 > recent_percent1_2 and recent_percent2 > recent_percent2_2:
-                                        driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                        check_type = "O"
-                                    elif recent_percent2_2 > recent_percent1 and recent_percent2_2 > recent_percent2 and recent_percent2_2 > recent_percent1_2:
-                                        driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                        time.sleep(0.5)
-                                        driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
-                                        check_type = "X"
-                                    elif (recent_percent1 == recent_percent2 or recent_percent1 == recent_percent2_2) and recent_percent2 > recent_percent2_2:
-                                        driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                        check_type = "O"
-                                    elif (recent_percent1_2 == recent_percent2_2 or recent_percent1_2 == recent_percent2) and recent_percent2_2 > recent_percent2:
-                                        driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                        time.sleep(0.5)
-                                        driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
-                                        check_type = "X"
-                                lose_stack = 0
-
-                            pass
-                    elif (stop_check1 and stop_check1 == "O") and (lose_stack >= long_stop_value) and long_stop_w:
-                        entry_25.insert(tk.END, ("연패방지 정지 후 패턴이동..\n"))
-                        entry_25.see(tk.END)
-                        stop_check = True
-                        stop_check2 = True
-                        stop_check3 = True
-                        stop_step2 = step
-                        recode_log('CHANGE_STOP', start_price, current_price, 0, d_title, r_title, "", "", round)
-                        print((recent_percent1_2 * 1.5) + max_percent1_2, (recent_percent2_2 * 1.5) + max_percent2_2,
-                              (recent_percent3_2 * 1.5) + max_percent3_2)
-                        if not long_go_o:
-                            if check_kind == "A":
-                                if recent_percent2 > recent_percent2_2 and recent_percent2 > recent_percent3 and recent_percent2 > recent_percent3_2:
-                                    driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                    check_type = "O"
-                                elif recent_percent2_2 > recent_percent2 and recent_percent2_2 > recent_percent3 and recent_percent2_2 > recent_percent3_2:
-                                    driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                    time.sleep(0.5)
-                                    driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
-                                    check_type = "X"
-                                elif recent_percent3 > recent_percent2 and recent_percent3 > recent_percent2_2 and recent_percent3 > recent_percent3_2:
-                                    driver2.find_element(By.CSS_SELECTOR, '.result3').click()
-                                    check_type = "O"
-                                elif recent_percent3_2 > recent_percent2 and recent_percent3_2 > recent_percent3 and recent_percent3_2 > recent_percent2_2:
-                                    driver2.find_element(By.CSS_SELECTOR, '.result3').click()
-                                    time.sleep(0.5)
-                                    driver2.find_element(By.CSS_SELECTOR, '.result3 .tc2').click()
-                                    check_type = "X"
-                                elif (
-                                        recent_percent2 == recent_percent3 or recent_percent2 == recent_percent3_2) and recent_percent2 > recent_percent2_2:
-                                    driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                    check_type = "O"
-                                elif (
-                                        recent_percent2_2 == recent_percent3_2 or recent_percent2_2 == recent_percent3) and recent_percent2_2 > recent_percent2:
-                                    driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                    time.sleep(0.5)
-                                    driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
-                                    check_type = "X"
-                            elif check_kind == "B":
-                                if recent_percent1 > recent_percent1_2 and recent_percent1 > recent_percent3 and recent_percent1 > recent_percent3_2:
-                                    driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                    check_type = "O"
-                                elif recent_percent1_2 > recent_percent1 and recent_percent1_2 > recent_percent3 and recent_percent1_2 > recent_percent3_2:
-                                    driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                    time.sleep(0.5)
-                                    driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
-                                    check_type = "X"
-                                elif recent_percent3 > recent_percent1 and recent_percent3 > recent_percent1_2 and recent_percent3 > recent_percent3_2:
-                                    driver2.find_element(By.CSS_SELECTOR, '.result3').click()
-                                    check_type = "O"
-                                elif recent_percent3_2 > recent_percent1 and recent_percent3_2 > recent_percent3 and recent_percent3_2 > recent_percent1_2:
-                                    driver2.find_element(By.CSS_SELECTOR, '.result3').click()
-                                    time.sleep(0.5)
-                                    driver2.find_element(By.CSS_SELECTOR, '.result3 .tc2').click()
-                                    check_type = "X"
-                                elif (
-                                        recent_percent1 == recent_percent3 or recent_percent1 == recent_percent3_2) and recent_percent1 > recent_percent1_2:
-                                    driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                    check_type = "O"
-                                elif (
-                                        recent_percent1_2 == recent_percent3_2 or recent_percent1_2 == recent_percent3) and recent_percent1_2 > recent_percent1:
-                                    driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                    time.sleep(0.5)
-                                    driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
-                                    check_type = "X"
-                            elif check_kind == "C":
-                                if recent_percent1 > recent_percent1_2 and recent_percent1 > recent_percent2 and recent_percent1 > recent_percent2_2:
-                                    driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                    check_type = "O"
-                                elif recent_percent1_2 > recent_percent1 and recent_percent1_2 > recent_percent2 and recent_percent1_2 > recent_percent2_2:
-                                    driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                    time.sleep(0.5)
-                                    driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
-                                    check_type = "X"
-                                elif recent_percent2 > recent_percent1 and recent_percent2 > recent_percent1_2 and recent_percent2 > recent_percent2_2:
-                                    driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                    check_type = "O"
-                                elif recent_percent2_2 > recent_percent1 and recent_percent2_2 > recent_percent2 and recent_percent2_2 > recent_percent1_2:
-                                    driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                    time.sleep(0.5)
-                                    driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
-                                    check_type = "X"
-                                elif (
-                                        recent_percent1 == recent_percent2 or recent_percent1 == recent_percent2_2) and recent_percent2 > recent_percent2_2:
-                                    driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                    check_type = "O"
-                                elif (
-                                        recent_percent1_2 == recent_percent2_2 or recent_percent1_2 == recent_percent2) and recent_percent2_2 > recent_percent2:
-                                    driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                    time.sleep(0.5)
-                                    driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
-                                    check_type = "X"
-                            lose_stack = 0
-                        pass
+                        chip_selection(martin_list[step], c_res, step, round)
+                        compare_mybet = c_res
+                        tie_on = False
+                        tie_stack += 1
                     else:
-
-                        if ox == "O":
-                            if martin_kind == "다니엘시스템":
-                                if check_kind == "A":
-                                    driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                elif check_kind == "B":
-                                    driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                elif check_kind == "C":
-                                    driver2.find_element(By.CSS_SELECTOR, '.result3').click()
-                                current_res = driver2.find_element(By.CSS_SELECTOR,
-                                                                   '.result.active .o-pattern .to-result')
-                                c_res = current_res.get_attribute('innerHTML').strip()
-                                check_type = "O"
-                            win_stack = 0
-                            if t_check == "TIE":
-                                print(lose_stack)
-                                if lose:
-                                    step = step
-                                    last_tie_step = 0
-                                    lose = False
-                                    group_level = 1
-                                else:
-                                    step = step
-                                    tie_on = True
-                                    print("step유지")
-                                if long_stop_w:
-                                    entry_25.insert(tk.END, ("연속 패 : " + str(lose_stack) + "패 - " + str(
+                        entry_25.insert(tk.END, ("처음으로 단계로 돌아감\n"))
+                        entry_25.see(tk.END)
+                        group_level = 1
+                        step = 0
+                        lose_stack = 0
+                        start = True
+                        tie_on = False
+                        lose = False
+                        pass
+                elif (stop_check1 and stop_check1 == "X") and (
+                        double_up_check >= long_stop_value2) and long_stop_w2:
+                    if double_up_check > long_stop_value2:
+                        if t_check == "TIE":
+                            lose_stack = lose_stack
+                        else:
+                            lose_stack -= 1
+                    entry_25.insert(tk.END,
+                                    ("연속 패 : " + str(lose_stack) + "패 - " + str(
                                         long_stop_value) + "연패시 정지후 패턴 변경\n\n"))
-                                    entry_25.see(tk.END)
-                            else:
-                                if lose:
-                                    step = 0
-                                else:
-                                    if win_stack > 1:
-                                        step = 0
-                                    else:
-                                        step += 1
-                                        if stop_check3:
-                                            lose_stack += 1
-                                            long_go_x = False
-                                        stop_check2 = False
-                                        stop_check3 = False
-                                if start:
-                                    step = 0
-                                    lose_stack = 0
-                                if long_stop_w:
-                                    entry_25.insert(tk.END, ("연속 패 : " + str(lose_stack) + "패 - " + str(
-                                        long_stop_value) + "연패시 정지후 패턴 변경\n\n"))
-                                    entry_25.see(tk.END)
-                            if re_start:
-                                if pause_step != 0:
-                                    step = pause_step - 1
-                                else:
-                                    step = stop_step - 1
-                                    group_level = 1
-                                re_start = False
-
-                            if martin_kind == "크루즈3":
-                                if step > 4 and win_stack > 0:
-                                    if t_check == "TIE":
-                                        step = step
-                                    else:
-                                        step = 0
-
-                            entry_25.insert(tk.END, (str(step + 1) + "마틴 진행\n"))
-                            entry_25.see(tk.END)
-
-                            for i in range(40):
-                                if step == i:
-                                    if selected_index == i + 1:
-                                        lose = True
-                                        last_tie_step = step
-                                        tie_on = True
-                                    chip_selection(martin_list[i], c_res, step, round)
-                                    compare_mybet = c_res
-                                    break  # 일치하는 조건을 찾으면 반복문을 종료
-
-                            start = False
-
-                        if ox == "X":
-
-                            if group_level == 2:
-                                if group2_get == 0:
-                                    group2_get = martin9
-                                if start:
-                                    entry_25.insert(tk.END, ("2단계 진행 시작\n"))
-                                    entry_25.see(tk.END)
-                                    driver2.find_element(By.CSS_SELECTOR, '.go-level2').click()
-
-                            if t_check == "TIE":
-                                tie_stack += 1
-                                if lose:
-                                    step = last_tie_step
-                                    last_tie_step = 0
-                                    lose = False
-                                    group_level = 1
-
-                                else:
-                                    step = step
-                                    print("step유지")
-                                    if martin_kind == "크루즈1" or martin_kind == "크루즈2" or martin_kind == "크루즈3" or martin_kind == "크루즈4" or martin_kind == "크루즈5" or martin_kind == "크루즈3_2" or martin_kind == "크루즈3_3" or martin_kind == "크루즈3_4":
-                                        entry_25.insert(tk.END,
-                                                        ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
-                                        entry_25.see(tk.END)
-                                    if (martin_kind == "일반+크루즈" and step > 3) or (martin_kind == "슈퍼+크루즈" and step > 3):
-                                        entry_25.insert(tk.END,
-                                                        ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
-                                        entry_25.see(tk.END)
-                                    if martin_kind == "일반+크루즈_2" and step > 4:
-                                        entry_25.insert(tk.END,
-                                                        ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
-                                        entry_25.see(tk.END)
-
-                            else:
-                                if start or re_start:
-                                    win_stack = 0
-                                else:
-                                    if stop_check2:
-                                        if stop_check3:
-
-                                            lose_stack = 0
-                                        else:
-                                            win_stack = 0
-                                        stop_check2 = False
-                                        stop_check3 = False
-
-                                    elif stop_check3:
-
-                                        stop_check3 = False
-                                        lose_stack = 0
-
-                                    else:
-                                        lose_stack = 0
-                                        win_stack += 1
-
-                                    if martin_kind == "크루즈1" or martin_kind == "크루즈2":
-                                        if step < 7:
-                                            entry_25.insert(tk.END,
-                                                            ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
-                                            entry_25.see(tk.END)
-                                    if martin_kind == "크루즈3" or martin_kind == "크루즈4" or martin_kind == "크루즈5":
-                                        if win_stack > 0 and step > selected_index - 4:
-                                            step = 0
-                                        else:
-                                            entry_25.insert(tk.END,
-                                                            ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
-                                            entry_25.see(tk.END)
-                                    if martin_kind == "크루즈3_2" or martin_kind == "크루즈3_3" or martin_kind == "크루즈3_4":
-                                        entry_25.insert(tk.END,
-                                                        ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
-                                        entry_25.see(tk.END)
-                                    if martin_kind == "일반+크루즈" or martin_kind == "슈퍼+크루즈":
-                                        if step > 3:
-                                            entry_25.insert(tk.END,
-                                                            ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
-                                            entry_25.see(tk.END)
-                                    if martin_kind == "일반+크루즈_2":
-                                        if step > 4:
-                                            entry_25.insert(tk.END,
-                                                            ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
-                                            entry_25.see(tk.END)
-                                if lose:
-                                    if t_check == "TIE":
-                                        step = last_tie_step
-                                    else:
-                                        step = 0
-                                    lose = False
-                                else:
-                                    if martin_kind == "크루즈1" or martin_kind == "크루즈2":
-                                        if martin_kind == "크루즈1":
-                                            step += 1
-                                        if martin_kind == "크루즈2" and win_stack == 0:
-                                            step += 1
-                                        if win_stack > 1 and step < 7:
-                                            step = 0
-                                        if win_stack == 2:
-                                            try:
-                                                sound_path = resource_path(os.path.join("assets", "start.mp3"))
-                                                playsound.playsound(sound_path, block=False)
-                                            except:
-                                                print("사운드오류")
-                                    elif martin_kind == "크루즈3" or martin_kind == "크루즈4" or martin_kind == "크루즈5":
-                                        if stop_check:
-                                            if stop_check3:
-                                                step -= 1
-                                            else:
-                                                step += 1
-                                            stop_check = False
-                                            stop_check3 = False
-                                        elif stop_check2:
-                                            if stop_check3:
-                                                step -= 1
-                                                stop_check3 = False
-                                            else:
-                                                step += 1
-
-                                            stop_check2 = False
-                                            stop_check3 = False
-                                        else:
-                                            if step == 0:
-                                                step = 0
-                                            else:
-                                                step -= 1
-
-                                        if win_stack > 1:
-                                            step = 0
-                                        if win_stack == 2:
-                                            try:
-                                                sound_path = resource_path(os.path.join("assets", "start.mp3"))
-                                                playsound.playsound(sound_path, block=False)
-                                            except:
-                                                print("사운드오류")
-                                        if win_stack > 0 and step > selected_index - 4:
-                                            step = 0
-                                    elif martin_kind == "크루즈3_2":
-                                        if stop_check:
-                                            if stop_check3:
-                                                if step == 1:
-                                                    step = 0
-                                                elif step == 0:
-                                                    step = 0
-                                                else:
-                                                    step -= 2
-                                            else:
-                                                step += 1
-                                            stop_check = False
-                                            stop_check3 = False
-                                        elif stop_check2:
-                                            if stop_check3:
-                                                if step == 1:
-                                                    step = 0
-                                                elif step == 0:
-                                                    step = 0
-                                                else:
-                                                    step -= 2
-                                                stop_check3 = False
-                                            else:
-                                                step += 1
-
-                                            stop_check2 = False
-                                            stop_check3 = False
-                                        else:
-                                            if step == 0:
-                                                step = 0
-                                            else:
-                                                if step == 1:
-                                                    step = 0
-                                                elif step == 0:
-                                                    step = 0
-                                                else:
-                                                    step -= 2
-
-                                        if win_stack > 1:
-                                            step = 0
-                                        if win_stack == 2:
-                                            try:
-                                                sound_path = resource_path(os.path.join("assets", "start.mp3"))
-                                                playsound.playsound(sound_path, block=False)
-                                            except:
-                                                print("사운드오류")
-                                    elif martin_kind == "크루즈3_3":
-                                        if stop_check:
-                                            if stop_check3:
-                                                if step == 1:
-                                                    step = 0
-                                                elif step == 0:
-                                                    step = 0
-                                                else:
-                                                    step -= 3
-                                                if step < 0:
-                                                    step = 0
-                                            else:
-                                                step += 1
-                                            stop_check = False
-                                            stop_check3 = False
-                                        elif stop_check2:
-                                            if stop_check3:
-                                                if step == 1:
-                                                    step = 0
-                                                elif step == 0:
-                                                    step = 0
-                                                else:
-                                                    step -= 3
-                                                if step < 0:
-                                                    step = 0
-                                                stop_check3 = False
-                                            else:
-                                                step += 1
-
-                                            stop_check2 = False
-                                            stop_check3 = False
-                                        else:
-                                            if step == 0:
-                                                step = 0
-                                            else:
-                                                if step == 1:
-                                                    step = 0
-                                                elif step == 0:
-                                                    step = 0
-                                                else:
-                                                    step -= 3
-                                                if step < 0:
-                                                    step = 0
-                                            if step < 0:
-                                                step = 0
-
-                                        if win_stack > 1:
-                                            step = 0
-                                        if win_stack == 2:
-                                            try:
-                                                sound_path = resource_path(os.path.join("assets", "start.mp3"))
-                                                playsound.playsound(sound_path, block=False)
-                                            except:
-                                                print("사운드오류")
-                                    elif martin_kind == "크루즈3_4":
-                                        if stop_check:
-                                            if stop_check3:
-                                                if step == 1:
-                                                    step = 0
-                                                elif step < 1:
-                                                    step = 0
-                                                else:
-                                                    step -= 4
-                                                if step < 0:
-                                                    step = 0
-                                            else:
-                                                step += 1
-                                            stop_check = False
-                                            stop_check3 = False
-                                        elif stop_check2:
-                                            if stop_check3:
-                                                if step == 1:
-                                                    step = 0
-                                                elif step == 0:
-                                                    step = 0
-                                                else:
-                                                    step -= 4
-                                                if step < 0:
-                                                    step = 0
-                                                stop_check3 = False
-                                            else:
-                                                step += 1
-
-                                            stop_check2 = False
-                                            stop_check3 = False
-                                        else:
-                                            if step == 0:
-                                                step = 0
-                                            else:
-                                                if step == 1:
-                                                    step = 0
-                                                elif step == 0:
-                                                    step = 0
-                                                else:
-                                                    step -= 4
-                                                if step < 0:
-                                                    step = 0
-                                            if step < 0:
-                                                step = 0
-
-                                        if win_stack > 1:
-                                            step = 0
-                                        if win_stack == 2:
-                                            try:
-                                                sound_path = resource_path(os.path.join("assets", "start.mp3"))
-                                                playsound.playsound(sound_path, block=False)
-                                            except:
-                                                print("사운드오류")
-                                    elif martin_kind == "일반+크루즈" or martin_kind == "슈퍼+크루즈":
-                                        if stop_check:
-                                            if stop_check3 and step > 3:
-                                                if step == 1:
-                                                    step = 0
-                                                elif step < 1:
-                                                    step = 0
-                                                else:
-                                                    if step > 3:
-                                                        step = 3
-                                                    elif step < 4:
-                                                        step = 0
-                                                if step < 0:
-                                                    step = 0
-                                            else:
-                                                step += 1
-                                            stop_check = False
-                                            stop_check3 = False
-                                        elif stop_check2:
-                                            if stop_check3 and step > 3:
-                                                if step == 1:
-                                                    step = 0
-                                                elif step == 0:
-                                                    step = 0
-                                                else:
-                                                    if step > 3:
-                                                        step = 3
-                                                    elif step < 4:
-                                                        step = 0
-                                                if step < 0:
-                                                    step = 0
-                                                stop_check3 = False
-                                            else:
-                                                step += 1
-
-                                            stop_check2 = False
-                                            stop_check3 = False
-                                        else:
-                                            if step == 0:
-                                                step = 0
-                                            else:
-                                                if step == 1:
-                                                    step = 0
-                                                elif step == 0:
-                                                    step = 0
-                                                else:
-                                                    if step > 3:
-                                                        step = 3
-                                                    elif step < 4:
-                                                        step = 0
-                                                if step < 0:
-                                                    step = 0
-                                            if step < 0:
-                                                step = 0
-
-                                        if step > 3:
-                                            if win_stack > 1:
-                                                step = 0
-                                            if win_stack == 2:
-                                                try:
-                                                    sound_path = resource_path(os.path.join("assets", "start.mp3"))
-                                                    playsound.playsound(sound_path, block=False)
-                                                except:
-                                                    print("사운드오류")
-                                    elif martin_kind == "일반+크루즈_2":
-                                        if stop_check:
-                                            if stop_check3 and step > 4:
-                                                if step == 1:
-                                                    step = 0
-                                                elif step < 1:
-                                                    step = 0
-                                                else:
-                                                    if step > 4:
-                                                        step = 3
-                                                    elif step < 5:
-                                                        step = 0
-                                                if step < 0:
-                                                    step = 0
-                                            else:
-                                                step += 1
-                                            stop_check = False
-                                            stop_check3 = False
-                                        elif stop_check2:
-                                            if stop_check3 and step > 4:
-                                                if step == 1:
-                                                    step = 0
-                                                elif step == 0:
-                                                    step = 0
-                                                else:
-                                                    if step > 4:
-                                                        step = 3
-                                                    elif step < 5:
-                                                        step = 0
-                                                if step < 0:
-                                                    step = 0
-                                                stop_check3 = False
-                                            else:
-                                                step += 1
-
-                                            stop_check2 = False
-                                            stop_check3 = False
-                                        else:
-                                            if step == 0:
-                                                step = 0
-                                            else:
-                                                if step == 1:
-                                                    step = 0
-                                                elif step == 0:
-                                                    step = 0
-                                                else:
-                                                    if step > 4:
-                                                        step = 3
-                                                    elif step < 5:
-                                                        step = 0
-                                                if step < 0:
-                                                    step = 0
-                                            if step < 0:
-                                                step = 0
-
-                                        if step > 4:
-                                            if win_stack > 1:
-                                                step = 0
-                                            if win_stack == 2:
-                                                try:
-                                                    sound_path = resource_path(os.path.join("assets", "start.mp3"))
-                                                    playsound.playsound(sound_path, block=False)
-                                                except:
-                                                    print("사운드오류")
-                                    else:
-                                        if martin_kind == "크루즈1" or martin_kind == "크루즈2":
-                                            if win_stack > 1:
-                                                step = 0
-                                            else:
-                                                step += 1
-                                        elif martin_kind == "다니엘시스템":
-                                            if stop_check:
-                                                step += 1
-                                                stop_check = False
-                                            else:
-                                                if step == 0:
-                                                    step = 0
-                                                else:
-                                                    if step > 12:
-                                                        step -= 2
-                                                    else:
-                                                        step -= 1
-                                                if step < 0:
-                                                    step = 0
-                                        else:
-                                            if stop_check:
-                                                step += 1
-                                                stop_check = False
-                                            else:
-                                                step = 0
-                                if start:
-                                    step = 0
-                                    lose_stack = 0
-                                if stop_check3:
-                                    step = step
-                                    stop_check3 = False
-                                    lose_stack = 0
-                            if re_start:
-                                if pause_step != 0:
-                                    step = pause_step - 1
-                                else:
-                                    step = stop_step - 1
-                                    group_level = 1
-                                re_start = False
-
-                            if stop_check3 and t_check == "TIE":
-                                stop_check3 = False
-                                pass
-                            else:
-                                entry_25.insert(tk.END, (str(step + 1) + "마틴 진행\n"))
-                                entry_25.see(tk.END)
-
-                                for i in range(40):
-                                    if step == i:
-                                        if selected_index == i + 1:
-                                            lose = True
-                                            last_tie_step = step
-                                            tie_on = True
-                                        chip_selection(martin_list[i], c_res, step, round)
-                                        compare_mybet = c_res
-                                        break  # 일치하는 조건을 찾으면 반복문을 종료
-
-                            start = False
-
-                            group2_get = 0
-
-                if tie_stack > 0:
-                    tie_step = 0
-                    tie_stack = 0
-                if tie_auto_value:
-                    entry_25.insert(tk.END, ("타이 승 : " + str(tie_stack) + "\n타이 " + str(tie_step + 1) + "마틴 진행\n"))
                     entry_25.see(tk.END)
-                    chip_selection(tie_values[tie_step], "T", step, round)
-                    compare_mybet = c_res
-                    tie_step += 1
+                    entry_25.insert(tk.END, ("X장줄 예상 정지중..\n"))
+                    entry_25.see(tk.END)
+                    recode_log('LONG_STOP', start_price, current_price, 0, d_title, r_title, "", "", round)
+                    stop_check = True
+                    stop_check2 = True
+
+                    if (stop_check1 and stop_check1 == "X") and (lose_stack >= long_stop_value) and long_stop_w:
+                        stop_check = True
+                        stop_check2 = True
+                        stop_check3 = True
+                        stop_step2 = step
+
+                        if not long_go_o:
+                            entry_25.insert(tk.END, ("연패방지 정지 후 패턴이동..\n"))
+                            entry_25.see(tk.END)
+                            recode_log('CHANGE_STOP', start_price, current_price, 0, d_title, r_title, "", "", round)
+                            if check_kind == "A":
+                                if recent_percent2 > recent_percent2_2 and recent_percent2 > recent_percent3 and recent_percent2 > recent_percent3_2:
+                                    driver2.find_element(By.CSS_SELECTOR, '.result2').click()
+                                    check_type = "O"
+                                elif recent_percent2_2 > recent_percent2 and recent_percent2_2 > recent_percent3 and recent_percent2_2 > recent_percent3_2:
+                                    driver2.find_element(By.CSS_SELECTOR, '.result2').click()
+                                    time.sleep(0.5)
+                                    driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
+                                    check_type = "X"
+                                elif recent_percent3 > recent_percent2 and recent_percent3 > recent_percent2_2 and recent_percent3 > recent_percent3_2:
+                                    driver2.find_element(By.CSS_SELECTOR, '.result3').click()
+                                    check_type = "O"
+                                elif recent_percent3_2 > recent_percent2 and recent_percent3_2 > recent_percent3 and recent_percent3_2 > recent_percent2_2:
+                                    driver2.find_element(By.CSS_SELECTOR, '.result3').click()
+                                    time.sleep(0.5)
+                                    driver2.find_element(By.CSS_SELECTOR, '.result3 .tc2').click()
+                                    check_type = "X"
+                                elif (
+                                        recent_percent2 == recent_percent3 or recent_percent2 == recent_percent3_2) and recent_percent2 > recent_percent2_2:
+                                    driver2.find_element(By.CSS_SELECTOR, '.result2').click()
+                                    check_type = "O"
+                                elif (
+                                        recent_percent2_2 == recent_percent3_2 or recent_percent2_2 == recent_percent3) and recent_percent2_2 > recent_percent2:
+                                    driver2.find_element(By.CSS_SELECTOR, '.result2').click()
+                                    time.sleep(0.5)
+                                    driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
+                                    check_type = "X"
+                            elif check_kind == "B":
+                                if recent_percent1 > recent_percent1_2 and recent_percent1 > recent_percent3 and recent_percent1 > recent_percent3_2:
+                                    driver2.find_element(By.CSS_SELECTOR, '.result1').click()
+                                    check_type = "O"
+                                elif recent_percent1_2 > recent_percent1 and recent_percent1_2 > recent_percent3 and recent_percent1_2 > recent_percent3_2:
+                                    driver2.find_element(By.CSS_SELECTOR, '.result1').click()
+                                    time.sleep(0.5)
+                                    driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
+                                    check_type = "X"
+                                elif recent_percent3 > recent_percent1 and recent_percent3 > recent_percent1_2 and recent_percent3 > recent_percent3_2:
+                                    driver2.find_element(By.CSS_SELECTOR, '.result3').click()
+                                    check_type = "O"
+                                elif recent_percent3_2 > recent_percent1 and recent_percent3_2 > recent_percent3 and recent_percent3_2 > recent_percent1_2:
+                                    driver2.find_element(By.CSS_SELECTOR, '.result3').click()
+                                    time.sleep(0.5)
+                                    driver2.find_element(By.CSS_SELECTOR, '.result3 .tc2').click()
+                                    check_type = "X"
+                                elif (
+                                        recent_percent1 == recent_percent3 or recent_percent1 == recent_percent3_2) and recent_percent1 > recent_percent1_2:
+                                    driver2.find_element(By.CSS_SELECTOR, '.result1').click()
+                                    check_type = "O"
+                                elif (
+                                        recent_percent1_2 == recent_percent3_2 or recent_percent1_2 == recent_percent3) and recent_percent1_2 > recent_percent1:
+                                    driver2.find_element(By.CSS_SELECTOR, '.result1').click()
+                                    time.sleep(0.5)
+                                    driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
+                                    check_type = "X"
+                            elif check_kind == "C":
+                                if recent_percent1 > recent_percent1_2 and recent_percent1 > recent_percent2 and recent_percent1 > recent_percent2_2:
+                                    driver2.find_element(By.CSS_SELECTOR, '.result1').click()
+                                    check_type = "O"
+                                elif recent_percent1_2 > recent_percent1 and recent_percent1_2 > recent_percent2 and recent_percent1_2 > recent_percent2_2:
+                                    driver2.find_element(By.CSS_SELECTOR, '.result1').click()
+                                    time.sleep(0.5)
+                                    driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
+                                    check_type = "X"
+                                elif recent_percent2 > recent_percent1 and recent_percent2 > recent_percent1_2 and recent_percent2 > recent_percent2_2:
+                                    driver2.find_element(By.CSS_SELECTOR, '.result2').click()
+                                    check_type = "O"
+                                elif recent_percent2_2 > recent_percent1 and recent_percent2_2 > recent_percent2 and recent_percent2_2 > recent_percent1_2:
+                                    driver2.find_element(By.CSS_SELECTOR, '.result2').click()
+                                    time.sleep(0.5)
+                                    driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
+                                    check_type = "X"
+                                elif (
+                                        recent_percent1 == recent_percent2 or recent_percent1 == recent_percent2_2) and recent_percent2 > recent_percent2_2:
+                                    driver2.find_element(By.CSS_SELECTOR, '.result2').click()
+                                    check_type = "O"
+                                elif (
+                                        recent_percent1_2 == recent_percent2_2 or recent_percent1_2 == recent_percent2) and recent_percent2_2 > recent_percent2:
+                                    driver2.find_element(By.CSS_SELECTOR, '.result2').click()
+                                    time.sleep(0.5)
+                                    driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
+                                    check_type = "X"
+                            lose_stack = 0
+                    pass
+                elif (lose_stack >= long_stop_value) and long_stop_w:
+                    entry_25.insert(tk.END, ("연패방지 정지 후 패턴이동..\n"))
+                    entry_25.see(tk.END)
+                    recode_log('CHANGE_STOP', start_price, current_price, 0, d_title, r_title, "", "", round)
+                    stop_check = True
+                    stop_check2 = True
+                    stop_check3 = True
+                    stop_step2 = step
+                    if not long_go_o:
+                        if check_kind == "A":
+                            if recent_percent2 > recent_percent2_2 and recent_percent2 > recent_percent3 and recent_percent2 > recent_percent3_2:
+                                driver2.find_element(By.CSS_SELECTOR, '.result2').click()
+                                check_type = "O"
+                            elif recent_percent2_2 > recent_percent2 and recent_percent2_2 > recent_percent3 and recent_percent2_2 > recent_percent3_2:
+                                driver2.find_element(By.CSS_SELECTOR, '.result2').click()
+                                time.sleep(0.5)
+                                driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
+                                check_type = "X"
+                            elif recent_percent3 > recent_percent2 and recent_percent3 > recent_percent2_2 and recent_percent3 > recent_percent3_2:
+                                driver2.find_element(By.CSS_SELECTOR, '.result3').click()
+                                check_type = "O"
+                            elif recent_percent3_2 > recent_percent2 and recent_percent3_2 > recent_percent3 and recent_percent3_2 > recent_percent2_2:
+                                driver2.find_element(By.CSS_SELECTOR, '.result3').click()
+                                time.sleep(0.5)
+                                driver2.find_element(By.CSS_SELECTOR, '.result3 .tc2').click()
+                                check_type = "X"
+                            elif (
+                                    recent_percent2 == recent_percent3 or recent_percent2 == recent_percent3_2) and recent_percent2 > recent_percent2_2:
+                                driver2.find_element(By.CSS_SELECTOR, '.result2').click()
+                                check_type = "O"
+                            elif (
+                                    recent_percent2_2 == recent_percent3_2 or recent_percent2_2 == recent_percent3) and recent_percent2_2 > recent_percent2:
+                                driver2.find_element(By.CSS_SELECTOR, '.result2').click()
+                                time.sleep(0.5)
+                                driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
+                                check_type = "X"
+                        elif check_kind == "B":
+                            if recent_percent1 > recent_percent1_2 and recent_percent1 > recent_percent3 and recent_percent1 > recent_percent3_2:
+                                driver2.find_element(By.CSS_SELECTOR, '.result1').click()
+                                check_type = "O"
+                            elif recent_percent1_2 > recent_percent1 and recent_percent1_2 > recent_percent3 and recent_percent1_2 > recent_percent3_2:
+                                driver2.find_element(By.CSS_SELECTOR, '.result1').click()
+                                time.sleep(0.5)
+                                driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
+                                check_type = "X"
+                            elif recent_percent3 > recent_percent1 and recent_percent3 > recent_percent1_2 and recent_percent3 > recent_percent3_2:
+                                driver2.find_element(By.CSS_SELECTOR, '.result3').click()
+                                check_type = "O"
+                            elif recent_percent3_2 > recent_percent1 and recent_percent3_2 > recent_percent3 and recent_percent3_2 > recent_percent1_2:
+                                driver2.find_element(By.CSS_SELECTOR, '.result3').click()
+                                time.sleep(0.5)
+                                driver2.find_element(By.CSS_SELECTOR, '.result3 .tc2').click()
+                                check_type = "X"
+                            elif (
+                                    recent_percent1 == recent_percent3 or recent_percent1 == recent_percent3_2) and recent_percent1 > recent_percent1_2:
+                                driver2.find_element(By.CSS_SELECTOR, '.result1').click()
+                                check_type = "O"
+                            elif (
+                                    recent_percent1_2 == recent_percent3_2 or recent_percent1_2 == recent_percent3) and recent_percent1_2 > recent_percent1:
+                                driver2.find_element(By.CSS_SELECTOR, '.result1').click()
+                                time.sleep(0.5)
+                                driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
+                                check_type = "X"
+                        elif check_kind == "C":
+                            if recent_percent1 > recent_percent1_2 and recent_percent1 > recent_percent2 and recent_percent1 > recent_percent2_2:
+                                driver2.find_element(By.CSS_SELECTOR, '.result1').click()
+                                check_type = "O"
+                            elif recent_percent1_2 > recent_percent1 and recent_percent1_2 > recent_percent2 and recent_percent1_2 > recent_percent2_2:
+                                driver2.find_element(By.CSS_SELECTOR, '.result1').click()
+                                time.sleep(0.5)
+                                driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
+                                check_type = "X"
+                            elif recent_percent2 > recent_percent1 and recent_percent2 > recent_percent1_2 and recent_percent2 > recent_percent2_2:
+                                driver2.find_element(By.CSS_SELECTOR, '.result2').click()
+                                check_type = "O"
+                            elif recent_percent2_2 > recent_percent1 and recent_percent2_2 > recent_percent2 and recent_percent2_2 > recent_percent1_2:
+                                driver2.find_element(By.CSS_SELECTOR, '.result2').click()
+                                time.sleep(0.5)
+                                driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
+                                check_type = "X"
+                            elif (
+                                    recent_percent1 == recent_percent2 or recent_percent1 == recent_percent2_2) and recent_percent2 > recent_percent2_2:
+                                driver2.find_element(By.CSS_SELECTOR, '.result2').click()
+                                check_type = "O"
+                            elif (
+                                    recent_percent1_2 == recent_percent2_2 or recent_percent1_2 == recent_percent2) and recent_percent2_2 > recent_percent2:
+                                driver2.find_element(By.CSS_SELECTOR, '.result2').click()
+                                time.sleep(0.5)
+                                driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
+                                check_type = "X"
+                        lose_stack = 0
+                    pass
+                else:
+                    long_go_o = False
+                    if ox == "X":
+                        if martin_kind == "다니엘시스템":
+                            if check_kind == "A":
+                                driver2.find_element(By.CSS_SELECTOR, '.result1').click()
+                                time.sleep(0.5)
+                                driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
+                            elif check_kind == "B":
+                                driver2.find_element(By.CSS_SELECTOR, '.result2').click()
+                                time.sleep(0.5)
+                                driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
+                            elif check_kind == "C":
+                                driver2.find_element(By.CSS_SELECTOR, '.result3').click()
+                                time.sleep(0.5)
+                                driver2.find_element(By.CSS_SELECTOR, '.result3 .tc2').click()
+                            current_res = driver2.find_element(By.CSS_SELECTOR, '.result.active .x-pattern .to-result')
+                            c_res = current_res.get_attribute('innerHTML').strip()
+                            check_type = "X"
+
+                        win_stack = 0
+                        if t_check == "TIE":
+                            print(lose_stack)
+                            if lose:
+                                step = step
+                                last_tie_step = 0
+                                lose = False
+                                group_level = 1
+                            else:
+                                step = step
+                                tie_on = True
+                                print("step유지")
+                            if long_stop_w:
+                                entry_25.insert(tk.END, ("연속 패 : " + str(lose_stack) + "패 - " + str(
+                                    long_stop_value) + "연패시 정지후 패턴 변경\n\n"))
+                                entry_25.see(tk.END)
+                        else:
+                            if lose:
+                                step = 0
+                            else:
+                                if win_stack > 1:
+                                    step = 0
+                                else:
+                                    step += 1
+                                    stop_check = False
+                                    stop_check2 = False
+                                    stop_check3 = False
+                            if start:
+                                step = 0
+                                lose_stack = 0
+                            if long_stop_w:
+                                entry_25.insert(tk.END, ("연속 패 : " + str(lose_stack) + "패 - " + str(
+                                    long_stop_value) + "연패시 정지후 패턴 변경\n\n"))
+                                entry_25.see(tk.END)
+                        if re_start:
+                            if pause_step != 0:
+                                step = pause_step - 1
+                            else:
+                                step = stop_step - 1
+                                group_level = 1
+                            re_start = False
+
+                        entry_25.insert(tk.END, (str(step + 1) + "마틴 진행\n"))
+                        entry_25.see(tk.END)
+
+                        for i in range(40):
+                            if step == i:
+                                if selected_index == i + 1:
+                                    lose = True
+                                    last_tie_step = step
+                                    tie_on = True
+                                chip_selection(martin_list[i], c_res, step, round)
+                                compare_mybet = c_res
+                                break  # 일치하는 조건을 찾으면 반복문을 종료
+
+                        start = False
+
+                    if ox == "O":
+
+                        if group_level == 2:
+                            if group2_get == 0:
+                                group2_get = martin9
+                            if start:
+                                entry_25.insert(tk.END, ("2단계 진행 시작\n"))
+                                entry_25.see(tk.END)
+                                driver2.find_element(By.CSS_SELECTOR, '.go-level2').click()
+
+                        if t_check == "TIE":
+                            tie_stack += 1
+                            if lose:
+                                step = last_tie_step
+                                last_tie_step = 0
+                                lose = False
+                                group_level = 1
+
+                            else:
+                                step = step
+                                print("step유지")
+                                if martin_kind == "크루즈1" or martin_kind == "크루즈2" or martin_kind == "크루즈3" or martin_kind == "크루즈4" or martin_kind == "크루즈5" or martin_kind == "크루즈3_2" or martin_kind == "크루즈3_3" or martin_kind == "크루즈3_4":
+                                    entry_25.insert(tk.END,
+                                                    ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
+                                    entry_25.see(tk.END)
+                                if (martin_kind == "일반+크루즈" and step > 3) or (martin_kind == "슈퍼+크루즈" and step > 3):
+                                    entry_25.insert(tk.END,
+                                                    ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
+                                    entry_25.see(tk.END)
+                                if martin_kind == "일반+크루즈_2" and step > 4:
+                                    entry_25.insert(tk.END,
+                                                    ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
+                                    entry_25.see(tk.END)
+
+                        else:
+                            if start or re_start:
+                                win_stack = 0
+                            else:
+                                if stop_check2:
+                                    if stop_check3:
+
+                                        lose_stack = 0
+                                    else:
+                                        win_stack = 0
+                                    stop_check2 = False
+                                    stop_check3 = False
+
+                                elif stop_check3:
+
+                                    stop_check3 = False
+                                    lose_stack = 0
+
+                                else:
+                                    lose_stack = 0
+                                    win_stack += 1
+
+                                if martin_kind == "크루즈1" or martin_kind == "크루즈2":
+                                    if step < 7:
+                                        entry_25.insert(tk.END,
+                                                        ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
+                                        entry_25.see(tk.END)
+                                if martin_kind == "크루즈3" or martin_kind == "크루즈4" or martin_kind == "크루즈5":
+                                    if win_stack > 0 and step > selected_index - 4:
+                                        step = 0
+                                    else:
+                                        entry_25.insert(tk.END,
+                                                        ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
+                                        entry_25.see(tk.END)
+                                if martin_kind == "크루즈3_2" or martin_kind == "크루즈3_3" or martin_kind == "크루즈3_4":
+                                    entry_25.insert(tk.END,
+                                                    ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
+                                    entry_25.see(tk.END)
+                                if martin_kind == "일반+크루즈" or martin_kind == "슈퍼+크루즈":
+                                    if step > 3:
+                                        entry_25.insert(tk.END,
+                                                        ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
+                                        entry_25.see(tk.END)
+                                if martin_kind == "일반+크루즈_2":
+                                    if step > 4:
+                                        entry_25.insert(tk.END,
+                                                        ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
+                                        entry_25.see(tk.END)
+                            if lose:
+                                if t_check == "TIE":
+                                    step = last_tie_step
+                                else:
+                                    step = 0
+                                lose = False
+                            else:
+                                if martin_kind == "크루즈1" or martin_kind == "크루즈2":
+                                    if martin_kind == "크루즈1":
+                                        step += 1
+                                    if martin_kind == "크루즈2" and win_stack == 0:
+                                        step += 1
+                                    if win_stack > 1 and step < 7:
+                                        step = 0
+                                    if win_stack == 2:
+                                        try:
+                                            sound_path = resource_path(os.path.join("assets", "start.mp3"))
+                                            playsound.playsound(sound_path, block=False)
+                                        except:
+                                            print("사운드오류")
+                                elif martin_kind == "크루즈3" or martin_kind == "크루즈4" or martin_kind == "크루즈5":
+                                    if stop_check:
+                                        if stop_check3:
+                                            step -= 1
+                                        else:
+                                            step += 1
+                                        stop_check = False
+                                        stop_check2 = False
+                                        stop_check3 = False
+                                    elif stop_check2:
+                                        if stop_check3:
+                                            step -= 1
+                                            stop_check3 = False
+                                        else:
+                                            step += 1
+
+                                        stop_check = False
+                                        stop_check2 = False
+                                        stop_check3 = False
+                                    else:
+                                        if step == 0:
+                                            step = 0
+                                        else:
+                                            step -= 1
+
+                                    if win_stack > 1:
+                                        step = 0
+                                    if win_stack == 2:
+                                        try:
+                                            sound_path = resource_path(os.path.join("assets", "start.mp3"))
+                                            playsound.playsound(sound_path, block=False)
+                                        except:
+                                            print("사운드오류")
+                                    if win_stack > 0 and step > selected_index - 4:
+                                        step = 0
+                                elif martin_kind == "크루즈3_2":
+                                    if stop_check:
+                                        if stop_check3:
+                                            if step == 1:
+                                                step = 0
+                                            elif step == 0:
+                                                step = 0
+                                            else:
+                                                step -= 2
+                                        else:
+                                            step += 1
+                                        stop_check = False
+                                        stop_check2 = False
+                                        stop_check3 = False
+                                    elif stop_check2:
+                                        if stop_check3:
+                                            if step == 1:
+                                                step = 0
+                                            elif step == 0:
+                                                step = 0
+                                            else:
+                                                step -= 2
+                                            stop_check3 = False
+                                        else:
+                                            step += 1
+
+                                        stop_check = False
+                                        stop_check2 = False
+                                        stop_check3 = False
+                                    else:
+                                        if step == 0:
+                                            step = 0
+                                        else:
+                                            if step == 1:
+                                                step = 0
+                                            elif step == 0:
+                                                step = 0
+                                            else:
+                                                step -= 2
+
+                                    if win_stack > 1:
+                                        step = 0
+                                    if win_stack == 2:
+                                        try:
+                                            sound_path = resource_path(os.path.join("assets", "start.mp3"))
+                                            playsound.playsound(sound_path, block=False)
+                                        except:
+                                            print("사운드오류")
+                                elif martin_kind == "크루즈3_3":
+                                    if stop_check:
+                                        if stop_check3:
+                                            if step == 1:
+                                                step = 0
+                                            elif step == 0:
+                                                step = 0
+                                            else:
+                                                step -= 3
+                                            if step < 0:
+                                                step = 0
+                                        else:
+                                            step += 1
+                                        stop_check = False
+                                        stop_check2 = False
+                                        stop_check3 = False
+                                    elif stop_check2:
+                                        if stop_check3:
+                                            if step == 1:
+                                                step = 0
+                                            elif step == 0:
+                                                step = 0
+                                            else:
+                                                step -= 3
+                                            if step < 0:
+                                                step = 0
+                                            stop_check3 = False
+                                        else:
+                                            step += 1
+
+                                        stop_check = False
+                                        stop_check2 = False
+                                        stop_check3 = False
+                                    else:
+                                        if step == 0:
+                                            step = 0
+                                        else:
+                                            if step == 1:
+                                                step = 0
+                                            elif step == 0:
+                                                step = 0
+                                            else:
+                                                step -= 3
+                                            if step < 0:
+                                                step = 0
+                                        if step < 0:
+                                            step = 0
+
+                                    if win_stack > 1:
+                                        step = 0
+                                    if win_stack == 2:
+                                        try:
+                                            sound_path = resource_path(os.path.join("assets", "start.mp3"))
+                                            playsound.playsound(sound_path, block=False)
+                                        except:
+                                            print("사운드오류")
+                                elif martin_kind == "크루즈3_4":
+                                    if stop_check:
+                                        if stop_check3:
+                                            if step == 1:
+                                                step = 0
+                                            elif step < 1:
+                                                step = 0
+                                            else:
+                                                step -= 4
+                                            if step < 0:
+                                                step = 0
+                                        else:
+                                            step += 1
+                                        stop_check = False
+                                        stop_check2 = False
+                                        stop_check3 = False
+                                    elif stop_check2:
+                                        if stop_check3:
+                                            if step == 1:
+                                                step = 0
+                                            elif step == 0:
+                                                step = 0
+                                            else:
+                                                step -= 4
+                                            if step < 0:
+                                                step = 0
+                                            stop_check3 = False
+                                        else:
+                                            step += 1
+
+                                        stop_check = False
+                                        stop_check2 = False
+                                        stop_check3 = False
+                                    else:
+                                        if step == 0:
+                                            step = 0
+                                        else:
+                                            if step == 1:
+                                                step = 0
+                                            elif step == 0:
+                                                step = 0
+                                            else:
+                                                step -= 4
+                                            if step < 0:
+                                                step = 0
+                                        if step < 0:
+                                            step = 0
+
+                                    if win_stack > 1:
+                                        step = 0
+                                    if win_stack == 2:
+                                        try:
+                                            sound_path = resource_path(os.path.join("assets", "start.mp3"))
+                                            playsound.playsound(sound_path, block=False)
+                                        except:
+                                            print("사운드오류")
+                                elif martin_kind == "일반+크루즈" or martin_kind == "슈퍼+크루즈":
+                                    if stop_check:
+                                        if stop_check3 and step > 3:
+                                            if step == 1:
+                                                step = 0
+                                            elif step < 1:
+                                                step = 0
+                                            else:
+                                                if step > 3:
+                                                    step = 3
+                                                elif step < 4:
+                                                    step = 0
+                                            if step < 0:
+                                                step = 0
+                                        else:
+                                            step += 1
+                                        stop_check = False
+                                        stop_check2 = False
+                                        stop_check3 = False
+                                    elif stop_check2:
+                                        if stop_check3 and step > 3:
+                                            if step == 1:
+                                                step = 0
+                                            elif step == 0:
+                                                step = 0
+                                            else:
+                                                if step > 3:
+                                                    step = 3
+                                                elif step < 4:
+                                                    step = 0
+                                            if step < 0:
+                                                step = 0
+                                            stop_check3 = False
+                                        else:
+                                            step += 1
+
+                                        stop_check = False
+                                        stop_check2 = False
+                                        stop_check3 = False
+                                    else:
+                                        if step == 0:
+                                            step = 0
+                                        else:
+                                            if step == 1:
+                                                step = 0
+                                            elif step == 0:
+                                                step = 0
+                                            else:
+                                                if step > 3:
+                                                    step = 3
+                                                elif step < 4:
+                                                    step = 0
+                                            if step < 0:
+                                                step = 0
+                                        if step < 0:
+                                            step = 0
+
+                                    if step > 3:
+                                        if win_stack > 1:
+                                            step = 0
+                                        if win_stack == 2:
+                                            try:
+                                                sound_path = resource_path(os.path.join("assets", "start.mp3"))
+                                                playsound.playsound(sound_path, block=False)
+                                            except:
+                                                print("사운드오류")
+                                elif martin_kind == "일반+크루즈_2":
+                                    if stop_check:
+                                        if stop_check3 and step > 4:
+                                            if step == 1:
+                                                step = 0
+                                            elif step < 1:
+                                                step = 0
+                                            else:
+                                                if step > 4:
+                                                    step = 3
+                                                elif step < 5:
+                                                    step = 0
+                                            if step < 0:
+                                                step = 0
+                                        else:
+                                            step += 1
+                                        stop_check = False
+                                        stop_check2 = False
+                                        stop_check3 = False
+                                    elif stop_check2:
+                                        if stop_check3 and step > 4:
+                                            if step == 1:
+                                                step = 0
+                                            elif step == 0:
+                                                step = 0
+                                            else:
+                                                if step > 4:
+                                                    step = 3
+                                                elif step < 5:
+                                                    step = 0
+                                            if step < 0:
+                                                step = 0
+                                            stop_check3 = False
+                                        else:
+                                            step += 1
+
+                                        stop_check = False
+                                        stop_check2 = False
+                                        stop_check3 = False
+                                    else:
+                                        if step == 0:
+                                            step = 0
+                                        else:
+                                            if step == 1:
+                                                step = 0
+                                            elif step == 0:
+                                                step = 0
+                                            else:
+                                                if step > 4:
+                                                    step = 3
+                                                elif step < 5:
+                                                    step = 0
+                                            if step < 0:
+                                                step = 0
+                                        if step < 0:
+                                            step = 0
+
+                                    if step > 4:
+                                        if win_stack > 1:
+                                            step = 0
+                                        if win_stack == 2:
+                                            try:
+                                                sound_path = resource_path(os.path.join("assets", "start.mp3"))
+                                                playsound.playsound(sound_path, block=False)
+                                            except:
+                                                print("사운드오류")
+
+                                else:
+                                    if martin_kind == "크루즈1" or martin_kind == "크루즈2":
+                                        if win_stack > 1:
+                                            step = 0
+                                        else:
+                                            step += 1
+                                    elif martin_kind == "다니엘시스템":
+                                        if stop_check:
+                                            step += 1
+                                            stop_check = False
+                                            stop_check2 = False
+                                            stop_check3 = False
+                                        else:
+                                            if step == 0:
+                                                step = 0
+                                            else:
+                                                if step > 12:
+                                                    step -= 2
+                                                else:
+                                                    step -= 1
+                                            if step < 0:
+                                                step = 0
+                                    else:
+                                        if stop_check:
+                                            step += 1
+                                            stop_check = False
+                                        else:
+                                            step = 0
+                            if start:
+                                step = 0
+                                lose_stack = 0
+                            if stop_check3:
+                                step = step
+                                stop_check3 = False
+                                lose_stack = 0
+                        if re_start:
+                            if pause_step != 0:
+                                step = pause_step - 1
+                            else:
+                                step = stop_step - 1
+                                group_level = 1
+                            re_start = False
+
+                        if stop_check3 and t_check == "TIE":
+                            stop_check3 = False
+                            pass
+                        else:
+                            entry_25.insert(tk.END, (str(step + 1) + "마틴 진행\n"))
+                            entry_25.see(tk.END)
+
+                            for i in range(40):
+                                if step == i:
+                                    if selected_index == i + 1:
+                                        lose = True
+                                        last_tie_step = step
+                                        tie_on = True
+                                    chip_selection(martin_list[i], c_res, step, round)
+                                    compare_mybet = c_res
+                                    break  # 일치하는 조건을 찾으면 반복문을 종료
+
+                        start = False
+
+                        group2_get = 0
+            elif check_type == "X":
+                if ox == "O":
+                    if t_check == "TIE":
+                        pass
+                    else:
+                        if not start:
+                            if lose_stack <= long_stop_value:
+                                lose_stack += 1
+                if (cal > 0) and (profit_stop2 != 0 and profit_stop2 < cal):
+                    profit_stop_func()
+                    pass
+                elif (cal < 0) and (loss_stop2 != 0 and loss_stop2 < positive_cal):
+                    loss_stop_func()
+                    pass
+                elif (stop_check1 and stop_check1 == "O") and lose:
+                    if t_check == "TIE":
+                        step = last_tie_step
+                        last_tie_step = 0
+                        lose = True
+                        group_level = 1
+                        entry_25.insert(tk.END, (str(step + 1) + "마틴 진행\n"))
+                        entry_25.see(tk.END)
+                        chip_selection(martin_list[step], c_res, step, round)
+                        compare_mybet = c_res
+                        tie_on = False
+                        tie_stack += 1
+                    else:
+                        entry_25.insert(tk.END, ("처음으로 단계로 돌아감\n"))
+                        entry_25.see(tk.END)
+                        group_level = 1
+                        step = 0
+                        lose_stack = 0
+                        start = True
+                        tie_on = False
+                        lose = False
+                        pass
+                elif (stop_check1 and stop_check1 == "O") and (
+                        double_up_check >= long_stop_value2) and long_stop_w2 and not start:
+                    if double_up_check > long_stop_value2:
+                        if t_check == "TIE":
+                            lose_stack = lose_stack
+                        else:
+                            lose_stack -= 1
+                    entry_25.insert(tk.END,
+                                    ("연속 패 : " + str(lose_stack) + "패 - " + str(
+                                        long_stop_value) + "연패시 정지후 패턴 변경\n\n"))
+                    entry_25.see(tk.END)
+                    entry_25.insert(tk.END, ("O장줄 예상 정지중..\n"))
+                    entry_25.see(tk.END)
+                    stop_check = True
+                    stop_check2 = True
+                    recode_log('LONG_STOP', start_price, current_price, 0, d_title, r_title, "", "", round)
+
+                    if (stop_check1 and stop_check1 == "O") and (lose_stack >= long_stop_value) and long_stop_w:
+                        stop_check = True
+                        stop_check2 = True
+                        stop_check3 = True
+                        stop_step2 = step
+
+                        if not long_go_x:
+                            entry_25.insert(tk.END, ("연패방지 정지 후 패턴이동..\n"))
+                            entry_25.see(tk.END)
+                            recode_log('CHANGE_STOP', start_price, current_price, 0, d_title, r_title, "", "", round)
+                            if check_kind == "A":
+                                if recent_percent2 > recent_percent2_2 and recent_percent2 > recent_percent3 and recent_percent2 > recent_percent3_2:
+                                    driver2.find_element(By.CSS_SELECTOR, '.result2').click()
+                                    check_type = "O"
+                                elif recent_percent2_2 > recent_percent2 and recent_percent2_2 > recent_percent3 and recent_percent2_2 > recent_percent3_2:
+                                    driver2.find_element(By.CSS_SELECTOR, '.result2').click()
+                                    time.sleep(0.5)
+                                    driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
+                                    check_type = "X"
+                                elif recent_percent3 > recent_percent2 and recent_percent3 > recent_percent2_2 and recent_percent3 > recent_percent3_2:
+                                    driver2.find_element(By.CSS_SELECTOR, '.result3').click()
+                                    check_type = "O"
+                                elif recent_percent3_2 > recent_percent2 and recent_percent3_2 > recent_percent3 and recent_percent3_2 > recent_percent2_2:
+                                    driver2.find_element(By.CSS_SELECTOR, '.result3').click()
+                                    time.sleep(0.5)
+                                    driver2.find_element(By.CSS_SELECTOR, '.result3 .tc2').click()
+                                    check_type = "X"
+                                elif (
+                                        recent_percent2 == recent_percent3 or recent_percent2 == recent_percent3_2) and recent_percent2 > recent_percent2_2:
+                                    driver2.find_element(By.CSS_SELECTOR, '.result2').click()
+                                    check_type = "O"
+                                elif (
+                                        recent_percent2_2 == recent_percent3_2 or recent_percent2_2 == recent_percent3) and recent_percent2_2 > recent_percent2:
+                                    driver2.find_element(By.CSS_SELECTOR, '.result2').click()
+                                    time.sleep(0.5)
+                                    driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
+                                    check_type = "X"
+                            elif check_kind == "B":
+                                if recent_percent1 > recent_percent1_2 and recent_percent1 > recent_percent3 and recent_percent1 > recent_percent3_2:
+                                    driver2.find_element(By.CSS_SELECTOR, '.result1').click()
+                                    check_type = "O"
+                                elif recent_percent1_2 > recent_percent1 and recent_percent1_2 > recent_percent3 and recent_percent1_2 > recent_percent3_2:
+                                    driver2.find_element(By.CSS_SELECTOR, '.result1').click()
+                                    time.sleep(0.5)
+                                    driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
+                                    check_type = "X"
+                                elif recent_percent3 > recent_percent1 and recent_percent3 > recent_percent1_2 and recent_percent3 > recent_percent3_2:
+                                    driver2.find_element(By.CSS_SELECTOR, '.result3').click()
+                                    check_type = "O"
+                                elif recent_percent3_2 > recent_percent1 and recent_percent3_2 > recent_percent3 and recent_percent3_2 > recent_percent1_2:
+                                    driver2.find_element(By.CSS_SELECTOR, '.result3').click()
+                                    time.sleep(0.5)
+                                    driver2.find_element(By.CSS_SELECTOR, '.result3 .tc2').click()
+                                    check_type = "X"
+                                elif (
+                                        recent_percent1 == recent_percent3 or recent_percent1 == recent_percent3_2) and recent_percent1 > recent_percent1_2:
+                                    driver2.find_element(By.CSS_SELECTOR, '.result1').click()
+                                    check_type = "O"
+                                elif (
+                                        recent_percent1_2 == recent_percent3_2 or recent_percent1_2 == recent_percent3) and recent_percent1_2 > recent_percent1:
+                                    driver2.find_element(By.CSS_SELECTOR, '.result1').click()
+                                    time.sleep(0.5)
+                                    driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
+                                    check_type = "X"
+                            elif check_kind == "C":
+                                if recent_percent1 > recent_percent1_2 and recent_percent1 > recent_percent2 and recent_percent1 > recent_percent2_2:
+                                    driver2.find_element(By.CSS_SELECTOR, '.result1').click()
+                                    check_type = "O"
+                                elif recent_percent1_2 > recent_percent1 and recent_percent1_2 > recent_percent2 and recent_percent1_2 > recent_percent2_2:
+                                    driver2.find_element(By.CSS_SELECTOR, '.result1').click()
+                                    time.sleep(0.5)
+                                    driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
+                                    check_type = "X"
+                                elif recent_percent2 > recent_percent1 and recent_percent2 > recent_percent1_2 and recent_percent2 > recent_percent2_2:
+                                    driver2.find_element(By.CSS_SELECTOR, '.result2').click()
+                                    check_type = "O"
+                                elif recent_percent2_2 > recent_percent1 and recent_percent2_2 > recent_percent2 and recent_percent2_2 > recent_percent1_2:
+                                    driver2.find_element(By.CSS_SELECTOR, '.result2').click()
+                                    time.sleep(0.5)
+                                    driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
+                                    check_type = "X"
+                                elif (
+                                        recent_percent1 == recent_percent2 or recent_percent1 == recent_percent2_2) and recent_percent2 > recent_percent2_2:
+                                    driver2.find_element(By.CSS_SELECTOR, '.result2').click()
+                                    check_type = "O"
+                                elif (
+                                        recent_percent1_2 == recent_percent2_2 or recent_percent1_2 == recent_percent2) and recent_percent2_2 > recent_percent2:
+                                    driver2.find_element(By.CSS_SELECTOR, '.result2').click()
+                                    time.sleep(0.5)
+                                    driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
+                                    check_type = "X"
+                            lose_stack = 0
+
+                        pass
+                elif (lose_stack >= long_stop_value) and long_stop_w:
+                    entry_25.insert(tk.END, ("연패방지 정지 후 패턴이동..\n"))
+                    entry_25.see(tk.END)
+                    stop_check = True
+                    stop_check2 = True
+                    stop_check3 = True
+                    stop_step2 = step
+                    recode_log('CHANGE_STOP', start_price, current_price, 0, d_title, r_title, "", "", round)
+                    print((recent_percent1_2 * 1.5) + max_percent1_2, (recent_percent2_2 * 1.5) + max_percent2_2,
+                          (recent_percent3_2 * 1.5) + max_percent3_2)
+                    if not long_go_o:
+                        if check_kind == "A":
+                            if recent_percent2 > recent_percent2_2 and recent_percent2 > recent_percent3 and recent_percent2 > recent_percent3_2:
+                                driver2.find_element(By.CSS_SELECTOR, '.result2').click()
+                                check_type = "O"
+                            elif recent_percent2_2 > recent_percent2 and recent_percent2_2 > recent_percent3 and recent_percent2_2 > recent_percent3_2:
+                                driver2.find_element(By.CSS_SELECTOR, '.result2').click()
+                                time.sleep(0.5)
+                                driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
+                                check_type = "X"
+                            elif recent_percent3 > recent_percent2 and recent_percent3 > recent_percent2_2 and recent_percent3 > recent_percent3_2:
+                                driver2.find_element(By.CSS_SELECTOR, '.result3').click()
+                                check_type = "O"
+                            elif recent_percent3_2 > recent_percent2 and recent_percent3_2 > recent_percent3 and recent_percent3_2 > recent_percent2_2:
+                                driver2.find_element(By.CSS_SELECTOR, '.result3').click()
+                                time.sleep(0.5)
+                                driver2.find_element(By.CSS_SELECTOR, '.result3 .tc2').click()
+                                check_type = "X"
+                            elif (
+                                    recent_percent2 == recent_percent3 or recent_percent2 == recent_percent3_2) and recent_percent2 > recent_percent2_2:
+                                driver2.find_element(By.CSS_SELECTOR, '.result2').click()
+                                check_type = "O"
+                            elif (
+                                    recent_percent2_2 == recent_percent3_2 or recent_percent2_2 == recent_percent3) and recent_percent2_2 > recent_percent2:
+                                driver2.find_element(By.CSS_SELECTOR, '.result2').click()
+                                time.sleep(0.5)
+                                driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
+                                check_type = "X"
+                        elif check_kind == "B":
+                            if recent_percent1 > recent_percent1_2 and recent_percent1 > recent_percent3 and recent_percent1 > recent_percent3_2:
+                                driver2.find_element(By.CSS_SELECTOR, '.result1').click()
+                                check_type = "O"
+                            elif recent_percent1_2 > recent_percent1 and recent_percent1_2 > recent_percent3 and recent_percent1_2 > recent_percent3_2:
+                                driver2.find_element(By.CSS_SELECTOR, '.result1').click()
+                                time.sleep(0.5)
+                                driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
+                                check_type = "X"
+                            elif recent_percent3 > recent_percent1 and recent_percent3 > recent_percent1_2 and recent_percent3 > recent_percent3_2:
+                                driver2.find_element(By.CSS_SELECTOR, '.result3').click()
+                                check_type = "O"
+                            elif recent_percent3_2 > recent_percent1 and recent_percent3_2 > recent_percent3 and recent_percent3_2 > recent_percent1_2:
+                                driver2.find_element(By.CSS_SELECTOR, '.result3').click()
+                                time.sleep(0.5)
+                                driver2.find_element(By.CSS_SELECTOR, '.result3 .tc2').click()
+                                check_type = "X"
+                            elif (
+                                    recent_percent1 == recent_percent3 or recent_percent1 == recent_percent3_2) and recent_percent1 > recent_percent1_2:
+                                driver2.find_element(By.CSS_SELECTOR, '.result1').click()
+                                check_type = "O"
+                            elif (
+                                    recent_percent1_2 == recent_percent3_2 or recent_percent1_2 == recent_percent3) and recent_percent1_2 > recent_percent1:
+                                driver2.find_element(By.CSS_SELECTOR, '.result1').click()
+                                time.sleep(0.5)
+                                driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
+                                check_type = "X"
+                        elif check_kind == "C":
+                            if recent_percent1 > recent_percent1_2 and recent_percent1 > recent_percent2 and recent_percent1 > recent_percent2_2:
+                                driver2.find_element(By.CSS_SELECTOR, '.result1').click()
+                                check_type = "O"
+                            elif recent_percent1_2 > recent_percent1 and recent_percent1_2 > recent_percent2 and recent_percent1_2 > recent_percent2_2:
+                                driver2.find_element(By.CSS_SELECTOR, '.result1').click()
+                                time.sleep(0.5)
+                                driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
+                                check_type = "X"
+                            elif recent_percent2 > recent_percent1 and recent_percent2 > recent_percent1_2 and recent_percent2 > recent_percent2_2:
+                                driver2.find_element(By.CSS_SELECTOR, '.result2').click()
+                                check_type = "O"
+                            elif recent_percent2_2 > recent_percent1 and recent_percent2_2 > recent_percent2 and recent_percent2_2 > recent_percent1_2:
+                                driver2.find_element(By.CSS_SELECTOR, '.result2').click()
+                                time.sleep(0.5)
+                                driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
+                                check_type = "X"
+                            elif (
+                                    recent_percent1 == recent_percent2 or recent_percent1 == recent_percent2_2) and recent_percent2 > recent_percent2_2:
+                                driver2.find_element(By.CSS_SELECTOR, '.result2').click()
+                                check_type = "O"
+                            elif (
+                                    recent_percent1_2 == recent_percent2_2 or recent_percent1_2 == recent_percent2) and recent_percent2_2 > recent_percent2:
+                                driver2.find_element(By.CSS_SELECTOR, '.result2').click()
+                                time.sleep(0.5)
+                                driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
+                                check_type = "X"
+                        lose_stack = 0
+                    pass
+                else:
+
+                    if ox == "O":
+                        if martin_kind == "다니엘시스템":
+                            if check_kind == "A":
+                                driver2.find_element(By.CSS_SELECTOR, '.result1').click()
+                            elif check_kind == "B":
+                                driver2.find_element(By.CSS_SELECTOR, '.result2').click()
+                            elif check_kind == "C":
+                                driver2.find_element(By.CSS_SELECTOR, '.result3').click()
+                            current_res = driver2.find_element(By.CSS_SELECTOR,
+                                                               '.result.active .o-pattern .to-result')
+                            c_res = current_res.get_attribute('innerHTML').strip()
+                            check_type = "O"
+                        win_stack = 0
+                        if t_check == "TIE":
+                            print(lose_stack)
+                            if lose:
+                                step = step
+                                last_tie_step = 0
+                                lose = False
+                                group_level = 1
+                            else:
+                                step = step
+                                tie_on = True
+                                print("step유지")
+                            if long_stop_w:
+                                entry_25.insert(tk.END, ("연속 패 : " + str(lose_stack) + "패 - " + str(
+                                    long_stop_value) + "연패시 정지후 패턴 변경\n\n"))
+                                entry_25.see(tk.END)
+                        else:
+                            if lose:
+                                step = 0
+                            else:
+                                if win_stack > 1:
+                                    step = 0
+                                else:
+                                    step += 1
+                                    if stop_check3:
+                                        lose_stack += 1
+                                        long_go_x = False
+                                    stop_check = False
+                                    stop_check2 = False
+                                    stop_check3 = False
+                            if start:
+                                step = 0
+                                lose_stack = 0
+                            if long_stop_w:
+                                entry_25.insert(tk.END, ("연속 패 : " + str(lose_stack) + "패 - " + str(
+                                    long_stop_value) + "연패시 정지후 패턴 변경\n\n"))
+                                entry_25.see(tk.END)
+                        if re_start:
+                            if pause_step != 0:
+                                step = pause_step - 1
+                            else:
+                                step = stop_step - 1
+                                group_level = 1
+                            re_start = False
+
+                        if martin_kind == "크루즈3":
+                            if step > 4 and win_stack > 0:
+                                if t_check == "TIE":
+                                    step = step
+                                else:
+                                    step = 0
+
+                        entry_25.insert(tk.END, (str(step + 1) + "마틴 진행\n"))
+                        entry_25.see(tk.END)
+
+                        for i in range(40):
+                            if step == i:
+                                if selected_index == i + 1:
+                                    lose = True
+                                    last_tie_step = step
+                                    tie_on = True
+                                chip_selection(martin_list[i], c_res, step, round)
+                                compare_mybet = c_res
+                                break  # 일치하는 조건을 찾으면 반복문을 종료
+
+                        start = False
+
+                    if ox == "X":
+
+                        if group_level == 2:
+                            if group2_get == 0:
+                                group2_get = martin9
+                            if start:
+                                entry_25.insert(tk.END, ("2단계 진행 시작\n"))
+                                entry_25.see(tk.END)
+                                driver2.find_element(By.CSS_SELECTOR, '.go-level2').click()
+
+                        if t_check == "TIE":
+                            tie_stack += 1
+                            if lose:
+                                step = last_tie_step
+                                last_tie_step = 0
+                                lose = False
+                                group_level = 1
+
+                            else:
+                                step = step
+                                print("step유지")
+                                if martin_kind == "크루즈1" or martin_kind == "크루즈2" or martin_kind == "크루즈3" or martin_kind == "크루즈4" or martin_kind == "크루즈5" or martin_kind == "크루즈3_2" or martin_kind == "크루즈3_3" or martin_kind == "크루즈3_4":
+                                    entry_25.insert(tk.END,
+                                                    ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
+                                    entry_25.see(tk.END)
+                                if (martin_kind == "일반+크루즈" and step > 3) or (martin_kind == "슈퍼+크루즈" and step > 3):
+                                    entry_25.insert(tk.END,
+                                                    ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
+                                    entry_25.see(tk.END)
+                                if martin_kind == "일반+크루즈_2" and step > 4:
+                                    entry_25.insert(tk.END,
+                                                    ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
+                                    entry_25.see(tk.END)
+
+                        else:
+                            if start or re_start:
+                                win_stack = 0
+                            else:
+                                if stop_check2:
+                                    if stop_check3:
+
+                                        lose_stack = 0
+                                    else:
+                                        win_stack = 0
+                                    stop_check2 = False
+                                    stop_check3 = False
+
+                                elif stop_check3:
+
+                                    stop_check3 = False
+                                    lose_stack = 0
+
+                                else:
+                                    lose_stack = 0
+                                    win_stack += 1
+
+                                if martin_kind == "크루즈1" or martin_kind == "크루즈2":
+                                    if step < 7:
+                                        entry_25.insert(tk.END,
+                                                        ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
+                                        entry_25.see(tk.END)
+                                if martin_kind == "크루즈3" or martin_kind == "크루즈4" or martin_kind == "크루즈5":
+                                    if win_stack > 0 and step > selected_index - 4:
+                                        step = 0
+                                    else:
+                                        entry_25.insert(tk.END,
+                                                        ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
+                                        entry_25.see(tk.END)
+                                if martin_kind == "크루즈3_2" or martin_kind == "크루즈3_3" or martin_kind == "크루즈3_4":
+                                    entry_25.insert(tk.END,
+                                                    ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
+                                    entry_25.see(tk.END)
+                                if martin_kind == "일반+크루즈" or martin_kind == "슈퍼+크루즈":
+                                    if step > 3:
+                                        entry_25.insert(tk.END,
+                                                        ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
+                                        entry_25.see(tk.END)
+                                if martin_kind == "일반+크루즈_2":
+                                    if step > 4:
+                                        entry_25.insert(tk.END,
+                                                        ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
+                                        entry_25.see(tk.END)
+                            if lose:
+                                if t_check == "TIE":
+                                    step = last_tie_step
+                                else:
+                                    step = 0
+                                lose = False
+                            else:
+                                if martin_kind == "크루즈1" or martin_kind == "크루즈2":
+                                    if martin_kind == "크루즈1":
+                                        step += 1
+                                    if martin_kind == "크루즈2" and win_stack == 0:
+                                        step += 1
+                                    if win_stack > 1 and step < 7:
+                                        step = 0
+                                    if win_stack == 2:
+                                        try:
+                                            sound_path = resource_path(os.path.join("assets", "start.mp3"))
+                                            playsound.playsound(sound_path, block=False)
+                                        except:
+                                            print("사운드오류")
+                                elif martin_kind == "크루즈3" or martin_kind == "크루즈4" or martin_kind == "크루즈5":
+                                    if stop_check:
+                                        if stop_check3:
+                                            step -= 1
+                                        else:
+                                            step += 1
+                                        stop_check = False
+                                        stop_check2 = False
+                                        stop_check3 = False
+                                    elif stop_check2:
+                                        if stop_check3:
+                                            step -= 1
+                                            stop_check3 = False
+                                        else:
+                                            step += 1
+
+                                        stop_check = False
+                                        stop_check2 = False
+                                        stop_check3 = False
+                                    else:
+                                        if step == 0:
+                                            step = 0
+                                        else:
+                                            step -= 1
+
+                                    if win_stack > 1:
+                                        step = 0
+                                    if win_stack == 2:
+                                        try:
+                                            sound_path = resource_path(os.path.join("assets", "start.mp3"))
+                                            playsound.playsound(sound_path, block=False)
+                                        except:
+                                            print("사운드오류")
+                                    if win_stack > 0 and step > selected_index - 4:
+                                        step = 0
+                                elif martin_kind == "크루즈3_2":
+                                    if stop_check:
+                                        if stop_check3:
+                                            if step == 1:
+                                                step = 0
+                                            elif step == 0:
+                                                step = 0
+                                            else:
+                                                step -= 2
+                                        else:
+                                            step += 1
+                                        stop_check = False
+                                        stop_check2 = False
+                                        stop_check3 = False
+                                    elif stop_check2:
+                                        if stop_check3:
+                                            if step == 1:
+                                                step = 0
+                                            elif step == 0:
+                                                step = 0
+                                            else:
+                                                step -= 2
+                                            stop_check3 = False
+                                        else:
+                                            step += 1
+
+                                        stop_check = False
+                                        stop_check2 = False
+                                        stop_check3 = False
+                                    else:
+                                        if step == 0:
+                                            step = 0
+                                        else:
+                                            if step == 1:
+                                                step = 0
+                                            elif step == 0:
+                                                step = 0
+                                            else:
+                                                step -= 2
+
+                                    if win_stack > 1:
+                                        step = 0
+                                    if win_stack == 2:
+                                        try:
+                                            sound_path = resource_path(os.path.join("assets", "start.mp3"))
+                                            playsound.playsound(sound_path, block=False)
+                                        except:
+                                            print("사운드오류")
+                                elif martin_kind == "크루즈3_3":
+                                    if stop_check:
+                                        if stop_check3:
+                                            if step == 1:
+                                                step = 0
+                                            elif step == 0:
+                                                step = 0
+                                            else:
+                                                step -= 3
+                                            if step < 0:
+                                                step = 0
+                                        else:
+                                            step += 1
+                                        stop_check = False
+                                        stop_check2 = False
+                                        stop_check3 = False
+                                    elif stop_check2:
+                                        if stop_check3:
+                                            if step == 1:
+                                                step = 0
+                                            elif step == 0:
+                                                step = 0
+                                            else:
+                                                step -= 3
+                                            if step < 0:
+                                                step = 0
+                                            stop_check3 = False
+                                        else:
+                                            step += 1
+
+                                        stop_check = False
+                                        stop_check2 = False
+                                        stop_check3 = False
+                                    else:
+                                        if step == 0:
+                                            step = 0
+                                        else:
+                                            if step == 1:
+                                                step = 0
+                                            elif step == 0:
+                                                step = 0
+                                            else:
+                                                step -= 3
+                                            if step < 0:
+                                                step = 0
+                                        if step < 0:
+                                            step = 0
+
+                                    if win_stack > 1:
+                                        step = 0
+                                    if win_stack == 2:
+                                        try:
+                                            sound_path = resource_path(os.path.join("assets", "start.mp3"))
+                                            playsound.playsound(sound_path, block=False)
+                                        except:
+                                            print("사운드오류")
+                                elif martin_kind == "크루즈3_4":
+                                    if stop_check:
+                                        if stop_check3:
+                                            if step == 1:
+                                                step = 0
+                                            elif step < 1:
+                                                step = 0
+                                            else:
+                                                step -= 4
+                                            if step < 0:
+                                                step = 0
+                                        else:
+                                            step += 1
+                                        stop_check = False
+                                        stop_check2 = False
+                                        stop_check3 = False
+                                    elif stop_check2:
+                                        if stop_check3:
+                                            if step == 1:
+                                                step = 0
+                                            elif step == 0:
+                                                step = 0
+                                            else:
+                                                step -= 4
+                                            if step < 0:
+                                                step = 0
+                                            stop_check3 = False
+                                        else:
+                                            step += 1
+
+                                        stop_check = False
+                                        stop_check2 = False
+                                        stop_check3 = False
+                                    else:
+                                        if step == 0:
+                                            step = 0
+                                        else:
+                                            if step == 1:
+                                                step = 0
+                                            elif step == 0:
+                                                step = 0
+                                            else:
+                                                step -= 4
+                                            if step < 0:
+                                                step = 0
+                                        if step < 0:
+                                            step = 0
+
+                                    if win_stack > 1:
+                                        step = 0
+                                    if win_stack == 2:
+                                        try:
+                                            sound_path = resource_path(os.path.join("assets", "start.mp3"))
+                                            playsound.playsound(sound_path, block=False)
+                                        except:
+                                            print("사운드오류")
+                                elif martin_kind == "일반+크루즈" or martin_kind == "슈퍼+크루즈":
+                                    if stop_check:
+                                        if stop_check3 and step > 3:
+                                            if step == 1:
+                                                step = 0
+                                            elif step < 1:
+                                                step = 0
+                                            else:
+                                                if step > 3:
+                                                    step = 3
+                                                elif step < 4:
+                                                    step = 0
+                                            if step < 0:
+                                                step = 0
+                                        else:
+                                            step += 1
+                                        stop_check = False
+                                        stop_check2 = False
+                                        stop_check3 = False
+                                    elif stop_check2:
+                                        if stop_check3 and step > 3:
+                                            if step == 1:
+                                                step = 0
+                                            elif step == 0:
+                                                step = 0
+                                            else:
+                                                if step > 3:
+                                                    step = 3
+                                                elif step < 4:
+                                                    step = 0
+                                            if step < 0:
+                                                step = 0
+                                            stop_check3 = False
+                                        else:
+                                            step += 1
+
+                                        stop_check = False
+                                        stop_check2 = False
+                                        stop_check3 = False
+                                    else:
+                                        if step == 0:
+                                            step = 0
+                                        else:
+                                            if step == 1:
+                                                step = 0
+                                            elif step == 0:
+                                                step = 0
+                                            else:
+                                                if step > 3:
+                                                    step = 3
+                                                elif step < 4:
+                                                    step = 0
+                                            if step < 0:
+                                                step = 0
+                                        if step < 0:
+                                            step = 0
+
+                                    if step > 3:
+                                        if win_stack > 1:
+                                            step = 0
+                                        if win_stack == 2:
+                                            try:
+                                                sound_path = resource_path(os.path.join("assets", "start.mp3"))
+                                                playsound.playsound(sound_path, block=False)
+                                            except:
+                                                print("사운드오류")
+                                elif martin_kind == "일반+크루즈_2":
+                                    if stop_check:
+                                        if stop_check3 and step > 4:
+                                            if step == 1:
+                                                step = 0
+                                            elif step < 1:
+                                                step = 0
+                                            else:
+                                                if step > 4:
+                                                    step = 3
+                                                elif step < 5:
+                                                    step = 0
+                                            if step < 0:
+                                                step = 0
+                                        else:
+                                            step += 1
+                                        stop_check = False
+                                        stop_check2 = False
+                                        stop_check3 = False
+                                    elif stop_check2:
+                                        if stop_check3 and step > 4:
+                                            if step == 1:
+                                                step = 0
+                                            elif step == 0:
+                                                step = 0
+                                            else:
+                                                if step > 4:
+                                                    step = 3
+                                                elif step < 5:
+                                                    step = 0
+                                            if step < 0:
+                                                step = 0
+                                            stop_check3 = False
+                                        else:
+                                            step += 1
+
+                                        stop_check = False
+                                        stop_check2 = False
+                                        stop_check3 = False
+                                    else:
+                                        if step == 0:
+                                            step = 0
+                                        else:
+                                            if step == 1:
+                                                step = 0
+                                            elif step == 0:
+                                                step = 0
+                                            else:
+                                                if step > 4:
+                                                    step = 3
+                                                elif step < 5:
+                                                    step = 0
+                                            if step < 0:
+                                                step = 0
+                                        if step < 0:
+                                            step = 0
+
+                                    if step > 4:
+                                        if win_stack > 1:
+                                            step = 0
+                                        if win_stack == 2:
+                                            try:
+                                                sound_path = resource_path(os.path.join("assets", "start.mp3"))
+                                                playsound.playsound(sound_path, block=False)
+                                            except:
+                                                print("사운드오류")
+                                else:
+                                    if martin_kind == "크루즈1" or martin_kind == "크루즈2":
+                                        if win_stack > 1:
+                                            step = 0
+                                        else:
+                                            step += 1
+                                    elif martin_kind == "다니엘시스템":
+                                        if stop_check:
+                                            step += 1
+                                            stop_check = False
+                                            stop_check2 = False
+                                            stop_check3 = False
+                                        else:
+                                            if step == 0:
+                                                step = 0
+                                            else:
+                                                if step > 12:
+                                                    step -= 2
+                                                else:
+                                                    step -= 1
+                                            if step < 0:
+                                                step = 0
+                                    else:
+                                        if stop_check:
+                                            step += 1
+                                            stop_check = False
+                                        else:
+                                            step = 0
+                            if start:
+                                step = 0
+                                lose_stack = 0
+                            if stop_check3:
+                                step = step
+                                stop_check3 = False
+                                lose_stack = 0
+                        if re_start:
+                            if pause_step != 0:
+                                step = pause_step - 1
+                            else:
+                                step = stop_step - 1
+                                group_level = 1
+                            re_start = False
+
+                        if stop_check3 and t_check == "TIE":
+                            stop_check3 = False
+                            pass
+                        else:
+                            entry_25.insert(tk.END, (str(step + 1) + "마틴 진행\n"))
+                            entry_25.see(tk.END)
+
+                            for i in range(40):
+                                if step == i:
+                                    if selected_index == i + 1:
+                                        lose = True
+                                        last_tie_step = step
+                                        tie_on = True
+                                    chip_selection(martin_list[i], c_res, step, round)
+                                    compare_mybet = c_res
+                                    break  # 일치하는 조건을 찾으면 반복문을 종료
+
+                        start = False
+
+                        group2_get = 0
+
+            if tie_stack > 0:
+                tie_step = 0
+                tie_stack = 0
+            if tie_auto_value:
+                entry_25.insert(tk.END, ("타이 승 : " + str(tie_stack) + "\n타이 " + str(tie_step + 1) + "마틴 진행\n"))
+                entry_25.see(tk.END)
+                chip_selection(tie_values[tie_step], "T", step, round)
+                compare_mybet = c_res
+                tie_step += 1
+
 
 
 
@@ -3220,21 +3239,31 @@ def long_stop():
                         ("=================================\n\n연패방지기능 OFF\n\n=================================\n\n"))
         entry_25.see(tk.END)
     elif CheckVar2.get() == 1:
-        long_stop_w = True
-        entry_999.state(['!readonly'])
-        entry_25.insert(tk.END,
-                        ("=================================\n\n연패방지기능 ON\n\n=================================\n\n"))
-        entry_25.see(tk.END)
+        if CheckVar3.get() == 0:
+            entry_25.insert(tk.END,
+                            ("=================================\n\n연패방지 단독사용불가\n장줄정지과 같이 사용하세요.\n\n=================================\n\n"))
+            entry_25.see(tk.END)
+            c2.deselect()
+            long_stop_w = False
+        else:
+            long_stop_w = True
+            entry_999.state(['!readonly'])
+            entry_25.insert(tk.END,
+                            ("=================================\n\n연패방지기능 ON\n\n=================================\n\n"))
+            entry_25.see(tk.END)
+
 
 
 def long_stop2():
-    global long_stop_w2
+    global long_stop_w2, long_stop_w
     if CheckVar3.get() == 0:
         long_stop_w2 = False
         entry_9999.state(['readonly'])
         entry_25.insert(tk.END,
                         ("=================================\n\n장줄정지기능 OFF\n\n=================================\n\n"))
         entry_25.see(tk.END)
+        c2.deselect()
+        long_stop_w = False
     elif CheckVar3.get() == 1:
         long_stop_w2 = True
         entry_9999.state(['!readonly'])
