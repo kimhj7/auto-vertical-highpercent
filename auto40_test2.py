@@ -1007,7 +1007,7 @@ def autoBet(driver, driver2):
                                     check_type = "O"
                                 elif recent_percent2_2 > recent_percent2 and recent_percent2_2 > recent_percent3 and recent_percent2_2 > recent_percent3_2:
                                     driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                    time.sleep(0.5)
+                                    time.sleep(0.2)
                                     driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
                                     check_type = "X"
                                 elif recent_percent3 > recent_percent2 and recent_percent3 > recent_percent2_2 and recent_percent3 > recent_percent3_2:
@@ -1015,7 +1015,7 @@ def autoBet(driver, driver2):
                                     check_type = "O"
                                 elif recent_percent3_2 > recent_percent2 and recent_percent3_2 > recent_percent3 and recent_percent3_2 > recent_percent2_2:
                                     driver2.find_element(By.CSS_SELECTOR, '.result3').click()
-                                    time.sleep(0.5)
+                                    time.sleep(0.2)
                                     driver2.find_element(By.CSS_SELECTOR, '.result3 .tc2').click()
                                     check_type = "X"
                                 elif (
@@ -1025,7 +1025,7 @@ def autoBet(driver, driver2):
                                 elif (
                                         recent_percent2_2 == recent_percent3_2 or recent_percent2_2 == recent_percent3) and recent_percent2_2 > recent_percent2:
                                     driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                    time.sleep(0.5)
+                                    time.sleep(0.2)
                                     driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
                                     check_type = "X"
                             elif check_kind == "B":
@@ -1034,7 +1034,7 @@ def autoBet(driver, driver2):
                                     check_type = "O"
                                 elif recent_percent1_2 > recent_percent1 and recent_percent1_2 > recent_percent3 and recent_percent1_2 > recent_percent3_2:
                                     driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                    time.sleep(0.5)
+                                    time.sleep(0.2)
                                     driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
                                     check_type = "X"
                                 elif recent_percent3 > recent_percent1 and recent_percent3 > recent_percent1_2 and recent_percent3 > recent_percent3_2:
@@ -1042,7 +1042,7 @@ def autoBet(driver, driver2):
                                     check_type = "O"
                                 elif recent_percent3_2 > recent_percent1 and recent_percent3_2 > recent_percent3 and recent_percent3_2 > recent_percent1_2:
                                     driver2.find_element(By.CSS_SELECTOR, '.result3').click()
-                                    time.sleep(0.5)
+                                    time.sleep(0.2)
                                     driver2.find_element(By.CSS_SELECTOR, '.result3 .tc2').click()
                                     check_type = "X"
                                 elif (
@@ -1052,7 +1052,7 @@ def autoBet(driver, driver2):
                                 elif (
                                         recent_percent1_2 == recent_percent3_2 or recent_percent1_2 == recent_percent3) and recent_percent1_2 > recent_percent1:
                                     driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                    time.sleep(0.5)
+                                    time.sleep(0.2)
                                     driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
                                     check_type = "X"
                             elif check_kind == "C":
@@ -1061,7 +1061,7 @@ def autoBet(driver, driver2):
                                     check_type = "O"
                                 elif recent_percent1_2 > recent_percent1 and recent_percent1_2 > recent_percent2 and recent_percent1_2 > recent_percent2_2:
                                     driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                    time.sleep(0.5)
+                                    time.sleep(0.2)
                                     driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
                                     check_type = "X"
                                 elif recent_percent2 > recent_percent1 and recent_percent2 > recent_percent1_2 and recent_percent2 > recent_percent2_2:
@@ -1069,7 +1069,7 @@ def autoBet(driver, driver2):
                                     check_type = "O"
                                 elif recent_percent2_2 > recent_percent1 and recent_percent2_2 > recent_percent2 and recent_percent2_2 > recent_percent1_2:
                                     driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                    time.sleep(0.5)
+                                    time.sleep(0.2)
                                     driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
                                     check_type = "X"
                                 elif (
@@ -1079,7 +1079,7 @@ def autoBet(driver, driver2):
                                 elif (
                                         recent_percent1_2 == recent_percent2_2 or recent_percent1_2 == recent_percent2) and recent_percent2_2 > recent_percent2:
                                     driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                    time.sleep(0.5)
+                                    time.sleep(0.2)
                                     driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
                                     check_type = "X"
                             lose_stack = 0
@@ -1099,7 +1099,7 @@ def autoBet(driver, driver2):
                                 check_type = "O"
                             elif recent_percent2_2 > recent_percent2 and recent_percent2_2 > recent_percent3 and recent_percent2_2 > recent_percent3_2:
                                 driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                time.sleep(0.5)
+                                time.sleep(0.2)
                                 driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
                                 check_type = "X"
                             elif recent_percent3 > recent_percent2 and recent_percent3 > recent_percent2_2 and recent_percent3 > recent_percent3_2:
@@ -1107,7 +1107,7 @@ def autoBet(driver, driver2):
                                 check_type = "O"
                             elif recent_percent3_2 > recent_percent2 and recent_percent3_2 > recent_percent3 and recent_percent3_2 > recent_percent2_2:
                                 driver2.find_element(By.CSS_SELECTOR, '.result3').click()
-                                time.sleep(0.5)
+                                time.sleep(0.2)
                                 driver2.find_element(By.CSS_SELECTOR, '.result3 .tc2').click()
                                 check_type = "X"
                             elif (
@@ -1117,7 +1117,7 @@ def autoBet(driver, driver2):
                             elif (
                                     recent_percent2_2 == recent_percent3_2 or recent_percent2_2 == recent_percent3) and recent_percent2_2 > recent_percent2:
                                 driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                time.sleep(0.5)
+                                time.sleep(0.2)
                                 driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
                                 check_type = "X"
                         elif check_kind == "B":
@@ -1126,7 +1126,7 @@ def autoBet(driver, driver2):
                                 check_type = "O"
                             elif recent_percent1_2 > recent_percent1 and recent_percent1_2 > recent_percent3 and recent_percent1_2 > recent_percent3_2:
                                 driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                time.sleep(0.5)
+                                time.sleep(0.2)
                                 driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
                                 check_type = "X"
                             elif recent_percent3 > recent_percent1 and recent_percent3 > recent_percent1_2 and recent_percent3 > recent_percent3_2:
@@ -1134,7 +1134,7 @@ def autoBet(driver, driver2):
                                 check_type = "O"
                             elif recent_percent3_2 > recent_percent1 and recent_percent3_2 > recent_percent3 and recent_percent3_2 > recent_percent1_2:
                                 driver2.find_element(By.CSS_SELECTOR, '.result3').click()
-                                time.sleep(0.5)
+                                time.sleep(0.2)
                                 driver2.find_element(By.CSS_SELECTOR, '.result3 .tc2').click()
                                 check_type = "X"
                             elif (
@@ -1144,7 +1144,7 @@ def autoBet(driver, driver2):
                             elif (
                                     recent_percent1_2 == recent_percent3_2 or recent_percent1_2 == recent_percent3) and recent_percent1_2 > recent_percent1:
                                 driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                time.sleep(0.5)
+                                time.sleep(0.2)
                                 driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
                                 check_type = "X"
                         elif check_kind == "C":
@@ -1153,7 +1153,7 @@ def autoBet(driver, driver2):
                                 check_type = "O"
                             elif recent_percent1_2 > recent_percent1 and recent_percent1_2 > recent_percent2 and recent_percent1_2 > recent_percent2_2:
                                 driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                time.sleep(0.5)
+                                time.sleep(0.2)
                                 driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
                                 check_type = "X"
                             elif recent_percent2 > recent_percent1 and recent_percent2 > recent_percent1_2 and recent_percent2 > recent_percent2_2:
@@ -1161,7 +1161,7 @@ def autoBet(driver, driver2):
                                 check_type = "O"
                             elif recent_percent2_2 > recent_percent1 and recent_percent2_2 > recent_percent2 and recent_percent2_2 > recent_percent1_2:
                                 driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                time.sleep(0.5)
+                                time.sleep(0.2)
                                 driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
                                 check_type = "X"
                             elif (
@@ -1171,7 +1171,7 @@ def autoBet(driver, driver2):
                             elif (
                                     recent_percent1_2 == recent_percent2_2 or recent_percent1_2 == recent_percent2) and recent_percent2_2 > recent_percent2:
                                 driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                time.sleep(0.5)
+                                time.sleep(0.2)
                                 driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
                                 check_type = "X"
                         lose_stack = 0
@@ -1182,15 +1182,15 @@ def autoBet(driver, driver2):
                         if martin_kind == "다니엘시스템":
                             if check_kind == "A":
                                 driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                time.sleep(0.5)
+                                time.sleep(0.2)
                                 driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
                             elif check_kind == "B":
                                 driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                time.sleep(0.5)
+                                time.sleep(0.2)
                                 driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
                             elif check_kind == "C":
                                 driver2.find_element(By.CSS_SELECTOR, '.result3').click()
-                                time.sleep(0.5)
+                                time.sleep(0.2)
                                 driver2.find_element(By.CSS_SELECTOR, '.result3 .tc2').click()
                             current_res = driver2.find_element(By.CSS_SELECTOR, '.result.active .x-pattern .to-result')
                             c_res = current_res.get_attribute('innerHTML').strip()
@@ -1815,7 +1815,7 @@ def autoBet(driver, driver2):
                                     check_type = "O"
                                 elif recent_percent2_2 > recent_percent2 and recent_percent2_2 > recent_percent3 and recent_percent2_2 > recent_percent3_2:
                                     driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                    time.sleep(0.5)
+                                    time.sleep(0.2)
                                     driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
                                     check_type = "X"
                                 elif recent_percent3 > recent_percent2 and recent_percent3 > recent_percent2_2 and recent_percent3 > recent_percent3_2:
@@ -1823,7 +1823,7 @@ def autoBet(driver, driver2):
                                     check_type = "O"
                                 elif recent_percent3_2 > recent_percent2 and recent_percent3_2 > recent_percent3 and recent_percent3_2 > recent_percent2_2:
                                     driver2.find_element(By.CSS_SELECTOR, '.result3').click()
-                                    time.sleep(0.5)
+                                    time.sleep(0.2)
                                     driver2.find_element(By.CSS_SELECTOR, '.result3 .tc2').click()
                                     check_type = "X"
                                 elif (
@@ -1833,7 +1833,7 @@ def autoBet(driver, driver2):
                                 elif (
                                         recent_percent2_2 == recent_percent3_2 or recent_percent2_2 == recent_percent3) and recent_percent2_2 > recent_percent2:
                                     driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                    time.sleep(0.5)
+                                    time.sleep(0.2)
                                     driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
                                     check_type = "X"
                             elif check_kind == "B":
@@ -1842,7 +1842,7 @@ def autoBet(driver, driver2):
                                     check_type = "O"
                                 elif recent_percent1_2 > recent_percent1 and recent_percent1_2 > recent_percent3 and recent_percent1_2 > recent_percent3_2:
                                     driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                    time.sleep(0.5)
+                                    time.sleep(0.2)
                                     driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
                                     check_type = "X"
                                 elif recent_percent3 > recent_percent1 and recent_percent3 > recent_percent1_2 and recent_percent3 > recent_percent3_2:
@@ -1850,7 +1850,7 @@ def autoBet(driver, driver2):
                                     check_type = "O"
                                 elif recent_percent3_2 > recent_percent1 and recent_percent3_2 > recent_percent3 and recent_percent3_2 > recent_percent1_2:
                                     driver2.find_element(By.CSS_SELECTOR, '.result3').click()
-                                    time.sleep(0.5)
+                                    time.sleep(0.2)
                                     driver2.find_element(By.CSS_SELECTOR, '.result3 .tc2').click()
                                     check_type = "X"
                                 elif (
@@ -1860,7 +1860,7 @@ def autoBet(driver, driver2):
                                 elif (
                                         recent_percent1_2 == recent_percent3_2 or recent_percent1_2 == recent_percent3) and recent_percent1_2 > recent_percent1:
                                     driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                    time.sleep(0.5)
+                                    time.sleep(0.2)
                                     driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
                                     check_type = "X"
                             elif check_kind == "C":
@@ -1869,7 +1869,7 @@ def autoBet(driver, driver2):
                                     check_type = "O"
                                 elif recent_percent1_2 > recent_percent1 and recent_percent1_2 > recent_percent2 and recent_percent1_2 > recent_percent2_2:
                                     driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                    time.sleep(0.5)
+                                    time.sleep(0.2)
                                     driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
                                     check_type = "X"
                                 elif recent_percent2 > recent_percent1 and recent_percent2 > recent_percent1_2 and recent_percent2 > recent_percent2_2:
@@ -1877,7 +1877,7 @@ def autoBet(driver, driver2):
                                     check_type = "O"
                                 elif recent_percent2_2 > recent_percent1 and recent_percent2_2 > recent_percent2 and recent_percent2_2 > recent_percent1_2:
                                     driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                    time.sleep(0.5)
+                                    time.sleep(0.2)
                                     driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
                                     check_type = "X"
                                 elif (
@@ -1887,7 +1887,7 @@ def autoBet(driver, driver2):
                                 elif (
                                         recent_percent1_2 == recent_percent2_2 or recent_percent1_2 == recent_percent2) and recent_percent2_2 > recent_percent2:
                                     driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                    time.sleep(0.5)
+                                    time.sleep(0.2)
                                     driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
                                     check_type = "X"
                             lose_stack = 0
@@ -1910,7 +1910,7 @@ def autoBet(driver, driver2):
                                 check_type = "O"
                             elif recent_percent2_2 > recent_percent2 and recent_percent2_2 > recent_percent3 and recent_percent2_2 > recent_percent3_2:
                                 driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                time.sleep(0.5)
+                                time.sleep(0.2)
                                 driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
                                 check_type = "X"
                             elif recent_percent3 > recent_percent2 and recent_percent3 > recent_percent2_2 and recent_percent3 > recent_percent3_2:
@@ -1918,7 +1918,7 @@ def autoBet(driver, driver2):
                                 check_type = "O"
                             elif recent_percent3_2 > recent_percent2 and recent_percent3_2 > recent_percent3 and recent_percent3_2 > recent_percent2_2:
                                 driver2.find_element(By.CSS_SELECTOR, '.result3').click()
-                                time.sleep(0.5)
+                                time.sleep(0.2)
                                 driver2.find_element(By.CSS_SELECTOR, '.result3 .tc2').click()
                                 check_type = "X"
                             elif (
@@ -1928,7 +1928,7 @@ def autoBet(driver, driver2):
                             elif (
                                     recent_percent2_2 == recent_percent3_2 or recent_percent2_2 == recent_percent3) and recent_percent2_2 > recent_percent2:
                                 driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                time.sleep(0.5)
+                                time.sleep(0.2)
                                 driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
                                 check_type = "X"
                         elif check_kind == "B":
@@ -1937,7 +1937,7 @@ def autoBet(driver, driver2):
                                 check_type = "O"
                             elif recent_percent1_2 > recent_percent1 and recent_percent1_2 > recent_percent3 and recent_percent1_2 > recent_percent3_2:
                                 driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                time.sleep(0.5)
+                                time.sleep(0.2)
                                 driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
                                 check_type = "X"
                             elif recent_percent3 > recent_percent1 and recent_percent3 > recent_percent1_2 and recent_percent3 > recent_percent3_2:
@@ -1945,7 +1945,7 @@ def autoBet(driver, driver2):
                                 check_type = "O"
                             elif recent_percent3_2 > recent_percent1 and recent_percent3_2 > recent_percent3 and recent_percent3_2 > recent_percent1_2:
                                 driver2.find_element(By.CSS_SELECTOR, '.result3').click()
-                                time.sleep(0.5)
+                                time.sleep(0.2)
                                 driver2.find_element(By.CSS_SELECTOR, '.result3 .tc2').click()
                                 check_type = "X"
                             elif (
@@ -1955,7 +1955,7 @@ def autoBet(driver, driver2):
                             elif (
                                     recent_percent1_2 == recent_percent3_2 or recent_percent1_2 == recent_percent3) and recent_percent1_2 > recent_percent1:
                                 driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                time.sleep(0.5)
+                                time.sleep(0.2)
                                 driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
                                 check_type = "X"
                         elif check_kind == "C":
@@ -1964,7 +1964,7 @@ def autoBet(driver, driver2):
                                 check_type = "O"
                             elif recent_percent1_2 > recent_percent1 and recent_percent1_2 > recent_percent2 and recent_percent1_2 > recent_percent2_2:
                                 driver2.find_element(By.CSS_SELECTOR, '.result1').click()
-                                time.sleep(0.5)
+                                time.sleep(0.2)
                                 driver2.find_element(By.CSS_SELECTOR, '.result1 .tc2').click()
                                 check_type = "X"
                             elif recent_percent2 > recent_percent1 and recent_percent2 > recent_percent1_2 and recent_percent2 > recent_percent2_2:
@@ -1972,7 +1972,7 @@ def autoBet(driver, driver2):
                                 check_type = "O"
                             elif recent_percent2_2 > recent_percent1 and recent_percent2_2 > recent_percent2 and recent_percent2_2 > recent_percent1_2:
                                 driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                time.sleep(0.5)
+                                time.sleep(0.2)
                                 driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
                                 check_type = "X"
                             elif (
@@ -1982,7 +1982,7 @@ def autoBet(driver, driver2):
                             elif (
                                     recent_percent1_2 == recent_percent2_2 or recent_percent1_2 == recent_percent2) and recent_percent2_2 > recent_percent2:
                                 driver2.find_element(By.CSS_SELECTOR, '.result2').click()
-                                time.sleep(0.5)
+                                time.sleep(0.2)
                                 driver2.find_element(By.CSS_SELECTOR, '.result2 .tc2').click()
                                 check_type = "X"
                         lose_stack = 0
@@ -2664,8 +2664,8 @@ def crawlresult(driver, driver2, nowin):
                     submit_button.click()
                     time.sleep(1)
                     try:
-                        if not stop_check and not stop_check3:
-                            if element_length > 6:
+                        if not stop_check and not stop_check3 and s_bet:
+                            if element_length > 1:
                                 check_type = driver2.find_element(By.CSS_SELECTOR,
                                                                   '.result.active .tc.active').get_attribute(
                                     'data-type')
@@ -3678,7 +3678,7 @@ if __name__ == "__main__":
 
     martin_level = [str(i) + "마틴" for i in range(1, 41)]
     martin_level.insert(0, "마틴단계설정")
-    text_font = ('Inter Black', '6')
+    text_font = ('Inter Black', '8')
 
     win.option_add('*TCombobox*Listbox.font', text_font)
     entry_7 = ttk.Combobox(
