@@ -1083,7 +1083,7 @@ def autoBet(driver, driver2):
                                     check_type = "X"
                             lose_stack = 0
                     pass
-                elif (lose_stack >= long_stop_value) and long_stop_w:
+                elif (stop_check1 and stop_check1 == "X") and (lose_stack >= long_stop_value) and long_stop_w:
                     entry_25.insert(tk.END, ("연패방지 정지 후 패턴이동..\n"))
                     entry_25.see(tk.END)
                     recode_log('CHANGE_STOP', start_price, current_price, 0, d_title, r_title, "", "", round)
@@ -1892,7 +1892,7 @@ def autoBet(driver, driver2):
                             lose_stack = 0
 
                         pass
-                elif (lose_stack >= long_stop_value) and long_stop_w:
+                elif (stop_check1 and stop_check1 == "O") and (lose_stack >= long_stop_value) and long_stop_w:
                     entry_25.insert(tk.END, ("연패방지 정지 후 패턴이동..\n"))
                     entry_25.see(tk.END)
                     stop_check = True
