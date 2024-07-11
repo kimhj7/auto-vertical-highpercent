@@ -669,6 +669,7 @@ lose_stack = 0
 stop_check = False
 stop_check2 = False
 stop_check3 = False
+stop_check4 = False
 stop_step2 = 0
 compare_mybet = ""
 # 우선순위 리스트 생성
@@ -842,7 +843,7 @@ def autoBet(driver, driver2):
                    martin32, martin33, martin34, martin35, martin36, martin37, martin38, martin39, martin40]
 
     if s_bet:
-        global step, x_stop, lose, start, current_price, t_check, last_tie_step, group_level, player_area, banker_area, group2_get, group2_get_sum, tie_on, re_start, win_stack, ask_dialog, tie_step, tie_area, tie_stack, stop_check, stop_check2, stop_check3, lose_stack, stop_step2, check_type, check_kind, compare_mybet, highest_variable, element_length, previously_selected, current_group, long_go_o, long_go_x, round
+        global step, x_stop, lose, start, current_price, t_check, last_tie_step, group_level, player_area, banker_area, group2_get, group2_get_sum, tie_on, re_start, win_stack, ask_dialog, tie_step, tie_area, tie_stack, stop_check, stop_check2, stop_check3, stop_check4, lose_stack, stop_step2, check_type, check_kind, compare_mybet, highest_variable, element_length, previously_selected, current_group, long_go_o, long_go_x, round
 
         player_area = driver.find_element(By.CSS_SELECTOR, '.player--d9544')
         banker_area = driver.find_element(By.CSS_SELECTOR, '.banker--7e77b')
@@ -995,6 +996,7 @@ def autoBet(driver, driver2):
                         stop_check = True
                         stop_check2 = True
                         stop_check3 = True
+                        stop_check4 = True
                         stop_step2 = step
 
                         if not long_go_o:
@@ -1091,6 +1093,7 @@ def autoBet(driver, driver2):
                     stop_check = True
                     stop_check2 = True
                     stop_check3 = True
+                    stop_check4 = True
                     stop_step2 = step
                     if not long_go_o:
                         if check_kind == "A":
@@ -1205,9 +1208,16 @@ def autoBet(driver, driver2):
                                 lose = False
                                 group_level = 1
                             else:
-                                step = step
-                                tie_on = True
-                                print("step유지")
+                                if stop_check4:
+                                    step += 1
+                                    stop_check = False
+                                    stop_check2 = False
+                                    stop_check3 = False
+                                    stop_check4 = False
+                                else:
+                                    step = step
+                                    tie_on = True
+                                    print("step유지")
                             if long_stop_w:
                                 entry_25.insert(tk.END, ("연속 패 : " + str(lose_stack) + "패 - " + str(
                                     long_stop_value) + "연패시 정지후 패턴 변경\n\n"))
@@ -1223,6 +1233,7 @@ def autoBet(driver, driver2):
                                     stop_check = False
                                     stop_check2 = False
                                     stop_check3 = False
+                                    stop_check4 = False
                             if start:
                                 step = 0
                                 lose_stack = 0
@@ -1272,8 +1283,16 @@ def autoBet(driver, driver2):
                                 group_level = 1
 
                             else:
-                                step = step
-                                print("step유지")
+                                if stop_check4:
+                                    step += 1
+                                    stop_check = False
+                                    stop_check2 = False
+                                    stop_check3 = False
+                                    stop_check4 = False
+                                else:
+                                    step = step
+                                    print("step유지")
+
                                 if martin_kind == "크루즈1" or martin_kind == "크루즈2" or martin_kind == "크루즈3" or martin_kind == "크루즈4" or martin_kind == "크루즈5" or martin_kind == "크루즈3_2" or martin_kind == "크루즈3_3" or martin_kind == "크루즈3_4":
                                     entry_25.insert(tk.END,
                                                     ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
@@ -1364,6 +1383,7 @@ def autoBet(driver, driver2):
                                         stop_check = False
                                         stop_check2 = False
                                         stop_check3 = False
+                                        stop_check4 = False
                                     elif stop_check2:
                                         if stop_check3:
                                             step -= 1
@@ -1374,6 +1394,7 @@ def autoBet(driver, driver2):
                                         stop_check = False
                                         stop_check2 = False
                                         stop_check3 = False
+                                        stop_check4 = False
                                     else:
                                         if step == 0:
                                             step = 0
@@ -1404,6 +1425,7 @@ def autoBet(driver, driver2):
                                         stop_check = False
                                         stop_check2 = False
                                         stop_check3 = False
+                                        stop_check4 = False
                                     elif stop_check2:
                                         if stop_check3:
                                             if step == 1:
@@ -1419,6 +1441,7 @@ def autoBet(driver, driver2):
                                         stop_check = False
                                         stop_check2 = False
                                         stop_check3 = False
+                                        stop_check4 = False
                                     else:
                                         if step == 0:
                                             step = 0
@@ -1454,6 +1477,7 @@ def autoBet(driver, driver2):
                                         stop_check = False
                                         stop_check2 = False
                                         stop_check3 = False
+                                        stop_check4 = False
                                     elif stop_check2:
                                         if stop_check3:
                                             if step == 1:
@@ -1471,6 +1495,7 @@ def autoBet(driver, driver2):
                                         stop_check = False
                                         stop_check2 = False
                                         stop_check3 = False
+                                        stop_check4 = False
                                     else:
                                         if step == 0:
                                             step = 0
@@ -1510,6 +1535,7 @@ def autoBet(driver, driver2):
                                         stop_check = False
                                         stop_check2 = False
                                         stop_check3 = False
+                                        stop_check4 = False
                                     elif stop_check2:
                                         if stop_check3:
                                             if step == 1:
@@ -1527,6 +1553,7 @@ def autoBet(driver, driver2):
                                         stop_check = False
                                         stop_check2 = False
                                         stop_check3 = False
+                                        stop_check4 = False
                                     else:
                                         if step == 0:
                                             step = 0
@@ -1569,6 +1596,7 @@ def autoBet(driver, driver2):
                                         stop_check = False
                                         stop_check2 = False
                                         stop_check3 = False
+                                        stop_check4 = False
                                     elif stop_check2:
                                         if stop_check3 and step > 3:
                                             if step == 1:
@@ -1589,6 +1617,7 @@ def autoBet(driver, driver2):
                                         stop_check = False
                                         stop_check2 = False
                                         stop_check3 = False
+                                        stop_check4 = False
                                     else:
                                         if step == 0:
                                             step = 0
@@ -1635,6 +1664,7 @@ def autoBet(driver, driver2):
                                         stop_check = False
                                         stop_check2 = False
                                         stop_check3 = False
+                                        stop_check4 = False
                                     elif stop_check2:
                                         if stop_check3 and step > 4:
                                             if step == 1:
@@ -1655,6 +1685,7 @@ def autoBet(driver, driver2):
                                         stop_check = False
                                         stop_check2 = False
                                         stop_check3 = False
+                                        stop_check4 = False
                                     else:
                                         if step == 0:
                                             step = 0
@@ -1695,6 +1726,7 @@ def autoBet(driver, driver2):
                                             stop_check = False
                                             stop_check2 = False
                                             stop_check3 = False
+                                            stop_check4 = False
                                         else:
                                             if step == 0:
                                                 step = 0
@@ -1803,6 +1835,7 @@ def autoBet(driver, driver2):
                         stop_check = True
                         stop_check2 = True
                         stop_check3 = True
+                        stop_check4 = True
                         stop_step2 = step
 
                         if not long_go_x:
@@ -1899,6 +1932,7 @@ def autoBet(driver, driver2):
                     stop_check = True
                     stop_check2 = True
                     stop_check3 = True
+                    stop_check4 = True
                     stop_step2 = step
                     recode_log('CHANGE_STOP', start_price, current_price, 0, d_title, r_title, "", "", round)
                     print((recent_percent1_2 * 1.5) + max_percent1_2, (recent_percent2_2 * 1.5) + max_percent2_2,
@@ -2010,9 +2044,16 @@ def autoBet(driver, driver2):
                                 lose = False
                                 group_level = 1
                             else:
-                                step = step
-                                tie_on = True
-                                print("step유지")
+                                if stop_check4:
+                                    step += 1
+                                    stop_check = False
+                                    stop_check2 = False
+                                    stop_check3 = False
+                                    stop_check4 = False
+                                else:
+                                    step = step
+                                    tie_on = True
+                                    print("step유지")
                             if long_stop_w:
                                 entry_25.insert(tk.END, ("연속 패 : " + str(lose_stack) + "패 - " + str(
                                     long_stop_value) + "연패시 정지후 패턴 변경\n\n"))
@@ -2031,6 +2072,7 @@ def autoBet(driver, driver2):
                                     stop_check = False
                                     stop_check2 = False
                                     stop_check3 = False
+                                    stop_check4 = False
                             if start:
                                 step = 0
                                 lose_stack = 0
@@ -2087,8 +2129,15 @@ def autoBet(driver, driver2):
                                 group_level = 1
 
                             else:
-                                step = step
-                                print("step유지")
+                                if stop_check4:
+                                    step += 1
+                                    stop_check = False
+                                    stop_check2 = False
+                                    stop_check3 = False
+                                    stop_check4 = False
+                                else:
+                                    step = step
+                                    print("step유지")
                                 if martin_kind == "크루즈1" or martin_kind == "크루즈2" or martin_kind == "크루즈3" or martin_kind == "크루즈4" or martin_kind == "크루즈5" or martin_kind == "크루즈3_2" or martin_kind == "크루즈3_3" or martin_kind == "크루즈3_4":
                                     entry_25.insert(tk.END,
                                                     ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
@@ -2179,6 +2228,7 @@ def autoBet(driver, driver2):
                                         stop_check = False
                                         stop_check2 = False
                                         stop_check3 = False
+                                        stop_check4 = False
                                     elif stop_check2:
                                         if stop_check3:
                                             step -= 1
@@ -2189,6 +2239,7 @@ def autoBet(driver, driver2):
                                         stop_check = False
                                         stop_check2 = False
                                         stop_check3 = False
+                                        stop_check4 = False
                                     else:
                                         if step == 0:
                                             step = 0
@@ -2219,6 +2270,7 @@ def autoBet(driver, driver2):
                                         stop_check = False
                                         stop_check2 = False
                                         stop_check3 = False
+                                        stop_check4 = False
                                     elif stop_check2:
                                         if stop_check3:
                                             if step == 1:
@@ -2234,6 +2286,7 @@ def autoBet(driver, driver2):
                                         stop_check = False
                                         stop_check2 = False
                                         stop_check3 = False
+                                        stop_check4 = False
                                     else:
                                         if step == 0:
                                             step = 0
@@ -2269,6 +2322,7 @@ def autoBet(driver, driver2):
                                         stop_check = False
                                         stop_check2 = False
                                         stop_check3 = False
+                                        stop_check4 = False
                                     elif stop_check2:
                                         if stop_check3:
                                             if step == 1:
@@ -2286,6 +2340,7 @@ def autoBet(driver, driver2):
                                         stop_check = False
                                         stop_check2 = False
                                         stop_check3 = False
+                                        stop_check4 = False
                                     else:
                                         if step == 0:
                                             step = 0
@@ -2325,6 +2380,7 @@ def autoBet(driver, driver2):
                                         stop_check = False
                                         stop_check2 = False
                                         stop_check3 = False
+                                        stop_check4 = False
                                     elif stop_check2:
                                         if stop_check3:
                                             if step == 1:
@@ -2342,6 +2398,7 @@ def autoBet(driver, driver2):
                                         stop_check = False
                                         stop_check2 = False
                                         stop_check3 = False
+                                        stop_check4 = False
                                     else:
                                         if step == 0:
                                             step = 0
@@ -2384,6 +2441,7 @@ def autoBet(driver, driver2):
                                         stop_check = False
                                         stop_check2 = False
                                         stop_check3 = False
+                                        stop_check4 = False
                                     elif stop_check2:
                                         if stop_check3 and step > 3:
                                             if step == 1:
@@ -2404,6 +2462,7 @@ def autoBet(driver, driver2):
                                         stop_check = False
                                         stop_check2 = False
                                         stop_check3 = False
+                                        stop_check4 = False
                                     else:
                                         if step == 0:
                                             step = 0
@@ -2450,6 +2509,7 @@ def autoBet(driver, driver2):
                                         stop_check = False
                                         stop_check2 = False
                                         stop_check3 = False
+                                        stop_check4 = False
                                     elif stop_check2:
                                         if stop_check3 and step > 4:
                                             if step == 1:
@@ -2470,6 +2530,7 @@ def autoBet(driver, driver2):
                                         stop_check = False
                                         stop_check2 = False
                                         stop_check3 = False
+                                        stop_check4 = False
                                     else:
                                         if step == 0:
                                             step = 0
@@ -2509,6 +2570,7 @@ def autoBet(driver, driver2):
                                             stop_check = False
                                             stop_check2 = False
                                             stop_check3 = False
+                                            stop_check4 = False
                                         else:
                                             if step == 0:
                                                 step = 0
