@@ -1299,7 +1299,7 @@ def autoBet(driver, driver2):
                                     entry_25.insert(tk.END,
                                                     ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
                                     entry_25.see(tk.END)
-                                if martin_kind == "일반+크루즈_2" and step > 4:
+                                if (martin_kind == "일반+크루즈_2" and step > 4) or (martin_kind == "슈퍼+크루즈_2" and step > 4):
                                     entry_25.insert(tk.END,
                                                     ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
                                     entry_25.see(tk.END)
@@ -1347,7 +1347,7 @@ def autoBet(driver, driver2):
                                         entry_25.insert(tk.END,
                                                         ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
                                         entry_25.see(tk.END)
-                                if martin_kind == "일반+크루즈_2":
+                                if martin_kind == "일반+크루즈_2" or martin_kind == "슈퍼+크루즈_2":
                                     if step > 4:
                                         entry_25.insert(tk.END,
                                                         ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
@@ -1643,7 +1643,7 @@ def autoBet(driver, driver2):
                                                 playsound.playsound(sound_path, block=False)
                                             except:
                                                 print("사운드오류")
-                                elif martin_kind == "일반+크루즈_2":
+                                elif martin_kind == "일반+크루즈_2" or martin_kind == "슈퍼+크루즈_2":
                                     if stop_check:
                                         if stop_check3 and step > 4:
                                             if step == 1:
@@ -2144,7 +2144,7 @@ def autoBet(driver, driver2):
                                     entry_25.insert(tk.END,
                                                     ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
                                     entry_25.see(tk.END)
-                                if martin_kind == "일반+크루즈_2" and step > 4:
+                                if (martin_kind == "일반+크루즈_2" and step > 4) or (martin_kind == "슈퍼+크루즈_2" and step > 4):
                                     entry_25.insert(tk.END,
                                                     ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
                                     entry_25.see(tk.END)
@@ -2192,7 +2192,7 @@ def autoBet(driver, driver2):
                                         entry_25.insert(tk.END,
                                                         ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
                                         entry_25.see(tk.END)
-                                if martin_kind == "일반+크루즈_2":
+                                if martin_kind == "일반+크루즈_2" or martin_kind == "슈퍼+크루즈_2":
                                     if step > 4:
                                         entry_25.insert(tk.END,
                                                         ("연속 승 : " + str(win_stack) + "승 - 2연승시 마틴 1단계로 복귀\n\n"))
@@ -2488,7 +2488,7 @@ def autoBet(driver, driver2):
                                                 playsound.playsound(sound_path, block=False)
                                             except:
                                                 print("사운드오류")
-                                elif martin_kind == "일반+크루즈_2":
+                                elif martin_kind == "일반+크루즈_2" or martin_kind == "슈퍼+크루즈_2":
                                     if stop_check:
                                         if stop_check3 and step > 4:
                                             if step == 1:
@@ -3230,6 +3230,10 @@ def set1_click(value):
         base_bet = [1, 3, 7, 15, 12, 24, 39, 63, 102, 165, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765, 1, 1, 1, 1, 1,
                     1,
                     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    elif martin_kind == "슈퍼+크루즈_2":
+        base_bet = [1, 3, 7, 15, 12, 24, 39, 63, 102, 165, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765, 1, 1, 1, 1, 1,
+                    1,
+                    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
     print(martin_kind)
 
@@ -3779,7 +3783,7 @@ if __name__ == "__main__":
         font=("Inter Black", 12 * -1)
     )
 
-    martin_kind = ["크루즈1", "크루즈2", "크루즈3","크루즈3_2","크루즈3_3","크루즈3_4","크루즈4", "크루즈5", "일반마틴", "슈퍼마틴", "다니엘시스템", "일반+크루즈", "일반+크루즈_2", "슈퍼+크루즈"]
+    martin_kind = ["크루즈1", "크루즈2", "크루즈3","크루즈3_2","크루즈3_3","크루즈3_4","크루즈4", "크루즈5", "일반마틴", "슈퍼마틴", "다니엘시스템", "일반+크루즈", "일반+크루즈_2", "슈퍼+크루즈", "슈퍼+크루즈_2"]
     martin_kind.insert(0, "마틴방식설정")
     entry_77 = ttk.Combobox(
         win,
@@ -4529,7 +4533,7 @@ if __name__ == "__main__":
     CheckVar2 = IntVar()
 
     c2 = tk.Checkbutton(win, text="설정값", variable=CheckVar2, command=long_stop)
-    c2.config(bg="#000000", fg="#F8DF00", font=text_font2,
+    c2.config(bg="#780599", fg="#F8DF00", font=text_font2,
               selectcolor="black")
     c2.select()
     c2.place(
@@ -4547,7 +4551,7 @@ if __name__ == "__main__":
         width=30.0,
         height=20.0
     )
-    entry_999.insert(tk.END, "4")
+    entry_999.insert(tk.END, "2")
     button_4 = tk.Button(
         win,
         text="입력",
@@ -4591,7 +4595,7 @@ if __name__ == "__main__":
     CheckVar3 = IntVar()
 
     c3 = tk.Checkbutton(win, text="설정값", variable=CheckVar3, command=long_stop2)
-    c3.config(bg="#000000", fg="#F8DF00", font=text_font2,
+    c3.config(bg="#780599", fg="#F8DF00", font=text_font2,
               selectcolor="black")
     c3.select()
     c3.place(
