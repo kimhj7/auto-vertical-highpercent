@@ -65,8 +65,8 @@ last_opened_window_handle = True
 
 set_hours = 72
 
-def recode_log(type, start_price, current_price, bet_price, title, room, status, step, round):
-    url = "https://log.pattern2024.com/log"
+def recode_log(type, start_price, current_price, bet_price, title, room, status, step, round, cal):
+    url = "https://log2.pattern2024.com/log"
     datas = {
         'serial': serial_number,
         'type': type,
@@ -77,7 +77,8 @@ def recode_log(type, start_price, current_price, bet_price, title, room, status,
         "room": room,
         "status": status,
         "step": step,
-        "round": round
+        "round": round,
+        "benefit": cal
     }
 
     requests.post(url, data=datas)
@@ -251,6 +252,7 @@ step = 0
 price_number2 = 0
 start_price = 0
 current_price = 0
+cal = 0
 s_bet = False
 selected_value = "마틴단계설정"
 selected_value2 = "마틴단계설정"
@@ -435,7 +437,7 @@ def start_autobet():
             entry_25.insert(tk.END,
                             "==================================\n%s\n==================================\n\n" % s.center(
                                 30))
-            recode_log('START', start_price, start_price, 0, d_title, r_title, "", "", "")
+            recode_log('START', start_price, start_price, 0, d_title, r_title, "", "", "", cal)
 
     else:
         tkinter.messagebox.showwarning("통화 및 마틴단계 선택", "게임에서 사용될 통화 및 마틴단계를 선택 후 다시 시도해 주세요.")
@@ -445,7 +447,7 @@ def start_autobet():
 
 
 def stop_autobet():
-    global check_type
+    global check_type, cal
 
     print("오토정지")
     global s_bet, step, current_price, re_start
@@ -460,9 +462,11 @@ def stop_autobet():
     entry_25.see(tk.END)
     try:
         current_price = driver.find_element(By.CSS_SELECTOR, '.amount--bb99f span').get_attribute('innerText').strip()
+        price_number = re.sub(r'[^0-9.]', '', current_price)
+        cal = int(float(price_number)) - int(float(price_number2))
     except:
         print("오류")
-    recode_log('STOP', start_price, current_price, 0, d_title, r_title, "", "", round)
+    recode_log('STOP', start_price, current_price, 0, d_title, r_title, "", "", round, cal)
 
 
 def profit_stop_func():
@@ -475,7 +479,7 @@ def profit_stop_func():
     entry_25.insert(tk.END,
                     "==================================\n%s\n==================================\n\n\n" % s.center(30))
     entry_25.see(tk.END)
-    recode_log('PROFIT_STOP', start_price, current_price, 0, d_title, r_title, "", "", round)
+    recode_log('PROFIT_STOP', start_price, current_price, 0, d_title, r_title, "", "", round, cal)
 
 
 def loss_stop_func():
@@ -489,7 +493,7 @@ def loss_stop_func():
                     "========================================\n%s\n========================================\n\n\n" % s.center(
                         30))
     entry_25.see(tk.END)
-    recode_log('LOSS_STOP', start_price, current_price, 0, d_title, r_title, "", "", round)
+    recode_log('LOSS_STOP', start_price, current_price, 0, d_title, r_title, "", "", round, cal)
 
 
 x_stop = False
@@ -541,7 +545,7 @@ def chip_selection(price, c_res, step, round):
             bet_price) + "원 배팅\n\n=================================\n\n"))
         entry_25.see(tk.END)
     current_price = driver.find_element(By.CSS_SELECTOR, '.amount--bb99f span').get_attribute('innerText').strip()
-    recode_log('RUNNING', start_price, current_price, bet_price, d_title, r_title, c_res, step, round)
+    recode_log('RUNNING', start_price, current_price, bet_price, d_title, r_title, c_res, step, round, cal)
 
 
 def click_chip(chip):
@@ -841,7 +845,7 @@ def autoBet(driver, driver2):
                    martin32, martin33, martin34, martin35, martin36, martin37, martin38, martin39, martin40]
 
     if s_bet:
-        global step, x_stop, lose, start, current_price, t_check, last_tie_step, group_level, player_area, banker_area, group2_get, group2_get_sum, tie_on, re_start, win_stack, ask_dialog, tie_step, tie_area, tie_stack, stop_check, stop_check2, stop_check3, stop_check4, lose_stack, stop_step2, check_type, check_kind, compare_mybet, highest_variable, element_length, previously_selected, current_group, long_go_o, long_go_x, round
+        global step, x_stop, lose, start, current_price, t_check, last_tie_step, group_level, player_area, banker_area, group2_get, group2_get_sum, tie_on, re_start, win_stack, ask_dialog, tie_step, tie_area, tie_stack, stop_check, stop_check2, stop_check3, stop_check4, lose_stack, stop_step2, check_type, check_kind, compare_mybet, highest_variable, element_length, previously_selected, current_group, long_go_o, long_go_x, round, cal
 
         player_area = driver.find_element(By.CSS_SELECTOR, '.player--d9544')
         banker_area = driver.find_element(By.CSS_SELECTOR, '.banker--7e77b')
@@ -986,7 +990,7 @@ def autoBet(driver, driver2):
                     entry_25.see(tk.END)
                     entry_25.insert(tk.END, ("X장줄 예상 정지중..\n"))
                     entry_25.see(tk.END)
-                    recode_log('LONG_STOP', start_price, current_price, 0, d_title, r_title, "", "", round)
+                    recode_log('LONG_STOP', start_price, current_price, 0, d_title, r_title, "", "", round, cal)
                     stop_check = True
                     stop_check2 = True
 
@@ -1000,7 +1004,7 @@ def autoBet(driver, driver2):
                         if not long_go_o:
                             entry_25.insert(tk.END, ("연패방지 정지 후 패턴이동..\n"))
                             entry_25.see(tk.END)
-                            recode_log('CHANGE_STOP', start_price, current_price, 0, d_title, r_title, "", "", round)
+                            recode_log('CHANGE_STOP', start_price, current_price, 0, d_title, r_title, "", "", round, cal)
                             if check_kind == "A":
                                 if recent_percent2 > recent_percent2_2 and recent_percent2 > recent_percent3 and recent_percent2 > recent_percent3_2:
                                     driver2.find_element(By.CSS_SELECTOR, '.result2').click()
@@ -1087,7 +1091,7 @@ def autoBet(driver, driver2):
                 elif (stop_check1 and stop_check1 == "X") and (lose_stack >= long_stop_value) and long_stop_w:
                     entry_25.insert(tk.END, ("연패방지 정지 후 패턴이동..\n"))
                     entry_25.see(tk.END)
-                    recode_log('CHANGE_STOP', start_price, current_price, 0, d_title, r_title, "", "", round)
+                    recode_log('CHANGE_STOP', start_price, current_price, 0, d_title, r_title, "", "", round, cal)
                     stop_check = True
                     stop_check2 = True
                     stop_check3 = True
@@ -1827,7 +1831,7 @@ def autoBet(driver, driver2):
                     entry_25.see(tk.END)
                     stop_check = True
                     stop_check2 = True
-                    recode_log('LONG_STOP', start_price, current_price, 0, d_title, r_title, "", "", round)
+                    recode_log('LONG_STOP', start_price, current_price, 0, d_title, r_title, "", "", round, cal)
 
                     if (stop_check1 and stop_check1 == "O") and (lose_stack >= long_stop_value) and long_stop_w:
                         stop_check = True
@@ -1839,7 +1843,7 @@ def autoBet(driver, driver2):
                         if not long_go_x:
                             entry_25.insert(tk.END, ("연패방지 정지 후 패턴이동..\n"))
                             entry_25.see(tk.END)
-                            recode_log('CHANGE_STOP', start_price, current_price, 0, d_title, r_title, "", "", round)
+                            recode_log('CHANGE_STOP', start_price, current_price, 0, d_title, r_title, "", "", round, cal)
                             if check_kind == "A":
                                 if recent_percent2 > recent_percent2_2 and recent_percent2 > recent_percent3 and recent_percent2 > recent_percent3_2:
                                     driver2.find_element(By.CSS_SELECTOR, '.result2').click()
@@ -1932,7 +1936,7 @@ def autoBet(driver, driver2):
                     stop_check3 = True
                     stop_check4 = True
                     stop_step2 = step
-                    recode_log('CHANGE_STOP', start_price, current_price, 0, d_title, r_title, "", "", round)
+                    recode_log('CHANGE_STOP', start_price, current_price, 0, d_title, r_title, "", "", round, cal)
                     print((recent_percent1_2 * 1.5) + max_percent1_2, (recent_percent2_2 * 1.5) + max_percent2_2,
                           (recent_percent3_2 * 1.5) + max_percent3_2)
                     if not long_go_o:
@@ -2746,26 +2750,26 @@ def crawlresult(driver, driver2, nowin):
                                                 "================================\n타이\n================================\n\n"))
                                             entry_25.see(tk.END)
                                             recode_log('TIE', start_price, current_price, 0, d_title, r_title, "", "",
-                                                       round)
+                                                       round, cal)
                                         else:
                                             entry_25.insert(tk.END, (
                                                 "=================================\n승리\n=================================\n\n"))
                                             entry_25.see(tk.END)
                                             recode_log('WIN', start_price, current_price, 0, d_title, r_title, "", "",
-                                                       round)
+                                                       round, cal)
                                     elif check_ox == "X":
                                         if tie_check == "TIE":
                                             entry_25.insert(tk.END, (
                                                 "================================\n타이\n================================\n\n"))
                                             entry_25.see(tk.END)
                                             recode_log('TIE', start_price, current_price, 0, d_title, r_title, "", "",
-                                                       round)
+                                                       round, cal)
                                         else:
                                             entry_25.insert(tk.END, (
                                                 "=================================\n패배\n=================================\n\n"))
                                             entry_25.see(tk.END)
                                             recode_log('LOSE', start_price, current_price, 0, d_title, r_title, "", "",
-                                                       round)
+                                                       round, cal)
                                 elif check_type == "X":
                                     if check_ox == "O":
                                         if tie_check == "TIE":
@@ -2773,26 +2777,26 @@ def crawlresult(driver, driver2, nowin):
                                                 "================================\n타이\n================================\n\n"))
                                             entry_25.see(tk.END)
                                             recode_log('TIE', start_price, current_price, 0, d_title, r_title, "", "",
-                                                       round)
+                                                       round, cal)
                                         else:
                                             entry_25.insert(tk.END, (
                                                 "=================================\n패배\n=================================\n\n"))
                                             entry_25.see(tk.END)
                                             recode_log('LOSE', start_price, current_price, 0, d_title, r_title, "", "",
-                                                       round)
+                                                       round, cal)
                                     elif check_ox == "X":
                                         if tie_check == "TIE":
                                             entry_25.insert(tk.END, (
                                                 "================================\n타이\n================================\n\n"))
                                             entry_25.see(tk.END)
                                             recode_log('TIE', start_price, current_price, 0, d_title, r_title, "", "",
-                                                       round)
+                                                       round, cal)
                                         else:
                                             entry_25.insert(tk.END, (
                                                 "=================================\n승리\n=================================\n\n"))
                                             entry_25.see(tk.END)
                                             recode_log('WIN', start_price, current_price, 0, d_title, r_title, "", "",
-                                                       round)
+                                                       round, cal)
 
                     except NoSuchElementException:
                         # 요소가 발견되지 않으면 계속 반복
@@ -2828,7 +2832,7 @@ def inputdoublex(arg2, driver, driver2):
     entry_3.delete(0, tkinter.END)
     entry_3.insert(0, price_number2)
     entry_3.config(state='readonly')
-    recode_log('OPEN_ROOM', start_price, start_price, 0, d_title, r_title, "", "", "")
+    recode_log('OPEN_ROOM', start_price, start_price, 0, d_title, r_title, "", "", "", cal)
 
     element = arg2
     elem2 = element.find_element(By.TAG_NAME, 'svg')
@@ -3158,9 +3162,11 @@ def on_closing():
     global current_price
     try:
         current_price = driver.find_element(By.CSS_SELECTOR, '.amount--bb99f span').get_attribute('innerText').strip()
+        price_number = re.sub(r'[^0-9.]', '', current_price)
+        cal = int(float(price_number)) - int(float(price_number2))
     except:
         print("오류")
-    recode_log('END', start_price, current_price, 0, d_title, r_title, "", "", round)
+    recode_log('END', start_price, current_price, 0, d_title, r_title, "", "", round, cal)
 
     if messagebox.askokcancel("종료", "종료하시겠습니까?"):
         martin_set_zero()
@@ -3231,7 +3237,7 @@ def set1_click(value):
                     1,
                     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
     elif martin_kind == "슈퍼+크루즈_2":
-        base_bet = [1, 3, 7, 15, 12, 24, 39, 63, 102, 165, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765, 1, 1, 1, 1, 1,
+        base_bet = [1, 3, 7, 15, 31, 27, 54, 85, 139, 224, 363, 587, 950, 1537, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                     1,
                     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
@@ -3438,7 +3444,7 @@ if __name__ == "__main__":
     if not serial_number == "MASTER":
         create_login_window()
     martin_set_zero()
-    recode_log('OPEN', 0, 0, 0, "", "", "", "", "")
+    recode_log('OPEN', 0, 0, 0, "", "", "", "", "", cal)
     win = tk.Tk()
     win.geometry("1060x500")
     win.configure(bg="#FFFFFF")
