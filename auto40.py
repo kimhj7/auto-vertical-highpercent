@@ -48,8 +48,8 @@ options.add_argument('--window-size=1920,1020')
 
 monitors = get_monitors()
 
-options.add_argument("force-device-scale-factor=0.6")
-options.add_argument("high-dpi-support=0.6")
+options.add_argument("force-device-scale-factor=1")
+options.add_argument("high-dpi-support=1")
 
 options.add_experimental_option("detach", True)
 
@@ -64,7 +64,7 @@ service = ChromeService(executable_path=ChromeDriverManager().install())
 last_opened_window_handle = True
 
 set_hours = 72
-serial_number = "MASTER"
+serial_number = 'MASTER'
 
 def recode_log(type, start_price, current_price, bet_price, title, room, status, step, round, cal):
     url = "https://log2.pattern2024.com/log"
@@ -313,7 +313,7 @@ tie_auto_value = False
 tie_step = 0
 long_stop_w = True
 long_stop_w2 = True
-long_stop_value = 4
+long_stop_value = 2
 long_stop_value2 = 2
 pause_status = False
 pause_status2 = False
@@ -468,6 +468,22 @@ def stop_autobet():
     except:
         print("오류")
     recode_log('STOP', start_price, current_price, 0, d_title, r_title, "", "", round, cal)
+    time.sleep(2)
+    try:
+        current_price = driver.find_element(By.CSS_SELECTOR, '.amount--bb99f span').get_attribute('innerText').strip()
+        price_number = re.sub(r'[^0-9.]', '', current_price)
+        cal = int(float(price_number)) - int(float(price_number2))
+    except:
+        print("오류")
+    recode_log('STOP_PRICE_CHECK', start_price, current_price, 0, d_title, r_title, "", "", round, cal)
+    time.sleep(2)
+    try:
+        current_price = driver.find_element(By.CSS_SELECTOR, '.amount--bb99f span').get_attribute('innerText').strip()
+        price_number = re.sub(r'[^0-9.]', '', current_price)
+        cal = int(float(price_number)) - int(float(price_number2))
+    except:
+        print("오류")
+    recode_log('STOP_PRICE_CHECK', start_price, current_price, 0, d_title, r_title, "", "", round, cal)
 
 
 def profit_stop_func():
@@ -673,6 +689,7 @@ lose_stack = 0
 stop_check = False
 stop_check2 = False
 stop_check3 = False
+stop_check4 = False
 stop_step2 = 0
 compare_mybet = ""
 # 우선순위 리스트 생성
@@ -838,6 +855,9 @@ def stop_bet():
         "=======================================\n실제 칩 배팅 정지\n=======================================\n\n"))
     entry_25.see(tk.END)
 
+previous_type = ""
+previous_win = False
+previous_lose = False
 
 def autoBet(driver, driver2):
     martin_list = [basecost, martin2, martin3, martin4, martin5, martin6, martin7, martin8, martin9, martin10, martin11,
@@ -846,7 +866,7 @@ def autoBet(driver, driver2):
                    martin32, martin33, martin34, martin35, martin36, martin37, martin38, martin39, martin40]
 
     if s_bet:
-        global step, x_stop, lose, start, current_price, t_check, last_tie_step, group_level, player_area, banker_area, group2_get, group2_get_sum, tie_on, re_start, win_stack, ask_dialog, tie_step, tie_area, tie_stack, stop_check, stop_check2, stop_check3, stop_check4, lose_stack, stop_step2, check_type, check_kind, compare_mybet, highest_variable, element_length, previously_selected, current_group, long_go_o, long_go_x, round, cal
+        global step, x_stop, lose, start, current_price, t_check, last_tie_step, group_level, player_area, banker_area, group2_get, group2_get_sum, tie_on, re_start, win_stack, ask_dialog, tie_step, tie_area, tie_stack, stop_check, stop_check2, stop_check3, stop_check4, lose_stack, stop_step2, check_type, check_kind, compare_mybet, highest_variable, element_length, previously_selected, current_group, long_go_o, long_go_x, round, cal, previous_type
 
         player_area = driver.find_element(By.CSS_SELECTOR, '.player--d9544')
         banker_area = driver.find_element(By.CSS_SELECTOR, '.banker--7e77b')
@@ -868,11 +888,26 @@ def autoBet(driver, driver2):
         entry_2.config(state='readonly')
 
         try:
-            check_ox = driver2.find_element(By.CSS_SELECTOR,
-                                            '.result.active .pattern2 > ul:last-child > li:last-child p')
-            ox = check_ox.get_attribute('innerHTML').strip()
-            check_type = driver2.find_element(By.CSS_SELECTOR, '.result.active .tc.active').get_attribute('data-type')
             check_kind = driver2.find_element(By.CSS_SELECTOR, '.result.active').get_attribute('data-kind')
+            check_type = driver2.find_element(By.CSS_SELECTOR, '.result.active .tc.active').get_attribute('data-type')
+
+            if check_kind != previous_type and previous_type != "":
+                if check_type == "O" and previous_win:
+                    ox = "O"
+                elif check_type == "X" and previous_win:
+                    ox = "O"
+                elif check_type == "O" and previous_lose:
+                    ox = "X"
+                elif check_type == "X" and previous_lose:
+                    ox = "O"
+            else:
+                check_ox = driver2.find_element(By.CSS_SELECTOR,
+                                                '.result.active .pattern2 > ul:last-child > li:last-child p')
+                ox = check_ox.get_attribute('innerHTML').strip()
+
+
+
+            previous_type = check_kind
             if check_type == "O":
                 current_res = driver2.find_element(By.CSS_SELECTOR, '.result.active .o-pattern .to-result')
             elif check_type == "X":
@@ -939,8 +974,7 @@ def autoBet(driver, driver2):
 
                 element_length = 0
 
-            print(f"현재 회차: {element_length}")
-            print(f"현재 그룹: {check_kind}")
+
             if check_type == "O":
                 if ox == "X":
                     if t_check == "TIE":
@@ -2656,7 +2690,7 @@ def close_popup(driver):
         time.sleep(10)
 
 def crawlresult(driver, driver2, nowin):
-    global current_price
+    global current_price, previous_win, previous_lose
 
     while True:
         try:
@@ -2758,6 +2792,9 @@ def crawlresult(driver, driver2, nowin):
                                             entry_25.see(tk.END)
                                             recode_log('WIN', start_price, current_price, 0, d_title, r_title, "", "",
                                                        round, cal)
+                                            previous_win = True
+                                            previous_lose = False
+
                                     elif check_ox == "X":
                                         if tie_check == "TIE":
                                             entry_25.insert(tk.END, (
@@ -2771,6 +2808,8 @@ def crawlresult(driver, driver2, nowin):
                                             entry_25.see(tk.END)
                                             recode_log('LOSE', start_price, current_price, 0, d_title, r_title, "", "",
                                                        round, cal)
+                                            previous_win = False
+                                            previous_lose = True
                                 elif check_type == "X":
                                     if check_ox == "O":
                                         if tie_check == "TIE":
@@ -2785,6 +2824,8 @@ def crawlresult(driver, driver2, nowin):
                                             entry_25.see(tk.END)
                                             recode_log('LOSE', start_price, current_price, 0, d_title, r_title, "", "",
                                                        round, cal)
+                                            previous_win = False
+                                            previous_lose = True
                                     elif check_ox == "X":
                                         if tie_check == "TIE":
                                             entry_25.insert(tk.END, (
@@ -2798,6 +2839,8 @@ def crawlresult(driver, driver2, nowin):
                                             entry_25.see(tk.END)
                                             recode_log('WIN', start_price, current_price, 0, d_title, r_title, "", "",
                                                        round, cal)
+                                            previous_win = True
+                                            previous_lose = False
 
                     except NoSuchElementException:
                         # 요소가 발견되지 않으면 계속 반복
@@ -3160,7 +3203,7 @@ t = response.text
 
 
 def on_closing():
-    global current_price
+    global current_price, cal
     try:
         current_price = driver.find_element(By.CSS_SELECTOR, '.amount--bb99f span').get_attribute('innerText').strip()
         price_number = re.sub(r'[^0-9.]', '', current_price)
@@ -3238,7 +3281,7 @@ def set1_click(value):
                     1,
                     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
     elif martin_kind == "슈퍼+크루즈_2":
-        base_bet = [1, 3, 7, 15, 12, 24, 39, 63, 102, 165, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765, 1, 1, 1, 1, 1,
+        base_bet = [1, 3, 7, 15, 31, 27, 54, 85, 139, 224, 363, 587, 950, 1537, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                     1,
                     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 

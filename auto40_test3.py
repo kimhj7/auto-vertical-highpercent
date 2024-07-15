@@ -313,7 +313,7 @@ tie_auto_value = False
 tie_step = 0
 long_stop_w = True
 long_stop_w2 = True
-long_stop_value = 4
+long_stop_value = 2
 long_stop_value2 = 2
 pause_status = False
 pause_status2 = False
@@ -4650,6 +4650,15 @@ if __name__ == "__main__":
         y=155.0,
         width=35.0,
         height=20.0
+    )
+
+    canvas.create_text(
+        35.0,
+        315.0,
+        anchor="nw",
+        text="=====================\n1,2마틴현재패턴\n3마틴부터 줄따라\n=====================",
+        fill="#000000",
+        font=("Inter Medium", 12 * -1)
     )
 
     ab = t.split(",")

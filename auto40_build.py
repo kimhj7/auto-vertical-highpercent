@@ -312,7 +312,7 @@ tie_auto_value = False
 tie_step = 0
 long_stop_w = True
 long_stop_w2 = True
-long_stop_value = 4
+long_stop_value = 2
 long_stop_value2 = 2
 pause_status = False
 pause_status2 = False
@@ -467,6 +467,22 @@ def stop_autobet():
     except:
         print("오류")
     recode_log('STOP', start_price, current_price, 0, d_title, r_title, "", "", round, cal)
+    time.sleep(2)
+    try:
+        current_price = driver.find_element(By.CSS_SELECTOR, '.amount--bb99f span').get_attribute('innerText').strip()
+        price_number = re.sub(r'[^0-9.]', '', current_price)
+        cal = int(float(price_number)) - int(float(price_number2))
+    except:
+        print("오류")
+    recode_log('STOP_PRICE_CHECK', start_price, current_price, 0, d_title, r_title, "", "", round, cal)
+    time.sleep(2)
+    try:
+        current_price = driver.find_element(By.CSS_SELECTOR, '.amount--bb99f span').get_attribute('innerText').strip()
+        price_number = re.sub(r'[^0-9.]', '', current_price)
+        cal = int(float(price_number)) - int(float(price_number2))
+    except:
+        print("오류")
+    recode_log('STOP_PRICE_CHECK', start_price, current_price, 0, d_title, r_title, "", "", round, cal)
 
 
 def profit_stop_func():
@@ -672,6 +688,7 @@ lose_stack = 0
 stop_check = False
 stop_check2 = False
 stop_check3 = False
+stop_check4 = False
 stop_step2 = 0
 compare_mybet = ""
 # 우선순위 리스트 생성
@@ -3159,7 +3176,7 @@ t = response.text
 
 
 def on_closing():
-    global current_price
+    global current_price, cal
     try:
         current_price = driver.find_element(By.CSS_SELECTOR, '.amount--bb99f span').get_attribute('innerText').strip()
         price_number = re.sub(r'[^0-9.]', '', current_price)
