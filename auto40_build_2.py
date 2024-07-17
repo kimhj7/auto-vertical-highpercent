@@ -854,6 +854,9 @@ def stop_bet():
         "=======================================\n실제 칩 배팅 정지\n=======================================\n\n"))
     entry_25.see(tk.END)
 
+previous_type = ""
+previous_win = False
+previous_lose = False
 
 def autoBet(driver, driver2):
     martin_list = [basecost, martin2, martin3, martin4, martin5, martin6, martin7, martin8, martin9, martin10, martin11,
@@ -862,7 +865,7 @@ def autoBet(driver, driver2):
                    martin32, martin33, martin34, martin35, martin36, martin37, martin38, martin39, martin40]
 
     if s_bet:
-        global step, x_stop, lose, start, current_price, t_check, last_tie_step, group_level, player_area, banker_area, group2_get, group2_get_sum, tie_on, re_start, win_stack, ask_dialog, tie_step, tie_area, tie_stack, stop_check, stop_check2, stop_check3, stop_check4, lose_stack, stop_step2, check_type, check_kind, compare_mybet, highest_variable, element_length, previously_selected, current_group, long_go_o, long_go_x, round, cal
+        global step, x_stop, lose, start, current_price, t_check, last_tie_step, group_level, player_area, banker_area, group2_get, group2_get_sum, tie_on, re_start, win_stack, ask_dialog, tie_step, tie_area, tie_stack, stop_check, stop_check2, stop_check3, stop_check4, lose_stack, stop_step2, check_type, check_kind, compare_mybet, highest_variable, element_length, previously_selected, current_group, long_go_o, long_go_x, round, cal, previous_type
 
         player_area = driver.find_element(By.CSS_SELECTOR, '.player--d9544')
         banker_area = driver.find_element(By.CSS_SELECTOR, '.banker--7e77b')
@@ -884,11 +887,25 @@ def autoBet(driver, driver2):
         entry_2.config(state='readonly')
 
         try:
-            check_ox = driver2.find_element(By.CSS_SELECTOR,
-                                            '.result.active .pattern2 > ul:last-child > li:last-child p')
-            ox = check_ox.get_attribute('innerHTML').strip()
-            check_type = driver2.find_element(By.CSS_SELECTOR, '.result.active .tc.active').get_attribute('data-type')
             check_kind = driver2.find_element(By.CSS_SELECTOR, '.result.active').get_attribute('data-kind')
+            check_type = driver2.find_element(By.CSS_SELECTOR, '.result.active .tc.active').get_attribute('data-type')
+
+            if check_kind != previous_type and previous_type != "":
+                if check_type == "O" and previous_win:
+                    ox = "O"
+                elif check_type == "X" and previous_win:
+                    ox = "O"
+                elif check_type == "O" and previous_lose:
+                    ox = "X"
+                elif check_type == "X" and previous_lose:
+                    ox = "O"
+            else:
+                check_ox = driver2.find_element(By.CSS_SELECTOR,
+                                                '.result.active .pattern2 > ul:last-child > li:last-child p')
+                ox = check_ox.get_attribute('innerHTML').strip()
+
+            previous_type = check_kind
+
             if check_type == "O":
                 current_res = driver2.find_element(By.CSS_SELECTOR, '.result.active .o-pattern .to-result')
             elif check_type == "X":
@@ -955,8 +972,6 @@ def autoBet(driver, driver2):
 
                 element_length = 0
 
-            print(f"현재 회차: {element_length}")
-            print(f"현재 그룹: {check_kind}")
             if check_type == "O":
                 if ox == "X":
                     if t_check == "TIE":
@@ -1673,7 +1688,7 @@ def autoBet(driver, driver2):
                                                 step = 0
                                             else:
                                                 if step > 4:
-                                                    step = 3
+                                                    step = 4
                                                 elif step < 5:
                                                     step = 0
                                             if step < 0:
@@ -1692,7 +1707,7 @@ def autoBet(driver, driver2):
                                                 step = 0
                                             else:
                                                 if step > 4:
-                                                    step = 3
+                                                    step = 4
                                                 elif step < 5:
                                                     step = 0
                                             if step < 0:
@@ -1715,7 +1730,7 @@ def autoBet(driver, driver2):
                                                 step = 0
                                             else:
                                                 if step > 4:
-                                                    step = 3
+                                                    step = 4
                                                 elif step < 5:
                                                     step = 0
                                             if step < 0:
@@ -2518,7 +2533,7 @@ def autoBet(driver, driver2):
                                                 step = 0
                                             else:
                                                 if step > 4:
-                                                    step = 3
+                                                    step = 4
                                                 elif step < 5:
                                                     step = 0
                                             if step < 0:
@@ -2537,7 +2552,7 @@ def autoBet(driver, driver2):
                                                 step = 0
                                             else:
                                                 if step > 4:
-                                                    step = 3
+                                                    step = 4
                                                 elif step < 5:
                                                     step = 0
                                             if step < 0:
@@ -2560,7 +2575,7 @@ def autoBet(driver, driver2):
                                                 step = 0
                                             else:
                                                 if step > 4:
-                                                    step = 3
+                                                    step = 4
                                                 elif step < 5:
                                                     step = 0
                                             if step < 0:
@@ -2672,7 +2687,7 @@ def close_popup(driver):
         time.sleep(10)
 
 def crawlresult(driver, driver2, nowin):
-    global current_price
+    global current_price, previous_win, previous_lose
 
     while True:
         try:
@@ -2774,6 +2789,9 @@ def crawlresult(driver, driver2, nowin):
                                             entry_25.see(tk.END)
                                             recode_log('WIN', start_price, current_price, 0, d_title, r_title, "", "",
                                                        round, cal)
+                                            previous_win = True
+                                            previous_lose = False
+
                                     elif check_ox == "X":
                                         if tie_check == "TIE":
                                             entry_25.insert(tk.END, (
@@ -2787,6 +2805,8 @@ def crawlresult(driver, driver2, nowin):
                                             entry_25.see(tk.END)
                                             recode_log('LOSE', start_price, current_price, 0, d_title, r_title, "", "",
                                                        round, cal)
+                                            previous_win = False
+                                            previous_lose = True
                                 elif check_type == "X":
                                     if check_ox == "O":
                                         if tie_check == "TIE":
@@ -2801,6 +2821,8 @@ def crawlresult(driver, driver2, nowin):
                                             entry_25.see(tk.END)
                                             recode_log('LOSE', start_price, current_price, 0, d_title, r_title, "", "",
                                                        round, cal)
+                                            previous_win = False
+                                            previous_lose = True
                                     elif check_ox == "X":
                                         if tie_check == "TIE":
                                             entry_25.insert(tk.END, (
@@ -2814,6 +2836,8 @@ def crawlresult(driver, driver2, nowin):
                                             entry_25.see(tk.END)
                                             recode_log('WIN', start_price, current_price, 0, d_title, r_title, "", "",
                                                        round, cal)
+                                            previous_win = True
+                                            previous_lose = False
 
                     except NoSuchElementException:
                         # 요소가 발견되지 않으면 계속 반복
@@ -4668,11 +4692,13 @@ if __name__ == "__main__":
         height=20.0
     )
 
+    info_text = "1,2마틴현재패턴\n3마틴부터 줄따라\n일반+크루즈_2\n6마틴부터 5마틴으로"
+
     canvas.create_text(
         35.0,
-        315.0,
+        295.0,
         anchor="nw",
-        text="=====================\n1,2마틴현재패턴\n3마틴부터 줄따라\n=====================",
+        text="=====================\n%s\n=====================" % info_text.center(10),
         fill="#000000",
         font=("Inter Medium", 12 * -1)
     )

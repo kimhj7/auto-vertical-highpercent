@@ -48,8 +48,8 @@ options.add_argument('--window-size=1920,1020')
 
 monitors = get_monitors()
 
-options.add_argument("force-device-scale-factor=1")
-options.add_argument("high-dpi-support=1")
+options.add_argument("force-device-scale-factor=0.6")
+options.add_argument("high-dpi-support=0.6")
 
 options.add_experimental_option("detach", True)
 
@@ -64,7 +64,6 @@ service = ChromeService(executable_path=ChromeDriverManager().install())
 last_opened_window_handle = True
 
 set_hours = 72
-serial_number = 'MASTER'
 
 def recode_log(type, start_price, current_price, bet_price, title, room, status, step, round, cal):
     url = "https://log2.pattern2024.com/log"
@@ -855,9 +854,6 @@ def stop_bet():
         "=======================================\n실제 칩 배팅 정지\n=======================================\n\n"))
     entry_25.see(tk.END)
 
-previous_type = ""
-previous_win = False
-previous_lose = False
 
 def autoBet(driver, driver2):
     martin_list = [basecost, martin2, martin3, martin4, martin5, martin6, martin7, martin8, martin9, martin10, martin11,
@@ -866,7 +862,7 @@ def autoBet(driver, driver2):
                    martin32, martin33, martin34, martin35, martin36, martin37, martin38, martin39, martin40]
 
     if s_bet:
-        global step, x_stop, lose, start, current_price, t_check, last_tie_step, group_level, player_area, banker_area, group2_get, group2_get_sum, tie_on, re_start, win_stack, ask_dialog, tie_step, tie_area, tie_stack, stop_check, stop_check2, stop_check3, stop_check4, lose_stack, stop_step2, check_type, check_kind, compare_mybet, highest_variable, element_length, previously_selected, current_group, long_go_o, long_go_x, round, cal, previous_type
+        global step, x_stop, lose, start, current_price, t_check, last_tie_step, group_level, player_area, banker_area, group2_get, group2_get_sum, tie_on, re_start, win_stack, ask_dialog, tie_step, tie_area, tie_stack, stop_check, stop_check2, stop_check3, stop_check4, lose_stack, stop_step2, check_type, check_kind, compare_mybet, highest_variable, element_length, previously_selected, current_group, long_go_o, long_go_x, round, cal
 
         player_area = driver.find_element(By.CSS_SELECTOR, '.player--d9544')
         banker_area = driver.find_element(By.CSS_SELECTOR, '.banker--7e77b')
@@ -888,24 +884,11 @@ def autoBet(driver, driver2):
         entry_2.config(state='readonly')
 
         try:
-            check_kind = driver2.find_element(By.CSS_SELECTOR, '.result.active').get_attribute('data-kind')
+            check_ox = driver2.find_element(By.CSS_SELECTOR,
+                                            '.result.active .pattern2 > ul:last-child > li:last-child p')
+            ox = check_ox.get_attribute('innerHTML').strip()
             check_type = driver2.find_element(By.CSS_SELECTOR, '.result.active .tc.active').get_attribute('data-type')
-
-            if check_kind != previous_type and previous_type != "":
-                if check_type == "O" and previous_win:
-                    ox = "O"
-                elif check_type == "X" and previous_win:
-                    ox = "O"
-                elif check_type == "O" and previous_lose:
-                    ox = "X"
-                elif check_type == "X" and previous_lose:
-                    ox = "O"
-            else:
-                check_ox = driver2.find_element(By.CSS_SELECTOR,
-                                                '.result.active .pattern2 > ul:last-child > li:last-child p')
-                ox = check_ox.get_attribute('innerHTML').strip()
-
-            previous_type = check_kind
+            check_kind = driver2.find_element(By.CSS_SELECTOR, '.result.active').get_attribute('data-kind')
             if check_type == "O":
                 current_res = driver2.find_element(By.CSS_SELECTOR, '.result.active .o-pattern .to-result')
             elif check_type == "X":
@@ -972,6 +955,8 @@ def autoBet(driver, driver2):
 
                 element_length = 0
 
+            print(f"현재 회차: {element_length}")
+            print(f"현재 그룹: {check_kind}")
             if check_type == "O":
                 if ox == "X":
                     if t_check == "TIE":
@@ -2687,7 +2672,7 @@ def close_popup(driver):
         time.sleep(10)
 
 def crawlresult(driver, driver2, nowin):
-    global current_price, previous_win, previous_lose
+    global current_price
 
     while True:
         try:
@@ -2727,10 +2712,6 @@ def crawlresult(driver, driver2, nowin):
         try:
             current_url = driver.current_url
 
-            # URL 변경 감지
-            if nowin == "no":
-                if "game=baccarat&table_id" not in current_url:
-                    break
             try:
                 if ("table_id=PTB" in current_url) or ("table_id=Lightning" in current_url):
                     element = driver.find_element(By.CSS_SELECTOR, '[class*="gameResult"]')
@@ -2789,9 +2770,6 @@ def crawlresult(driver, driver2, nowin):
                                             entry_25.see(tk.END)
                                             recode_log('WIN', start_price, current_price, 0, d_title, r_title, "", "",
                                                        round, cal)
-                                            previous_win = True
-                                            previous_lose = False
-
                                     elif check_ox == "X":
                                         if tie_check == "TIE":
                                             entry_25.insert(tk.END, (
@@ -2805,8 +2783,6 @@ def crawlresult(driver, driver2, nowin):
                                             entry_25.see(tk.END)
                                             recode_log('LOSE', start_price, current_price, 0, d_title, r_title, "", "",
                                                        round, cal)
-                                            previous_win = False
-                                            previous_lose = True
                                 elif check_type == "X":
                                     if check_ox == "O":
                                         if tie_check == "TIE":
@@ -2821,8 +2797,6 @@ def crawlresult(driver, driver2, nowin):
                                             entry_25.see(tk.END)
                                             recode_log('LOSE', start_price, current_price, 0, d_title, r_title, "", "",
                                                        round, cal)
-                                            previous_win = False
-                                            previous_lose = True
                                     elif check_ox == "X":
                                         if tie_check == "TIE":
                                             entry_25.insert(tk.END, (
@@ -2836,8 +2810,6 @@ def crawlresult(driver, driver2, nowin):
                                             entry_25.see(tk.END)
                                             recode_log('WIN', start_price, current_price, 0, d_title, r_title, "", "",
                                                        round, cal)
-                                            previous_win = True
-                                            previous_lose = False
 
                     except NoSuchElementException:
                         # 요소가 발견되지 않으면 계속 반복
@@ -2953,6 +2925,16 @@ def inputdoublex(arg2, driver, driver2):
             print(f"오류 발생: {e}")
             break
 
+def print_current_location(driver):
+    current_url = driver.current_url
+    print(f"Current URL: {current_url}")
+
+    try:
+        # Get the outer HTML of the current frame
+        frame_html = driver.execute_script("return document.documentElement.outerHTML;")
+        print(f"Current frame's outer HTML: {frame_html[:1000]}...")  # Print first 1000 characters for brevity
+    except Exception as e:
+        print(f"Could not retrieve frame HTML: {e}")
 
 def findurl(driver, driver2):
     last_opened_window_handle = None
@@ -2997,31 +2979,43 @@ def findurl(driver, driver2):
 
                 last_checked_url = current_url
 
-                if "game=baccarat&table_id" in current_url:
-                    print("필요한 URL 변경을 감지했습니다. 작업을 수행합니다.")
-                    entry_25.insert(tk.END, "방 접속완료. 마틴단계와 금액 설정 후 오토프로그램을 시작하세요.\n\n")
-                    entry_25.see(tk.END)
-                    driver2.refresh()
-                    driver2.refresh()
-                    start = True
-                    time.sleep(5)
-                    driver.switch_to.default_content()
-                    iframes = driver.find_elements(By.TAG_NAME, "iframe")
-                    # iframe이 하나 이상 있을 경우 첫 번째 iframe으로 이동
-                    if len(iframes) > 0:
-                        driver.switch_to.frame(iframes[0])
+                if "evolution_game_shows" in current_url:
+                    # 첫 번째 iframe으로 전환
+                    WebDriverWait(driver, 10).until(
+                        EC.frame_to_be_available_and_switch_to_it((By.CSS_SELECTOR, "iframe#game-iframe")))
+
+                    # 두 번째 iframe으로 전환
+                    WebDriverWait(driver, 10).until(
+                        EC.frame_to_be_available_and_switch_to_it((By.TAG_NAME, "iframe")))
+                    print_current_location(driver)
                     try:
-                        elem = driver.find_element(By.CLASS_NAME, 'roadGrid--bd5fc')
-                        r_title = driver.find_element(By.CLASS_NAME, 'tableName--a9bc5').get_attribute(
-                            'innerText').strip()
-                    except NoSuchElementException:
-                        print("지정된 요소를 찾을 수 없습니다.")
-                        continue
+                        target_element = WebDriverWait(driver, 20).until(
+                            EC.presence_of_element_located((By.CSS_SELECTOR, "#root > .app--2c5f6"))
+                        )
+                        # 요소가 존재하면 함수 실행
+                        print("필요한 URL 변경을 감지했습니다. 작업을 수행합니다.")
+                        entry_25.insert(tk.END, "방 접속완료. 마틴단계와 금액 설정 후 오토프로그램을 시작하세요.\n\n")
+                        entry_25.see(tk.END)
+                        driver2.refresh()
+                        driver2.refresh()
+                        time.sleep(5)
+                        start = True
 
-                    startThread4(elem, driver, driver2)
-                    time.sleep(5)
+                        try:
+                            elem = driver.find_element(By.CLASS_NAME, 'roadGrid--bd5fc')
+                            r_title = driver.find_element(By.CLASS_NAME, 'tableName--a9bc5').get_attribute(
+                                'innerText').strip()
+                        except NoSuchElementException:
+                            print("지정된 요소를 찾을 수 없습니다.")
+                            continue
 
-                    startThread5(driver, driver2, "no")
+                        startThread4(elem, driver, driver2)
+                        time.sleep(5)
+
+                        startThread5(driver, driver2, "no")
+                    except:
+                        print("Target element does not exist.")
+
 
             time.sleep(1)  # 리소스 최소화를 위해 대기
 
@@ -4580,7 +4574,7 @@ if __name__ == "__main__":
     CheckVar2 = IntVar()
 
     c2 = tk.Checkbutton(win, text="설정값", variable=CheckVar2, command=long_stop)
-    c2.config(bg="#780599", fg="#F8DF00", font=text_font2,
+    c2.config(bg="#026832", fg="#F8DF00", font=text_font2,
               selectcolor="black")
     c2.select()
     c2.place(
@@ -4642,7 +4636,7 @@ if __name__ == "__main__":
     CheckVar3 = IntVar()
 
     c3 = tk.Checkbutton(win, text="설정값", variable=CheckVar3, command=long_stop2)
-    c3.config(bg="#780599", fg="#F8DF00", font=text_font2,
+    c3.config(bg="#026832", fg="#F8DF00", font=text_font2,
               selectcolor="black")
     c3.select()
     c3.place(

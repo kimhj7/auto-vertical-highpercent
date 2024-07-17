@@ -2899,32 +2899,8 @@ def findurl(driver, driver2):
                     room_search = False
 
                 last_checked_url = current_url
-                if "game=baccarat&table_id" in current_url:
-                    print("필요한 URL 변경을 감지했습니다. 작업을 수행합니다.")
-                    entry_25.insert(tk.END, "방 접속완료. 마틴단계와 금액 설정 후 오토프로그램을 시작하세요.\n\n")
-                    entry_25.see(tk.END)
-                    driver2.refresh()
-                    driver2.refresh()
-                    start = True
-                    time.sleep(5)
-                    driver.switch_to.default_content()
-                    iframes = driver.find_elements(By.TAG_NAME, "iframe")
-                    # iframe이 하나 이상 있을 경우 첫 번째 iframe으로 이동
-                    if len(iframes) > 0:
-                        driver.switch_to.frame(iframes[0])
-                    try:
-                        elem = driver.find_element(By.CLASS_NAME, 'roadGrid--bd5fc')
-                        r_title = driver.find_element(By.CLASS_NAME, 'tableName--a9bc5').get_attribute(
-                            'innerText').strip()
-                    except NoSuchElementException:
-                        print("지정된 요소를 찾을 수 없습니다.")
-                        continue
 
-                    startThread4(elem, driver, driver2)
-                    time.sleep(5)
-
-                    startThread5(driver, driver2, "no")
-                elif "evolution_game_shows" in current_url:
+                if "evolution_game_shows" in current_url:
                     # 첫 번째 iframe으로 전환
                     WebDriverWait(driver, 10).until(
                         EC.frame_to_be_available_and_switch_to_it((By.CSS_SELECTOR, "iframe#game-iframe")))
@@ -2933,33 +2909,33 @@ def findurl(driver, driver2):
                     WebDriverWait(driver, 10).until(
                         EC.frame_to_be_available_and_switch_to_it((By.TAG_NAME, "iframe")))
                     print_current_location(driver)
-                try:
-                    target_element = WebDriverWait(driver, 20).until(
-                        EC.presence_of_element_located((By.CSS_SELECTOR, "#root > .app--2c5f6"))
-                    )
-                    # 요소가 존재하면 함수 실행
-                    print("필요한 URL 변경을 감지했습니다. 작업을 수행합니다.")
-                    entry_25.insert(tk.END, "방 접속완료. 마틴단계와 금액 설정 후 오토프로그램을 시작하세요.\n\n")
-                    entry_25.see(tk.END)
-                    driver2.refresh()
-                    driver2.refresh()
-                    time.sleep(5)
-                    start = True
-
                     try:
-                        elem = driver.find_element(By.CLASS_NAME, 'roadGrid--bd5fc')
-                        r_title = driver.find_element(By.CLASS_NAME, 'tableName--a9bc5').get_attribute(
-                            'innerText').strip()
-                    except NoSuchElementException:
-                        print("지정된 요소를 찾을 수 없습니다.")
-                        continue
+                        target_element = WebDriverWait(driver, 20).until(
+                            EC.presence_of_element_located((By.CSS_SELECTOR, "#root > .app--2c5f6"))
+                        )
+                        # 요소가 존재하면 함수 실행
+                        print("필요한 URL 변경을 감지했습니다. 작업을 수행합니다.")
+                        entry_25.insert(tk.END, "방 접속완료. 마틴단계와 금액 설정 후 오토프로그램을 시작하세요.\n\n")
+                        entry_25.see(tk.END)
+                        driver2.refresh()
+                        driver2.refresh()
+                        time.sleep(5)
+                        start = True
 
-                    startThread4(elem, driver, driver2)
-                    time.sleep(5)
+                        try:
+                            elem = driver.find_element(By.CLASS_NAME, 'roadGrid--bd5fc')
+                            r_title = driver.find_element(By.CLASS_NAME, 'tableName--a9bc5').get_attribute(
+                                'innerText').strip()
+                        except NoSuchElementException:
+                            print("지정된 요소를 찾을 수 없습니다.")
+                            continue
 
-                    startThread5(driver, driver2, "no")
-                except:
-                    print("Target element does not exist.")
+                        startThread4(elem, driver, driver2)
+                        time.sleep(5)
+
+                        startThread5(driver, driver2, "no")
+                    except:
+                        print("Target element does not exist.")
 
 
             time.sleep(1)  # 리소스 최소화를 위해 대기
