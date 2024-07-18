@@ -956,8 +956,6 @@ def autoBet(driver, driver2):
 
                 element_length = 0
 
-            print(f"현재 회차: {element_length}")
-            print(f"현재 그룹: {check_kind}")
             if check_type == "O":
                 if ox == "X":
                     if t_check == "TIE":
@@ -1202,7 +1200,7 @@ def autoBet(driver, driver2):
                 else:
                     long_go_o = False
                     if ox == "X":
-                        if martin_kind == "다니엘시스템":
+                        if martin_kind == "다니엘시스템" or step > 1:
                             if check_kind == "A":
                                 driver2.find_element(By.CSS_SELECTOR, '.result1').click()
                                 time.sleep(0.2)
@@ -1250,6 +1248,7 @@ def autoBet(driver, driver2):
                                     step = 0
                                 else:
                                     step += 1
+                                    long_go_o = False
                                     stop_check = False
                                     stop_check2 = False
                                     stop_check3 = False
@@ -1674,7 +1673,7 @@ def autoBet(driver, driver2):
                                                 step = 0
                                             else:
                                                 if step > 4:
-                                                    step = 3
+                                                    step = 4
                                                 elif step < 5:
                                                     step = 0
                                             if step < 0:
@@ -1693,7 +1692,7 @@ def autoBet(driver, driver2):
                                                 step = 0
                                             else:
                                                 if step > 4:
-                                                    step = 3
+                                                    step = 4
                                                 elif step < 5:
                                                     step = 0
                                             if step < 0:
@@ -1716,7 +1715,7 @@ def autoBet(driver, driver2):
                                                 step = 0
                                             else:
                                                 if step > 4:
-                                                    step = 3
+                                                    step = 4
                                                 elif step < 5:
                                                     step = 0
                                             if step < 0:
@@ -2044,7 +2043,7 @@ def autoBet(driver, driver2):
                 else:
 
                     if ox == "O":
-                        if martin_kind == "다니엘시스템":
+                        if martin_kind == "다니엘시스템" or step > 1:
                             if check_kind == "A":
                                 driver2.find_element(By.CSS_SELECTOR, '.result1').click()
                             elif check_kind == "B":
@@ -2086,9 +2085,7 @@ def autoBet(driver, driver2):
                                     step = 0
                                 else:
                                     step += 1
-                                    if stop_check3:
-                                        lose_stack += 1
-                                        long_go_x = False
+                                    long_go_x = False
                                     stop_check = False
                                     stop_check2 = False
                                     stop_check3 = False
@@ -2519,7 +2516,7 @@ def autoBet(driver, driver2):
                                                 step = 0
                                             else:
                                                 if step > 4:
-                                                    step = 3
+                                                    step = 4
                                                 elif step < 5:
                                                     step = 0
                                             if step < 0:
@@ -2538,7 +2535,7 @@ def autoBet(driver, driver2):
                                                 step = 0
                                             else:
                                                 if step > 4:
-                                                    step = 3
+                                                    step = 4
                                                 elif step < 5:
                                                     step = 0
                                             if step < 0:
@@ -2561,7 +2558,7 @@ def autoBet(driver, driver2):
                                                 step = 0
                                             else:
                                                 if step > 4:
-                                                    step = 3
+                                                    step = 4
                                                 elif step < 5:
                                                     step = 0
                                             if step < 0:

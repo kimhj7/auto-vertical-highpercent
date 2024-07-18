@@ -11,7 +11,7 @@ print(serial_data)
 with open("serial_config.py", "r", encoding="utf-8") as serial_file:
     serial_content = serial_file.read()
 
-with open("auto40_build.py", "r", encoding="utf-8") as main_file:
+with open("auto40_build_2.py", "r", encoding="utf-8") as main_file:
     main_data = main_file.read()
 
 combined_data = serial_content + "\n" + main_data

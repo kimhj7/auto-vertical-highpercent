@@ -437,7 +437,7 @@ def start_autobet():
             entry_25.insert(tk.END,
                             "==================================\n%s\n==================================\n\n" % s.center(
                                 30))
-            recode_log('START', start_price, start_price, 0, d_title, r_title, "", "", "", cal)
+            recode_log('START', start_price, current_price, 0, d_title, r_title, "", "", "", cal)
 
     else:
         tkinter.messagebox.showwarning("통화 및 마틴단계 선택", "게임에서 사용될 통화 및 마틴단계를 선택 후 다시 시도해 주세요.")
@@ -854,9 +854,6 @@ def stop_bet():
         "=======================================\n실제 칩 배팅 정지\n=======================================\n\n"))
     entry_25.see(tk.END)
 
-previous_type = ""
-previous_win = False
-previous_lose = False
 
 def autoBet(driver, driver2):
     martin_list = [basecost, martin2, martin3, martin4, martin5, martin6, martin7, martin8, martin9, martin10, martin11,
@@ -865,7 +862,7 @@ def autoBet(driver, driver2):
                    martin32, martin33, martin34, martin35, martin36, martin37, martin38, martin39, martin40]
 
     if s_bet:
-        global step, x_stop, lose, start, current_price, t_check, last_tie_step, group_level, player_area, banker_area, group2_get, group2_get_sum, tie_on, re_start, win_stack, ask_dialog, tie_step, tie_area, tie_stack, stop_check, stop_check2, stop_check3, stop_check4, lose_stack, stop_step2, check_type, check_kind, compare_mybet, highest_variable, element_length, previously_selected, current_group, long_go_o, long_go_x, round, cal, previous_type
+        global step, x_stop, lose, start, current_price, t_check, last_tie_step, group_level, player_area, banker_area, group2_get, group2_get_sum, tie_on, re_start, win_stack, ask_dialog, tie_step, tie_area, tie_stack, stop_check, stop_check2, stop_check3, stop_check4, lose_stack, stop_step2, check_type, check_kind, compare_mybet, highest_variable, element_length, previously_selected, current_group, long_go_o, long_go_x, round, cal
 
         player_area = driver.find_element(By.CSS_SELECTOR, '.player--d9544')
         banker_area = driver.find_element(By.CSS_SELECTOR, '.banker--7e77b')
@@ -887,25 +884,11 @@ def autoBet(driver, driver2):
         entry_2.config(state='readonly')
 
         try:
-            check_kind = driver2.find_element(By.CSS_SELECTOR, '.result.active').get_attribute('data-kind')
+            check_ox = driver2.find_element(By.CSS_SELECTOR,
+                                            '.result.active .pattern2 > ul:last-child > li:last-child p')
+            ox = check_ox.get_attribute('innerHTML').strip()
             check_type = driver2.find_element(By.CSS_SELECTOR, '.result.active .tc.active').get_attribute('data-type')
-
-            if check_kind != previous_type and previous_type != "":
-                if check_type == "O" and previous_win:
-                    ox = "O"
-                elif check_type == "X" and previous_win:
-                    ox = "O"
-                elif check_type == "O" and previous_lose:
-                    ox = "X"
-                elif check_type == "X" and previous_lose:
-                    ox = "O"
-            else:
-                check_ox = driver2.find_element(By.CSS_SELECTOR,
-                                                '.result.active .pattern2 > ul:last-child > li:last-child p')
-                ox = check_ox.get_attribute('innerHTML').strip()
-
-            previous_type = check_kind
-
+            check_kind = driver2.find_element(By.CSS_SELECTOR, '.result.active').get_attribute('data-kind')
             if check_type == "O":
                 current_res = driver2.find_element(By.CSS_SELECTOR, '.result.active .o-pattern .to-result')
             elif check_type == "X":
@@ -1264,6 +1247,7 @@ def autoBet(driver, driver2):
                                     step = 0
                                 else:
                                     step += 1
+                                    long_go_o = False
                                     stop_check = False
                                     stop_check2 = False
                                     stop_check3 = False
@@ -2100,9 +2084,7 @@ def autoBet(driver, driver2):
                                     step = 0
                                 else:
                                     step += 1
-                                    if stop_check3:
-                                        lose_stack += 1
-                                        long_go_x = False
+                                    long_go_x = False
                                     stop_check = False
                                     stop_check2 = False
                                     stop_check3 = False
