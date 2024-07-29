@@ -41,7 +41,7 @@ from selenium_stealth import stealth
 import threading
 
 options = ChromeOptions()
-user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.6478.183 Safari/537.36"
 options.add_argument('user-agent=' + user_agent)
 options.add_argument("lang=ko_KR")
 options.add_argument('--window-size=1920,1020')
@@ -53,8 +53,26 @@ options.add_argument("high-dpi-support=0.6")
 
 options.add_experimental_option("detach", True)
 
+def resource_path(relative_path):
+    """ 리소스의 절대 경로를 얻기 위한 함수 """
+    try:
+        # PyInstaller가 생성한 임시 폴더에서 실행 중일 때의 경로
+        base_path = sys._MEIPASS
+    except Exception:
+        # 일반적인 Python 인터프리터에서 실행 중일 때의 경로
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
 # 크롬 드라이버 최신 버전 설정
-service = ChromeService(executable_path=ChromeDriverManager().install())
+driver_path = ChromeDriverManager().install()
+if driver_path:
+        driver_name = driver_path.split('/')[-1]
+        if driver_name != "chromedriver":
+            driver_path = "/".join(driver_path.split('/')[:-1] + ["chromedriver.exe"])
+            if '/' in driver_path:
+                driver_path = driver_path.replace('/', '\\')
+            os.chmod(driver_path, 0o755)
 
 # chrome driver
 # driver = webdriver.Chrome(service=service, options=options)  # <- options로 변경
@@ -312,8 +330,8 @@ tie_auto_value = False
 tie_step = 0
 long_stop_w = True
 long_stop_w2 = True
-long_stop_value = 2
-long_stop_value2 = 2
+long_stop_value = 3
+long_stop_value2 = 3
 pause_status = False
 pause_status2 = False
 pause_step = 0
@@ -437,7 +455,7 @@ def start_autobet():
             entry_25.insert(tk.END,
                             "==================================\n%s\n==================================\n\n" % s.center(
                                 30))
-            recode_log('START', start_price, start_price, 0, d_title, r_title, "", "", "", cal)
+            recode_log('START', start_price, current_price, 0, d_title, r_title, "", "", "", cal)
 
     else:
         tkinter.messagebox.showwarning("통화 및 마틴단계 선택", "게임에서 사용될 통화 및 마틴단계를 선택 후 다시 시도해 주세요.")
@@ -558,7 +576,7 @@ def chip_selection(price, c_res, step, round):
         entry_25.see(tk.END)
     else:
         entry_25.insert(tk.END, (", ".join(result) + " " + c_res + "에 " + str(
-            bet_price) + "원 배팅\n\n=================================\n\n"))
+                bet_price) + "원 배팅\n\n=================================\n\n"))
         entry_25.see(tk.END)
     current_price = driver.find_element(By.CSS_SELECTOR, '.amount--bb99f span').get_attribute('innerText').strip()
     recode_log('RUNNING', start_price, current_price, bet_price, d_title, r_title, c_res, step, round, cal)
@@ -862,10 +880,12 @@ def autoBet(driver, driver2):
                    martin32, martin33, martin34, martin35, martin36, martin37, martin38, martin39, martin40]
 
     if s_bet:
-        global step, x_stop, lose, start, current_price, t_check, last_tie_step, group_level, player_area, banker_area, group2_get, group2_get_sum, tie_on, re_start, win_stack, ask_dialog, tie_step, tie_area, tie_stack, stop_check, stop_check2, stop_check3, stop_check4, lose_stack, stop_step2, check_type, check_kind, compare_mybet, highest_variable, element_length, previously_selected, current_group, long_go_o, long_go_x, round, cal
+        global step, x_stop, lose, start, current_price, t_check, last_tie_step, group_level, player_area, banker_area, player_bonus, banker_bonus, group2_get, group2_get_sum, tie_on, re_start, win_stack, ask_dialog, tie_step, tie_area, tie_stack, stop_check, stop_check2, stop_check3, stop_check4, lose_stack, stop_step2, check_type, check_kind, compare_mybet, highest_variable, element_length, previously_selected, current_group, long_go_o, long_go_x, round, cal
 
         player_area = driver.find_element(By.CSS_SELECTOR, '.player--d9544')
         banker_area = driver.find_element(By.CSS_SELECTOR, '.banker--7e77b')
+        player_bonus = driver.find_element(By.CSS_SELECTOR, '.left--caa19 .item--11cf3')
+        banker_bonus = driver.find_element(By.CSS_SELECTOR, '.right--87590 .item--11cf3')
         tie_area = driver.find_element(By.CSS_SELECTOR, '.tie--a582d')
         current_price = driver.find_element(By.CSS_SELECTOR, '.amount--bb99f span').get_attribute('innerText').strip()
         round = driver2.find_element(By.CSS_SELECTOR, '.result1 .current_no').get_attribute('innerText').strip()
@@ -955,8 +975,6 @@ def autoBet(driver, driver2):
 
                 element_length = 0
 
-            print(f"현재 회차: {element_length}")
-            print(f"현재 그룹: {check_kind}")
             if check_type == "O":
                 if ox == "X":
                     if t_check == "TIE":
@@ -1201,7 +1219,7 @@ def autoBet(driver, driver2):
                 else:
                     long_go_o = False
                     if ox == "X":
-                        if martin_kind == "다니엘시스템":
+                        if martin_kind == "다니엘시스템" or step > 1:
                             if check_kind == "A":
                                 driver2.find_element(By.CSS_SELECTOR, '.result1').click()
                                 time.sleep(0.2)
@@ -1249,6 +1267,7 @@ def autoBet(driver, driver2):
                                     step = 0
                                 else:
                                     step += 1
+                                    long_go_o = False
                                     stop_check = False
                                     stop_check2 = False
                                     stop_check3 = False
@@ -1673,7 +1692,7 @@ def autoBet(driver, driver2):
                                                 step = 0
                                             else:
                                                 if step > 4:
-                                                    step = 3
+                                                    step = 4
                                                 elif step < 5:
                                                     step = 0
                                             if step < 0:
@@ -1692,7 +1711,7 @@ def autoBet(driver, driver2):
                                                 step = 0
                                             else:
                                                 if step > 4:
-                                                    step = 3
+                                                    step = 4
                                                 elif step < 5:
                                                     step = 0
                                             if step < 0:
@@ -1715,7 +1734,7 @@ def autoBet(driver, driver2):
                                                 step = 0
                                             else:
                                                 if step > 4:
-                                                    step = 3
+                                                    step = 4
                                                 elif step < 5:
                                                     step = 0
                                             if step < 0:
@@ -2043,7 +2062,7 @@ def autoBet(driver, driver2):
                 else:
 
                     if ox == "O":
-                        if martin_kind == "다니엘시스템":
+                        if martin_kind == "다니엘시스템" or step > 1:
                             if check_kind == "A":
                                 driver2.find_element(By.CSS_SELECTOR, '.result1').click()
                             elif check_kind == "B":
@@ -2085,9 +2104,7 @@ def autoBet(driver, driver2):
                                     step = 0
                                 else:
                                     step += 1
-                                    if stop_check3:
-                                        lose_stack += 1
-                                        long_go_x = False
+                                    long_go_x = False
                                     stop_check = False
                                     stop_check2 = False
                                     stop_check3 = False
@@ -2518,7 +2535,7 @@ def autoBet(driver, driver2):
                                                 step = 0
                                             else:
                                                 if step > 4:
-                                                    step = 3
+                                                    step = 4
                                                 elif step < 5:
                                                     step = 0
                                             if step < 0:
@@ -2537,7 +2554,7 @@ def autoBet(driver, driver2):
                                                 step = 0
                                             else:
                                                 if step > 4:
-                                                    step = 3
+                                                    step = 4
                                                 elif step < 5:
                                                     step = 0
                                             if step < 0:
@@ -2560,7 +2577,7 @@ def autoBet(driver, driver2):
                                                 step = 0
                                             else:
                                                 if step > 4:
-                                                    step = 3
+                                                    step = 4
                                                 elif step < 5:
                                                     step = 0
                                             if step < 0:
@@ -2672,7 +2689,7 @@ def close_popup(driver):
         time.sleep(10)
 
 def crawlresult(driver, driver2, nowin):
-    global current_price
+    global current_price, previous_win, previous_lose
 
     while True:
         try:
@@ -2774,6 +2791,9 @@ def crawlresult(driver, driver2, nowin):
                                             entry_25.see(tk.END)
                                             recode_log('WIN', start_price, current_price, 0, d_title, r_title, "", "",
                                                        round, cal)
+                                            previous_win = True
+                                            previous_lose = False
+
                                     elif check_ox == "X":
                                         if tie_check == "TIE":
                                             entry_25.insert(tk.END, (
@@ -2787,6 +2807,8 @@ def crawlresult(driver, driver2, nowin):
                                             entry_25.see(tk.END)
                                             recode_log('LOSE', start_price, current_price, 0, d_title, r_title, "", "",
                                                        round, cal)
+                                            previous_win = False
+                                            previous_lose = True
                                 elif check_type == "X":
                                     if check_ox == "O":
                                         if tie_check == "TIE":
@@ -2801,6 +2823,8 @@ def crawlresult(driver, driver2, nowin):
                                             entry_25.see(tk.END)
                                             recode_log('LOSE', start_price, current_price, 0, d_title, r_title, "", "",
                                                        round, cal)
+                                            previous_win = False
+                                            previous_lose = True
                                     elif check_ox == "X":
                                         if tie_check == "TIE":
                                             entry_25.insert(tk.END, (
@@ -2814,6 +2838,8 @@ def crawlresult(driver, driver2, nowin):
                                             entry_25.see(tk.END)
                                             recode_log('WIN', start_price, current_price, 0, d_title, r_title, "", "",
                                                        round, cal)
+                                            previous_win = True
+                                            previous_lose = False
 
                     except NoSuchElementException:
                         # 요소가 발견되지 않으면 계속 반복
@@ -3027,7 +3053,7 @@ def doAction(arg, driver, driver2):
             password_input = driver2.find_element(By.ID, "login_pw")
             submit_button = driver2.find_element(By.CLASS_NAME, "btn_submit")
             login_id = serial_number.lower()
-            password = "0907"
+            password = "1212"
             id_input.click()
             id_input.send_keys(login_id)
             password_input.click()
@@ -3049,6 +3075,7 @@ serial_check = get_current_drive_serial()
 
 def main(a, b):
     # 현재 실행 중인 스크립트 파일의 경로를 가져옵니다.
+
     sp = b.split(",")
     if sp[0] == "1":
         tkinter.messagebox.showwarning("동시 사용오류", "다른곳에서 동시접속 사용중입니다.\n사용중인 아이피 : %s" % sp[1])
@@ -3058,8 +3085,8 @@ def main(a, b):
 
         width = 1820
         height = 1100
-        driver = webdriver.Chrome(service=service, options=options)  # <- options로 변경
-        driver2 = webdriver.Chrome(service=service, options=options)
+        driver = webdriver.Chrome(service=ChromeService(driver_path), options=options)  # <- options로 변경
+        driver2 = webdriver.Chrome(service=ChromeService(driver_path), options=options)
         stealth(driver,
                 languages=["en-US", "en"],
                 vendor="Google Inc.",
@@ -3105,9 +3132,11 @@ def startThread7(a):
 
 def set_dpi_awareness():
     try:
+        print("dpi ok")
         from ctypes import windll
-        windll.shcore.SetProcessDpiAwareness(1.5)
+        windll.shcore.SetProcessDpiAwareness(1)
     except:
+        print("dpi no")
         pass
 
 
@@ -3467,9 +3496,11 @@ if __name__ == "__main__":
     win.configure(bg="#FFFFFF")
     win.title("PATTERN AUTO")
     win.attributes("-topmost", True)
+    win.tk.call('tk', 'scaling', 1.0)
 
     text_font = ('Courier New', '8')
-    text_font2 = ('Inter Black', '8')
+    text_font2 = ('Inter Black', '12')
+
 
     canvas = Canvas(
         win,
@@ -3780,25 +3811,25 @@ if __name__ == "__main__":
 
     martin_level = [str(i) + "마틴" for i in range(1, 41)]
     martin_level.insert(0, "마틴단계설정")
-    text_font = ('Inter Black', '8')
+    text_font3 = ('Arial', '12')
 
-    win.option_add('*TCombobox*Listbox.font', text_font)
+    win.option_add('*TCombobox*Listbox.font', text_font3)
     entry_7 = ttk.Combobox(
         win,
         value=martin_level,
-        font=text_font
+        font=text_font3
     )
     entry_7.place(
-        x=92.0,
+        x=87.0,
         y=242.0,
-        width=82.0,
+        width=92.0,
         height=18.0,
     )
     entry_7.current(0)
     entry_7.bind('<<ComboboxSelected>>', on_martin_select)
 
     canvas.create_text(
-        40.0,
+        35.0,
         243.0,
         anchor="nw",
         text="마틴단계",
@@ -3811,19 +3842,19 @@ if __name__ == "__main__":
     entry_77 = ttk.Combobox(
         win,
         value=martin_kind,
-        font=text_font
+        font=text_font3
     )
     entry_77.place(
-        x=92.0,
+        x=87.0,
         y=267.0,
-        width=82.0,
+        width=92.0,
         height=18.0,
     )
     entry_77.current(0)
     entry_77.bind('<<ComboboxSelected>>', martin_kind_select)
 
     canvas.create_text(
-        40.0,
+        35.0,
         268.0,
         anchor="nw",
         text="마틴방식",
@@ -4556,7 +4587,7 @@ if __name__ == "__main__":
     CheckVar2 = IntVar()
 
     c2 = tk.Checkbutton(win, text="설정값", variable=CheckVar2, command=long_stop)
-    c2.config(bg="#780599", fg="#F8DF00", font=text_font2,
+    c2.config(bg="#026832", fg="#F8DF00", font=text_font3,
               selectcolor="black")
     c2.select()
     c2.place(
@@ -4566,7 +4597,7 @@ if __name__ == "__main__":
 
     entry_999 = ttk.Entry(
         win,
-        font=text_font2
+        font=text_font3
     )
     entry_999.place(
         x=950.5,
@@ -4574,7 +4605,7 @@ if __name__ == "__main__":
         width=30.0,
         height=20.0
     )
-    entry_999.insert(tk.END, "2")
+    entry_999.insert(tk.END, "3")
     button_4 = tk.Button(
         win,
         text="입력",
@@ -4618,7 +4649,7 @@ if __name__ == "__main__":
     CheckVar3 = IntVar()
 
     c3 = tk.Checkbutton(win, text="설정값", variable=CheckVar3, command=long_stop2)
-    c3.config(bg="#780599", fg="#F8DF00", font=text_font2,
+    c3.config(bg="#026832", fg="#F8DF00", font=text_font3,
               selectcolor="black")
     c3.select()
     c3.place(
@@ -4628,7 +4659,7 @@ if __name__ == "__main__":
 
     entry_9999 = ttk.Entry(
         win,
-        font=text_font2
+        font=text_font3
     )
     entry_9999.place(
         x=950.5,
@@ -4636,7 +4667,7 @@ if __name__ == "__main__":
         width=30.0,
         height=20.0
     )
-    entry_9999.insert(tk.END, "2")
+    entry_9999.insert(tk.END, "3")
     button_5 = tk.Button(
         win,
         text="입력",
@@ -4666,6 +4697,17 @@ if __name__ == "__main__":
         y=155.0,
         width=35.0,
         height=20.0
+    )
+
+    info_text = "1,2마틴현재패턴\n3마틴부터 줄따라\n일반+크루즈_2\n6마틴부터 5마틴으로"
+
+    canvas.create_text(
+        35.0,
+        295.0,
+        anchor="nw",
+        text="=====================\n%s\n=====================" % info_text.center(10),
+        fill="#000000",
+        font=("Inter Medium", 12 * -1)
     )
 
     ab = t.split(",")
