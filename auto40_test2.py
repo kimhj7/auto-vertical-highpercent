@@ -41,7 +41,7 @@ from selenium_stealth import stealth
 import threading
 
 options = ChromeOptions()
-user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.6478.183 Safari/537.36"
 options.add_argument('user-agent=' + user_agent)
 options.add_argument("lang=ko_KR")
 options.add_argument('--window-size=1920,1020')
@@ -54,7 +54,14 @@ options.add_argument("high-dpi-support=0.6")
 options.add_experimental_option("detach", True)
 
 # 크롬 드라이버 최신 버전 설정
-service = ChromeService(executable_path=ChromeDriverManager().install())
+driver_path = ChromeDriverManager().install()
+if driver_path:
+        driver_name = driver_path.split('/')[-1]
+        if driver_name != "chromedriver":
+            driver_path = "/".join(driver_path.split('/')[:-1] + ["chromedriver.exe"])
+            if '/' in driver_path:
+                driver_path = driver_path.replace('/', '\\')
+            os.chmod(driver_path, 0o755)
 
 # chrome driver
 # driver = webdriver.Chrome(service=service, options=options)  # <- options로 변경
@@ -863,10 +870,12 @@ def autoBet(driver, driver2):
                    martin32, martin33, martin34, martin35, martin36, martin37, martin38, martin39, martin40]
 
     if s_bet:
-        global step, x_stop, lose, start, current_price, t_check, last_tie_step, group_level, player_area, banker_area, group2_get, group2_get_sum, tie_on, re_start, win_stack, ask_dialog, tie_step, tie_area, tie_stack, stop_check, stop_check2, stop_check3, stop_check4, lose_stack, stop_step2, check_type, check_kind, compare_mybet, highest_variable, element_length, previously_selected, current_group, long_go_o, long_go_x, round, cal
+        global step, x_stop, lose, start, current_price, t_check, last_tie_step, group_level, player_area, banker_area, player_bonus, banker_bonus, group2_get, group2_get_sum, tie_on, re_start, win_stack, ask_dialog, tie_step, tie_area, tie_stack, stop_check, stop_check2, stop_check3, stop_check4, lose_stack, stop_step2, check_type, check_kind, compare_mybet, highest_variable, element_length, previously_selected, current_group, long_go_o, long_go_x, round, cal
 
         player_area = driver.find_element(By.CSS_SELECTOR, '.player--d9544')
         banker_area = driver.find_element(By.CSS_SELECTOR, '.banker--7e77b')
+        player_bonus = driver.find_element(By.CSS_SELECTOR, '.left--caa19 .item--11cf3')
+        banker_bonus = driver.find_element(By.CSS_SELECTOR, '.right--87590 .item--11cf3')
         tie_area = driver.find_element(By.CSS_SELECTOR, '.tie--a582d')
         current_price = driver.find_element(By.CSS_SELECTOR, '.amount--bb99f span').get_attribute('innerText').strip()
         round = driver2.find_element(By.CSS_SELECTOR, '.result1 .current_no').get_attribute('innerText').strip()
@@ -979,7 +988,7 @@ def autoBet(driver, driver2):
                         group_level = 1
                         entry_25.insert(tk.END, (str(step + 1) + "마틴 진행\n"))
                         entry_25.see(tk.END)
-                        chip_selection(martin_list[step], c_res, step, round)
+                        chip_selection(martin_list[step], c_res, step, round, "")
                         compare_mybet = c_res
                         tie_on = False
                         tie_stack += 1
@@ -1277,7 +1286,9 @@ def autoBet(driver, driver2):
                                     lose = True
                                     last_tie_step = step
                                     tie_on = True
-                                chip_selection(martin_list[i], c_res, step, round)
+                                chip_selection(martin_list[i], c_res, step, round, "")
+                                if step > 4:
+                                    chip_selection(martin_list[i]/4, c_res, step, round, "bonus")
                                 compare_mybet = c_res
                                 break  # 일치하는 조건을 찾으면 반복문을 종료
 
@@ -1790,7 +1801,9 @@ def autoBet(driver, driver2):
                                         lose = True
                                         last_tie_step = step
                                         tie_on = True
-                                    chip_selection(martin_list[i], c_res, step, round)
+                                    chip_selection(martin_list[i], c_res, step, round, "")
+                                    if step > 4:
+                                        chip_selection(martin_list[i] / 4, c_res, step, round, "bonus")
                                     compare_mybet = c_res
                                     break  # 일치하는 조건을 찾으면 반복문을 종료
 
@@ -1819,7 +1832,7 @@ def autoBet(driver, driver2):
                         group_level = 1
                         entry_25.insert(tk.END, (str(step + 1) + "마틴 진행\n"))
                         entry_25.see(tk.END)
-                        chip_selection(martin_list[step], c_res, step, round)
+                        chip_selection(martin_list[step], c_res, step, round, "")
                         compare_mybet = c_res
                         tie_on = False
                         tie_stack += 1
@@ -2121,7 +2134,9 @@ def autoBet(driver, driver2):
                                     lose = True
                                     last_tie_step = step
                                     tie_on = True
-                                chip_selection(martin_list[i], c_res, step, round)
+                                chip_selection(martin_list[i], c_res, step, round, "")
+                                if step > 4:
+                                    chip_selection(martin_list[i]/4, c_res, step, round, "bonus")
                                 compare_mybet = c_res
                                 break  # 일치하는 조건을 찾으면 반복문을 종료
 
@@ -2632,7 +2647,9 @@ def autoBet(driver, driver2):
                                         lose = True
                                         last_tie_step = step
                                         tie_on = True
-                                    chip_selection(martin_list[i], c_res, step, round)
+                                    chip_selection(martin_list[i], c_res, step, round, "")
+                                    if step > 4:
+                                        chip_selection(martin_list[i] / 4, c_res, step, round, "bonus")
                                     compare_mybet = c_res
                                     break  # 일치하는 조건을 찾으면 반복문을 종료
 
@@ -2646,13 +2663,9 @@ def autoBet(driver, driver2):
             if tie_auto_value:
                 entry_25.insert(tk.END, ("타이 승 : " + str(tie_stack) + "\n타이 " + str(tie_step + 1) + "마틴 진행\n"))
                 entry_25.see(tk.END)
-                chip_selection(tie_values[tie_step], "T", step, round)
+                chip_selection(tie_values[tie_step], "T", step, round, "")
                 compare_mybet = c_res
                 tie_step += 1
-
-
-
-
 
         except NoSuchElementException:
             # 요소가 발견되지 않으면 계속 반복
@@ -3056,8 +3069,8 @@ def main(a, b):
 
         width = 1820
         height = 1100
-        driver = webdriver.Chrome(service=service, options=options)  # <- options로 변경
-        driver2 = webdriver.Chrome(service=service, options=options)
+        driver = webdriver.Chrome(service=ChromeService(driver_path), options=options)  # <- options로 변경
+        driver2 = webdriver.Chrome(service=ChromeService(driver_path), options=options)
         stealth(driver,
                 languages=["en-US", "en"],
                 vendor="Google Inc.",

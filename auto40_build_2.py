@@ -578,6 +578,7 @@ def chip_selection(price, c_res, step, round, bonus):
             bet_price) + "원 배팅 ※※\n\n=================================\n\n"), "green")
         entry_25.see(tk.END)
     else:
+        current_price = driver.find_element(By.CSS_SELECTOR, '.amount--bb99f span').get_attribute('innerText').strip()
         if bonus == "bonus":
             if c_res == "B":
                 tx = "BANKER BONUS"
@@ -586,12 +587,14 @@ def chip_selection(price, c_res, step, round, bonus):
             entry_25.insert(tk.END, (", ".join(result) + " " + tx + "에 " + str(
                 bet_price) + "원 배팅\n\n=================================\n\n"))
             entry_25.see(tk.END)
+            recode_log('RUNNING', start_price, current_price, bet_price, d_title, r_title, tx, step, round, cal)
         else:
             entry_25.insert(tk.END, (", ".join(result) + " " + c_res + "에 " + str(
                 bet_price) + "원 배팅\n\n=================================\n\n"))
             entry_25.see(tk.END)
-    current_price = driver.find_element(By.CSS_SELECTOR, '.amount--bb99f span').get_attribute('innerText').strip()
-    recode_log('RUNNING', start_price, current_price, bet_price, d_title, r_title, c_res, step, round, cal)
+            recode_log('RUNNING', start_price, current_price, bet_price, d_title, r_title, c_res, step, round, cal)
+
+
 
 
 def click_chip(chip):
@@ -1316,7 +1319,7 @@ def autoBet(driver, driver2):
                                     last_tie_step = step
                                     tie_on = True
                                 chip_selection(martin_list[i], c_res, step, round, "")
-                                if step > 3:
+                                if step > 4:
                                     chip_selection(martin_list[i]/4, c_res, step, round, "bonus")
                                 compare_mybet = c_res
                                 break  # 일치하는 조건을 찾으면 반복문을 종료
@@ -1831,7 +1834,7 @@ def autoBet(driver, driver2):
                                         last_tie_step = step
                                         tie_on = True
                                     chip_selection(martin_list[i], c_res, step, round, "")
-                                    if step > 3:
+                                    if step > 4:
                                         chip_selection(martin_list[i] / 4, c_res, step, round, "bonus")
                                     compare_mybet = c_res
                                     break  # 일치하는 조건을 찾으면 반복문을 종료
@@ -2164,7 +2167,7 @@ def autoBet(driver, driver2):
                                     last_tie_step = step
                                     tie_on = True
                                 chip_selection(martin_list[i], c_res, step, round, "")
-                                if step > 3:
+                                if step > 4:
                                     chip_selection(martin_list[i]/4, c_res, step, round, "bonus")
                                 compare_mybet = c_res
                                 break  # 일치하는 조건을 찾으면 반복문을 종료
@@ -2677,7 +2680,7 @@ def autoBet(driver, driver2):
                                         last_tie_step = step
                                         tie_on = True
                                     chip_selection(martin_list[i], c_res, step, round, "")
-                                    if step > 3:
+                                    if step > 4:
                                         chip_selection(martin_list[i] / 4, c_res, step, round, "bonus")
                                     compare_mybet = c_res
                                     break  # 일치하는 조건을 찾으면 반복문을 종료
@@ -2695,10 +2698,6 @@ def autoBet(driver, driver2):
                 chip_selection(tie_values[tie_step], "T", step, round, "")
                 compare_mybet = c_res
                 tie_step += 1
-
-
-
-
 
         except NoSuchElementException:
             # 요소가 발견되지 않으면 계속 반복
