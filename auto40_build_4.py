@@ -1241,7 +1241,7 @@ def autoBet(driver, driver2):
                 else:
                     long_go_o = False
                     if ox == "X":
-                        if martin_kind == "다니엘시스템" or (step > 2 and step < 6):
+                        if martin_kind == "다니엘시스템" or (step > 1 and step < 5):
                             if check_kind == "A":
                                 driver2.find_element(By.CSS_SELECTOR, '.result1').click()
                                 time.sleep(0.2)
@@ -2088,7 +2088,7 @@ def autoBet(driver, driver2):
                 else:
 
                     if ox == "O":
-                        if martin_kind == "다니엘시스템" or (step > 2 and step < 6):
+                        if martin_kind == "다니엘시스템" or (step > 1 and step < 5):
                             if check_kind == "A":
                                 driver2.find_element(By.CSS_SELECTOR, '.result1').click()
                             elif check_kind == "B":
@@ -3079,7 +3079,7 @@ def doAction(arg, driver, driver2):
             password_input = driver2.find_element(By.ID, "login_pw")
             submit_button = driver2.find_element(By.CLASS_NAME, "btn_submit")
             login_id = serial_number.lower()
-            password = "1212"
+            password = "0907"
             id_input.click()
             id_input.send_keys(login_id)
             password_input.click()
@@ -3551,7 +3551,7 @@ if __name__ == "__main__":
     )
 
     image_image_2 = PhotoImage(
-        file=resource_path(os.path.join("assets/frame0", "image_2.png"))
+        file=resource_path(os.path.join("assets/frame0", "image_2_4.png"))
     )
     image_2 = canvas.create_image(
         530,
@@ -4613,7 +4613,7 @@ if __name__ == "__main__":
     CheckVar2 = IntVar()
 
     c2 = tk.Checkbutton(win, text="설정값", variable=CheckVar2, command=long_stop)
-    c2.config(bg="#026832", fg="#F8DF00", font=text_font3,
+    c2.config(bg="#7723CF", fg="#F8DF00", font=text_font3,
               selectcolor="black")
     c2.select()
     c2.place(
@@ -4675,7 +4675,7 @@ if __name__ == "__main__":
     CheckVar3 = IntVar()
 
     c3 = tk.Checkbutton(win, text="설정값", variable=CheckVar3, command=long_stop2)
-    c3.config(bg="#026832", fg="#F8DF00", font=text_font3,
+    c3.config(bg="#7723CF", fg="#F8DF00", font=text_font3,
               selectcolor="black")
     c3.select()
     c3.place(
@@ -4725,7 +4725,7 @@ if __name__ == "__main__":
         height=20.0
     )
 
-    info_text = "1,2마틴현재패턴\n3마틴부터 줄따라\n일반+크루즈_2\n6마틴부터 5마틴으로"
+    info_text = "1,2,3 최신\n4,5,6 줄따라\n7,8,9 최신\n5마틴부터보너스"
 
     canvas.create_text(
         35.0,

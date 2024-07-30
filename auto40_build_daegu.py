@@ -4725,7 +4725,7 @@ if __name__ == "__main__":
         height=20.0
     )
 
-    info_text = "1,2마틴현재패턴\n3마틴부터 줄따라\n일반+크루즈_2\n6마틴부터 5마틴으로"
+    info_text = "5마틴부터보너스\n배팅금의 1/5"
 
     canvas.create_text(
         35.0,
