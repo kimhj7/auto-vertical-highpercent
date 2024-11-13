@@ -23,6 +23,7 @@ import uuid
 from pathlib import Path
 from ctypes import windll
 import traceback
+import time
 
 processed_history = {}
 # 리소스 경로 함수
@@ -932,7 +933,7 @@ class Application(tk.Tk):
                             sn = 'ADMIN'
                         else:
                             sn = serial_number
-                        base_price = vbet_data[sn.lower() + '-1']['betting']['base']
+                        base_price = int(vbet_data[sn.lower() + '-1']['betting']['base'])
 
                         step_order = [0] * len(vbet_data)
 
@@ -1662,7 +1663,7 @@ async def click_check_pattern(page2, new_page, self):
                             if element_handle:
                                 print(f"element_selector '{element_selector}' 발견")
                                 # 4초 대기 후 autoBet 실행
-                                await asyncio.sleep(2)
+                                await asyncio.sleep(5)
                                 print(self.s_bet, autobet_called)
                                 if self.s_bet and not autobet_called:
                                     if not start:
